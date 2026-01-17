@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/npc/asset/builder/InternalReferenceResolver.java
++++ b/com/hypixel/hytale/server/npc/asset/builder/InternalReferenceResolver.java
+@@ -110,7 +_,7 @@
+       if (classType != Instruction.class) {
+          throw new IllegalArgumentException("Internal references are currently only supported for instruction list");
+       } else {
+-         return this.builders.get(index);
++         return (Builder<T>) this.builders.get(index);
+       }
+    }
+ 

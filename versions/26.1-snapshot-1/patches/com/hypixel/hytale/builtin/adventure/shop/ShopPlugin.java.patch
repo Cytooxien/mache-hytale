@@ -1,0 +1,39 @@
+--- a/com/hypixel/hytale/builtin/adventure/shop/ShopPlugin.java
++++ b/com/hypixel/hytale/builtin/adventure/shop/ShopPlugin.java
+@@ -29,24 +_,24 @@
+       instance = this;
+       this.getAssetRegistry()
+          .register(
+-            ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              ShopAsset.class, new DefaultAssetMap()
++            HytaleAssetStore.builder(
++                              ShopAsset.class, new DefaultAssetMap<>()
+                            )
+-                           .setPath("Shops"))
+-                        .setCodec(ShopAsset.CODEC))
+-                     .setKeyFunction(ShopAsset::getId))
+-                  .loadsAfter(Item.class))
++                           .setPath("Shops")
++                        .setCodec(ShopAsset.CODEC)
++                     .setKeyFunction(ShopAsset::getId)
++                  .loadsAfter(Item.class)
+                .build()
+          );
+       this.getAssetRegistry()
+          .register(
+-            ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              BarterShopAsset.class, new DefaultAssetMap()
++            HytaleAssetStore.builder(
++                              BarterShopAsset.class, new DefaultAssetMap<>()
+                            )
+-                           .setPath("BarterShops"))
+-                        .setCodec(BarterShopAsset.CODEC))
+-                     .setKeyFunction(BarterShopAsset::getId))
+-                  .loadsAfter(Item.class))
++                           .setPath("BarterShops")
++                        .setCodec(BarterShopAsset.CODEC)
++                     .setKeyFunction(BarterShopAsset::getId)
++                  .loadsAfter(Item.class)
+                .build()
+          );
+       this.getCodecRegistry(ChoiceElement.CODEC).register("ShopElement", ShopElement.class, ShopElement.CODEC);

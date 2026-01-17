@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/npc/asset/builder/BuilderObjectStaticListHelper.java
++++ b/com/hypixel/hytale/server/npc/asset/builder/BuilderObjectStaticListHelper.java
+@@ -24,7 +_,7 @@
+          List<T> objects = new ObjectArrayList<>();
+ 
+          for (BuilderObjectReferenceHelper<T> builder : this.builders) {
+-            T obj = ((BuilderObjectStaticHelper)builder).staticBuild(manager);
++            T obj = (T) ((BuilderObjectStaticHelper)builder).staticBuild(manager);
+             if (obj != null) {
+                objects.add(obj);
+             }

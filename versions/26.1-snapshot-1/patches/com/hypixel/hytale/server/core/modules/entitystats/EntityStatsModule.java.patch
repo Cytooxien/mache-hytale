@@ -25,3 +25,14 @@
              .build()
        );
        this.getEventRegistry().register(LoadedAssetsEvent.class, EntityStatType.class, this::onLoadedAssetsEvent);
+@@ -115,8 +_,8 @@
+       this.getEntityStoreRegistry().registerSystem(new EntityStatsSystems.EntityTrackerRemove(this.entityStatMapComponentType));
+       this.getEntityStoreRegistry().registerSystem(new EntityStatsSystems.Changes(this.entityStatMapComponentType));
+       this.getEntityStoreRegistry().registerSystem(new EntityStatsSystems.ClearChanges(this.entityStatMapComponentType));
+-      this.getEventRegistry().register(LoadedAssetsEvent.class, Item.class, x$0 -> onLoadedAssetsInvalidate(x$0));
+-      this.getEventRegistry().register(LoadedAssetsEvent.class, EntityEffect.class, x$0 -> onLoadedAssetsInvalidate(x$0));
++      this.getEventRegistry().register(LoadedAssetsEvent.class, Item.class, EntityStatsModule::onLoadedAssetsInvalidate);
++      this.getEventRegistry().register(LoadedAssetsEvent.class, EntityEffect.class, EntityStatsModule::onLoadedAssetsInvalidate);
+    }
+ 
+    @Override

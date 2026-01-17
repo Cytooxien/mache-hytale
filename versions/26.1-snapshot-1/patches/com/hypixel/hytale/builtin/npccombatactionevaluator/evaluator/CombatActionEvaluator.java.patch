@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/npccombatactionevaluator/evaluator/CombatActionEvaluator.java
++++ b/com/hypixel/hytale/builtin/npccombatactionevaluator/evaluator/CombatActionEvaluator.java
+@@ -140,7 +_,7 @@
+       }
+ 
+       for (List<Evaluator<CombatActionOption>.OptionHolder> optionList : this.optionsBySubState.values()) {
+-         optionList.sort(Comparator.comparingDouble(Evaluator.OptionHolder::getWeightCoefficient).reversed());
++         optionList.sort(Comparator.<Evaluator<CombatActionOption>.OptionHolder>comparingDouble(Evaluator.OptionHolder::getWeightCoefficient).reversed());
+       }
+    }
+ 

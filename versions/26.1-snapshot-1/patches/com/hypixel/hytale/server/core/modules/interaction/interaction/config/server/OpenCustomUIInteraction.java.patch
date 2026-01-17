@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/server/OpenCustomUIInteraction.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/server/OpenCustomUIInteraction.java
+@@ -81,7 +_,7 @@
+          .register(
+             id,
+             (Class<? extends OpenCustomUIInteraction.CustomPageSupplier>)supplier.getClass(),
+-            (Codec<? extends OpenCustomUIInteraction.CustomPageSupplier>)BuilderCodec.builder(tClass, () -> supplier).build()
++            BuilderCodec.builder(tClass, () -> supplier).build()
+          );
+    }
+ 

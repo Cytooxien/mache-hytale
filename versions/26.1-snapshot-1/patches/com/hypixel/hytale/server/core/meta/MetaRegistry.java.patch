@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/meta/MetaRegistry.java
++++ b/com/hypixel/hytale/server/core/meta/MetaRegistry.java
+@@ -33,7 +_,7 @@
+             key = new MetaKey<>(metaId);
+          }
+ 
+-         MetaRegistry<K>.MetaRegistryEntry<T> metaEntry = new MetaRegistry.MetaRegistryEntry<>(function, key);
++         MetaRegistry<K>.MetaRegistryEntry<T> metaEntry = new MetaRegistry.MetaRegistryEntry(function, key);
+          this.suppliers.add(metaEntry);
+          if (persistent) {
+             if (this.parameterMapping.containsKey(keyName)) {

@@ -1,11 +1,11 @@
 --- a/com/hypixel/hytale/server/core/universe/world/meta/BlockState.java
 +++ b/com/hypixel/hytale/server/core/universe/world/meta/BlockState.java
-@@ -195,7 +_,7 @@
+@@ -191,7 +_,7 @@
+          return holder;
+       } else {
+          Holder<ChunkStore> holder = ChunkStore.REGISTRY.newHolder();
+-         ComponentType<ChunkStore, ? extends BlockState> componentType = BlockStateModule.get().getComponentType((Class<? extends BlockState>)this.getClass());
++         ComponentType<ChunkStore, BlockState> componentType = (ComponentType<ChunkStore, BlockState>) BlockStateModule.get().getComponentType((Class<? extends BlockState>)this.getClass());
           if (componentType == null) {
              throw new IllegalArgumentException("Unable to find component type for: " + this);
           } else {
--            holder.addComponent(componentType, this);
-+            holder.addComponent(componentType, (BlockState) this);
-             return holder;
-          }
-       }

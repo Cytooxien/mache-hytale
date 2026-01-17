@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/LegacyModule.java
++++ b/com/hypixel/hytale/server/core/modules/LegacyModule.java
+@@ -142,7 +_,7 @@
+          )
+          .addField(
+             new KeyedCodec<>("States", new ArrayCodec<>(new StoredCodec<>(ChunkStore.HOLDER_CODEC_KEY), Holder[]::new)),
+-            (entityChunk, array) -> entityChunk.holders = array,
++            (entityChunk, array) -> entityChunk.holders = (Holder<ChunkStore>[]) array,
+             entityChunk -> {
+                throw new UnsupportedOperationException("Serialise is not allowed for BlockStateChunk");
+             }

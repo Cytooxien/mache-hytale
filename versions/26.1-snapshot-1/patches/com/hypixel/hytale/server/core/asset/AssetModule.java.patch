@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/AssetModule.java
++++ b/com/hypixel/hytale/server/core/asset/AssetModule.java
+@@ -380,7 +_,7 @@
+       AssetRegistry.ASSET_LOCK.writeLock().lock();
+ 
+       try {
+-         List<?> preAddedAssets = assetStore.getPreAddedAssets();
++         List preAddedAssets = assetStore.getPreAddedAssets();
+          if (preAddedAssets != null && !preAddedAssets.isEmpty()) {
+             AssetLoadResult loadResult = assetStore.loadAssets("Hytale:Hytale", preAddedAssets);
+             if (loadResult.hasFailed()) {

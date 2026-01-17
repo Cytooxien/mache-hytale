@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/flock/config/FlockAsset.java
++++ b/com/hypixel/hytale/server/flock/config/FlockAsset.java
+@@ -44,7 +_,7 @@
+       .addValidator(Validators.uniqueInArray())
+       .add()
+       .build();
+-   public static final AssetCodecMapCodec<String, FlockAsset> CODEC = new AssetCodecMapCodec<String, RangeSizeFlockAsset>(
++   public static final AssetCodecMapCodec<String, FlockAsset> CODEC = new AssetCodecMapCodec<String, FlockAsset>(
+          Codec.STRING, (t, k) -> t.id = k, t -> t.id, (t, data) -> t.data = data, t -> t.data, true
+       )
+       .register(Priority.DEFAULT, "Default", RangeSizeFlockAsset.class, RangeSizeFlockAsset.CODEC);

@@ -1,0 +1,122 @@
+--- a/com/hypixel/hytale/procedurallib/json/NoisePropertyJsonLoader.java
++++ b/com/hypixel/hytale/procedurallib/json/NoisePropertyJsonLoader.java
+@@ -50,8 +_,8 @@
+                   throw new IllegalStateException("Could not find noise map data. Keyword: Noise");
+                }
+ 
+-               NoiseProperty[] noiseProperties = this.loadNoiseProperties(this.get("Noise"));
+-               noiseProperty = new MinNoiseProperty(noiseProperties);
++               NoiseProperty[] noiseProperties2 = this.loadNoiseProperties(this.get("Noise"));
++               noiseProperty = new MinNoiseProperty(noiseProperties2);
+                break;
+             case SUM:
+                if (!this.has("Noise")) {
+@@ -62,12 +_,12 @@
+                   throw new IllegalStateException("Could not find factors for sum composed noise map. Keyword: Factors");
+                }
+ 
+-               NoiseProperty[] noiseProperties = this.loadNoiseProperties(this.get("Noise"));
+-               double[] factors = this.loadDoubleArray(this.get("Factors"), noiseProperties.length);
+-               SumNoiseProperty.Entry[] entries = new SumNoiseProperty.Entry[noiseProperties.length];
++               NoiseProperty[] noiseProperties3 = this.loadNoiseProperties(this.get("Noise"));
++               double[] factors = this.loadDoubleArray(this.get("Factors"), noiseProperties3.length);
++               SumNoiseProperty.Entry[] entries = new SumNoiseProperty.Entry[noiseProperties3.length];
+ 
+                for (int i = 0; i < entries.length; i++) {
+-                  entries[i] = new SumNoiseProperty.Entry(noiseProperties[i], factors[i]);
++                  entries[i] = new SumNoiseProperty.Entry(noiseProperties3[i], factors[i]);
+                }
+ 
+                noiseProperty = new SumNoiseProperty(entries);
+@@ -94,17 +_,17 @@
+                   throw new IllegalStateException("Could not find formula type for noise map. Keyword: Formula");
+                }
+ 
+-               NoiseProperty noise = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
++               NoiseProperty noise2 = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
+                NoiseFormulaProperty.NoiseFormula noiseFormula = NoiseFormulaProperty.NoiseFormula.valueOf(this.get("Formula").getAsString());
+-               noiseProperty = new NoiseFormulaProperty(noise, noiseFormula.getFormula());
++               noiseProperty = new NoiseFormulaProperty(noise2, noiseFormula.getFormula());
+                break;
+             case MULTIPLY:
+                if (!this.has("Noise")) {
+                   throw new IllegalStateException("Could not find noise map data. Keyword: Noise");
+                }
+ 
+-               NoiseProperty[] noiseProperties = this.loadNoiseProperties(this.get("Noise"));
+-               noiseProperty = new MultiplyNoiseProperty(noiseProperties);
++               NoiseProperty[] noiseProperties4 = this.loadNoiseProperties(this.get("Noise"));
++               noiseProperty = new MultiplyNoiseProperty(noiseProperties4);
+                break;
+             case DISTORTED:
+                if (!this.has("Noise")) {
+@@ -115,9 +_,9 @@
+                   throw new IllegalStateException("Could not find randomizer for distorted noise map. Keyword: Randomizer");
+                }
+ 
+-               NoiseProperty noise = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
++               NoiseProperty noise3 = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
+                noiseProperty = new DistortedNoiseProperty(
+-                  noise, new CoordinateRandomizerJsonLoader<>(this.seed, this.dataFolder, this.get("Randomizer")).load()
++                  noise3, new CoordinateRandomizerJsonLoader<>(this.seed, this.dataFolder, this.get("Randomizer")).load()
+                );
+                break;
+             case NORMALIZE:
+@@ -129,29 +_,29 @@
+                   throw new IllegalStateException("Could not find range data for normalized noise map. Keyword: Range");
+                }
+ 
+-               NoiseProperty noise = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
++               NoiseProperty noise4 = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
+                IDoubleRange range = new DoubleRangeJsonLoader<>(this.seed, this.dataFolder, this.get("Range")).load();
+-               noiseProperty = new NormalizeNoiseProperty(noise, range.getValue(0.0), range.getValue(1.0) - range.getValue(0.0));
++               noiseProperty = new NormalizeNoiseProperty(noise4, range.getValue(0.0), range.getValue(1.0) - range.getValue(0.0));
+                break;
+             case INVERT:
+                if (!this.has("Noise")) {
+                   throw new IllegalStateException("Could not find noise map data. Keyword: Noise");
+                }
+ 
+-               NoiseProperty noise = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
+-               noiseProperty = new InvertNoiseProperty(noise);
++               NoiseProperty noise5 = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
++               noiseProperty = new InvertNoiseProperty(noise5);
+                break;
+             case OFFSET:
+                if (!this.has("Noise")) {
+                   throw new IllegalStateException("Could not find noise map data. Keyword: Noise");
+                }
+ 
+-               NoiseProperty noise = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
++               NoiseProperty noise6 = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
+                double offset = this.has("Offset") ? this.get("Offset").getAsDouble() : 0.0;
+                double offsetX = this.has("OffsetX") ? this.get("OffsetX").getAsDouble() : offset;
+                double offsetY = this.has("OffsetY") ? this.get("OffsetY").getAsDouble() : offset;
+                double offsetZ = this.has("OffsetZ") ? this.get("OffsetZ").getAsDouble() : offset;
+-               noiseProperty = new OffsetNoiseProperty(noise, offsetX, offsetY, offsetZ);
++               noiseProperty = new OffsetNoiseProperty(noise6, offsetX, offsetY, offsetZ);
+                break;
+             case ROTATE:
+                if (!this.has("Noise")) {
+@@ -162,17 +_,17 @@
+                   throw new IllegalStateException("Could not find noise map data. Keyword: Noise");
+                }
+ 
+-               NoiseProperty noise = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
++               NoiseProperty noise7 = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
+                CoordinateRotator rotation = new CoordinateRotatorJsonLoader<>(this.seed, this.dataFolder, this.get("Rotate")).load();
+-               noiseProperty = new RotateNoiseProperty(noise, rotation);
++               noiseProperty = new RotateNoiseProperty(noise7, rotation);
+                break;
+             case GRADIENT:
+                if (!this.has("Noise")) {
+                   throw new IllegalStateException("Could not find noise map data. Keyword: Noise");
+                }
+ 
+-               NoiseProperty noise = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
+-               noiseProperty = new GradientNoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.json, noise).load();
++               NoiseProperty noise8 = new NoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.get("Noise")).load();
++               noiseProperty = new GradientNoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.json, noise8).load();
+                break;
+             case CURVE:
+                noiseProperty = new CurveNoisePropertyJsonLoader<>(this.seed, this.dataFolder, this.json, null).load();

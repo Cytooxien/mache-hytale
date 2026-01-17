@@ -35,3 +35,12 @@
        );
        commandRegistry.registerCommand(new ClearBlocksCommand());
        commandRegistry.registerCommand(new ClearEntitiesCommand());
+@@ -2487,7 +_,7 @@
+                            rotatedLocation.x + x,
+                            rotatedLocation.y + y,
+                            rotatedLocation.z + z,
+-                           blockChange.block,
++                           blockChangex.block,
+                            newRotation,
+                            FillerBlockUtil.pack(x, y, z),
+                            0,

@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/npc/decisionmaker/core/Evaluator.java
++++ b/com/hypixel/hytale/server/npc/decisionmaker/core/Evaluator.java
+@@ -22,7 +_,7 @@
+    protected List<Evaluator<OptionType>.OptionHolder> options;
+ 
+    public void initialise() {
+-      this.options.sort(Comparator.comparingDouble(Evaluator.OptionHolder::getWeightCoefficient).reversed());
++      this.options.sort(Comparator.<Evaluator<OptionType>.OptionHolder>comparingDouble(Evaluator.OptionHolder::getWeightCoefficient).reversed());
+ 
+       for (Evaluator<OptionType>.OptionHolder optionHolder : this.options) {
+          optionHolder.option.sortConditions();

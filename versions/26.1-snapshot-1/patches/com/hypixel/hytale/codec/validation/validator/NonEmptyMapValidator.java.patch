@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/codec/validation/validator/NonEmptyMapValidator.java
++++ b/com/hypixel/hytale/codec/validation/validator/NonEmptyMapValidator.java
+@@ -6,7 +_,7 @@
+ import javax.annotation.Nullable;
+ 
+ public class NonEmptyMapValidator<K, V> extends NonNullValidator<Map<K, V>> {
+-   public static final NonEmptyMapValidator<?, ?> INSTANCE = new NonEmptyMapValidator();
++   public static final NonEmptyMapValidator INSTANCE = new NonEmptyMapValidator();
+ 
+    private NonEmptyMapValidator() {
+    }
