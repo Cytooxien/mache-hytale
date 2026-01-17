@@ -9,3 +9,12 @@
           new KeyedCodec<>("ActionSets", new MapCodec<>(CombatActionEvaluatorConfig.ActionSet.CODEC, Object2ObjectOpenHashMap::new)),
           (option, o) -> option.actionSets = o,
           option -> option.actionSets
+@@ -208,7 +_,7 @@
+          .addValidator(Validators.weaklyMonotonicSequentialDoubleArrayValidator())
+          .documentation("A random range to pick a cooldown between basic attacks from.")
+          .add()
+-         .<Map>appendInherited(
++         .appendInherited(
+             new KeyedCodec<>("InteractionVars", new MapCodec<>(RootInteraction.CHILD_ASSET_CODEC, Object2ObjectOpenHashMap::new)),
+             (basicAttacks, v) -> basicAttacks.interactionVars = v,
+             basicAttacks -> basicAttacks.interactionVars,

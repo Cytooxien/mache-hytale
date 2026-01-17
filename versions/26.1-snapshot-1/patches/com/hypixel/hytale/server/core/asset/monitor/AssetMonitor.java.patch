@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/monitor/AssetMonitor.java
++++ b/com/hypixel/hytale/server/core/asset/monitor/AssetMonitor.java
+@@ -65,7 +_,7 @@
+             LOGGER.at(Level.FINE).log("Monitoring Directory: %s", normalize);
+             this.directoryMonitors.computeIfAbsent(normalize, SneakyThrow.sneakyFunction(k -> {
+                this.pathWatcherThread.addPath(k);
+-               return new ObjectArrayList();
++               return new ObjectArrayList<>();
+             })).removeIf(v -> v.getKey().equals(key));
+          } catch (Exception var4) {
+             LOGGER.at(Level.SEVERE).withCause(new SkipSentryException(var4)).log("Failed to monitor directory: %s", path);

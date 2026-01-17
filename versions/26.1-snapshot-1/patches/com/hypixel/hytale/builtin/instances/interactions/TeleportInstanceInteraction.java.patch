@@ -1,0 +1,12 @@
+--- a/com/hypixel/hytale/builtin/instances/interactions/TeleportInstanceInteraction.java
++++ b/com/hypixel/hytale/builtin/instances/interactions/TeleportInstanceInteraction.java
+@@ -232,7 +_,8 @@
+                         .completeOnTimeout(null, (long)(this.removeBlockAfter * 1.0E9), TimeUnit.NANOSECONDS)
+                         .thenRunAsync(
+                            () -> {
+-                              if (world.getBlock(targetBlock.x, targetBlock.y, targetBlock.z) == block) {
++                               final var targetBlock = targetBlockx;
++                               if (world.getBlock(targetBlock.x, targetBlock.y, targetBlock.z) == block) {
+                                  world.getChunk(ChunkUtil.indexChunkFromBlock(targetBlock.x, targetBlock.z))
+                                     .setBlock(targetBlock.x, targetBlock.y, targetBlock.z, 0, 256);
+                               }

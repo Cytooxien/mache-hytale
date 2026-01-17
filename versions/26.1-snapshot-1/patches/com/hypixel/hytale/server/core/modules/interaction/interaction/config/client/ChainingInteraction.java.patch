@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/client/ChainingInteraction.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/client/ChainingInteraction.java
+@@ -62,7 +_,7 @@
+       .add()
+       .appendInherited(new KeyedCodec<>("ChainId", Codec.STRING), (o, i) -> o.chainId = i, o -> o.chainId, (o, p) -> o.chainId = p.chainId)
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("Flags", new MapCodec<>(CHILD_ASSET_CODEC, HashMap::new)), (o, i) -> o.flags = i, o -> o.flags, (o, p) -> o.flags = p.flags
+       )
+       .addValidatorLate(() -> Interaction.VALIDATOR_CACHE.getMapValueValidator().late())

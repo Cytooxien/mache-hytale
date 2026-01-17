@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/none/SelectInteraction.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/none/SelectInteraction.java
+@@ -200,7 +_,7 @@
+                      metaStore.putMetaObject(SELECT_META_STORE, context.getInstanceStore());
+                      metaStore.removeMetaObject(TARGET_BLOCK);
+                      metaStore.removeMetaObject(TARGET_BLOCK_RAW);
+-                     if (playerComponent != null && SNAPSHOT_SOURCE == SelectInteraction.SnapshotSource.CLIENT) {
++                     if (playerComponentx != null && SNAPSHOT_SOURCE == SelectInteraction.SnapshotSource.CLIENT) {
+                         InteractionSyncData currentState = context.getClientState();
+                         subCtx.setSnapshotProvider((cBuffer, attacker, targetNetworkId) -> {
+                            int attackerNetworkId = cBuffer.getComponent(attacker, NetworkId.getComponentType()).getId();

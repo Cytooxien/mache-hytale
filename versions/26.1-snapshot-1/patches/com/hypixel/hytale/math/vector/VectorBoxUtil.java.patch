@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/math/vector/VectorBoxUtil.java
++++ b/com/hypixel/hytale/math/vector/VectorBoxUtil.java
+@@ -201,7 +_,7 @@
+       V2 objV2
+    ) {
+       if (input instanceof FastCollection) {
+-         ((FastCollection)input)
++         ((FastCollection<T>)input)
+             .forEach(
+                (objx, _func, _originX, _originY, _originZ, _apothemXMin, _apothemYMin, _apothemZMin, _apothemXMax, _apothemYMax, _apothemZMax, _consumer, _objV1, _objV2) -> {
+                   Vector3d vectorx = (Vector3d)_func.apply(objx);

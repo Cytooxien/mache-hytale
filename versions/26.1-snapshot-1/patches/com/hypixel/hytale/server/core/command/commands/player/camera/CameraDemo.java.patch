@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/command/commands/player/camera/CameraDemo.java
++++ b/com/hypixel/hytale/server/core/command/commands/player/camera/CameraDemo.java
+@@ -127,7 +_,7 @@
+                      targetBlock.getY() + 1,
+                      targetBlock.getZ(),
+                      (xx, y, zx, px, py, pz, qx, qy, qz) -> {
+-                        world.getChunk(ChunkUtil.indexChunkFromBlock(xx, zx)).setBlock(xx, y, zx, blockId);
++                        world.getChunk(ChunkUtil.indexChunkFromBlock(xx, zx)).setBlock(xx, y, zx, blockIdx);
+                         return true;
+                      }
+                   );

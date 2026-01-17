@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/server/DamageEntityInteraction.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/server/DamageEntityInteraction.java
+@@ -92,7 +_,7 @@
+          (i, parent) -> i.angledDamage = parent.angledDamage
+       )
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("TargetedDamage", new MapCodec<>(DamageEntityInteraction.TargetedDamage.CODEC, HashMap::new)),
+          (i, o) -> i.targetedDamage = o,
+          i -> i.targetedDamage,

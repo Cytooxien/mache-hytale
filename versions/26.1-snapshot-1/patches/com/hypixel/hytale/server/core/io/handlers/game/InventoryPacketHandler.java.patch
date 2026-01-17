@@ -1,0 +1,24 @@
+--- a/com/hypixel/hytale/server/core/io/handlers/game/InventoryPacketHandler.java
++++ b/com/hypixel/hytale/server/core/io/handlers/game/InventoryPacketHandler.java
+@@ -452,8 +_,8 @@
+                         return;
+                      }
+ 
+-                     Window window = playerComponent.getWindowManager().getWindow(packet.inventorySectionId);
+-                     if (window instanceof ItemContainerWindow) {
++                     Window window2 = playerComponent.getWindowManager().getWindow(packet.inventorySectionId);
++                     if (window2 instanceof ItemContainerWindow) {
+                         inventory.putAll(packet.inventorySectionId);
+                      }
+                      break;
+@@ -463,8 +_,8 @@
+                         return;
+                      }
+ 
+-                     Window window = playerComponent.getWindowManager().getWindow(packet.inventorySectionId);
+-                     if (window instanceof ItemContainerWindow) {
++                     Window window3 = playerComponent.getWindowManager().getWindow(packet.inventorySectionId);
++                     if (window3 instanceof ItemContainerWindow) {
+                         inventory.quickStack(packet.inventorySectionId);
+                      }
+                      break;

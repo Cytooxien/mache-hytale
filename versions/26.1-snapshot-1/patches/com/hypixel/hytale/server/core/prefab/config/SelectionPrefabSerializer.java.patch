@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/prefab/config/SelectionPrefabSerializer.java
++++ b/com/hypixel/hytale/server/core/prefab/config/SelectionPrefabSerializer.java
+@@ -371,7 +_,7 @@
+          if (constructor == null) {
+             return null;
+          } else {
+-            DirectDecodeCodec<? extends Entity> codec = EntityModule.get().getCodec(entityType);
++            DirectDecodeCodec<Entity> codec = (DirectDecodeCodec<Entity>) EntityModule.get().getCodec(entityType);
+             Objects.requireNonNull(codec, "Unable to create entity because there is no associated codec");
+             Entity entity = constructor.apply(null);
+             codec.decode(document, entity, new ExtraInfo(version));

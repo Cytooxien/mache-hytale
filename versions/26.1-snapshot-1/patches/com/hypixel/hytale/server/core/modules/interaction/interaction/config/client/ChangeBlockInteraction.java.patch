@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/client/ChangeBlockInteraction.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/client/ChangeBlockInteraction.java
+@@ -40,7 +_,7 @@
+          ChangeBlockInteraction.class, ChangeBlockInteraction::new, SimpleBlockInteraction.CODEC
+       )
+       .documentation("Changes the target block to another block based on the block types provided.")
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("Changes", new MapCodec<>(Codec.STRING, HashMap::new)),
+          (interaction, changeMap) -> interaction.blockTypeKeys = changeMap,
+          interaction -> interaction.blockTypeKeys,

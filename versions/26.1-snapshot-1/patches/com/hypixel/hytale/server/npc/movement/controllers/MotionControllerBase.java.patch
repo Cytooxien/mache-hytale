@@ -1,0 +1,19 @@
+--- a/com/hypixel/hytale/server/npc/movement/controllers/MotionControllerBase.java
++++ b/com/hypixel/hytale/server/npc/movement/controllers/MotionControllerBase.java
+@@ -294,11 +_,11 @@
+                break;
+             case STANDING:
+             default:
+-               NPCEntity npcComponent = componentAccessor.getComponent(ref, NPCEntity.getComponentType());
+-
+-               assert npcComponent != null;
+-
+-               this.updateStandingStates(movementStates, this.motionKind, npcComponent.getHoverHeight() > 0.0);
++               NPCEntity npcComponent2 = componentAccessor.getComponent(ref, NPCEntity.getComponentType());
++
++               assert npcComponent2 != null;
++
++               this.updateStandingStates(movementStates, this.motionKind, npcComponent2.getHoverHeight() > 0.0);
+          }
+       }
+ 

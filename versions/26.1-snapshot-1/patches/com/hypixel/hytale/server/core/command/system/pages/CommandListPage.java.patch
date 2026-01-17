@@ -1,0 +1,20 @@
+--- a/com/hypixel/hytale/server/core/command/system/pages/CommandListPage.java
++++ b/com/hypixel/hytale/server/core/command/system/pages/CommandListPage.java
+@@ -513,7 +_,7 @@
+          Field requiredArgsField = AbstractCommand.class.getDeclaredField("requiredArguments");
+          requiredArgsField.setAccessible(true);
+ 
+-         for (RequiredArg<?> arg : (List)requiredArgsField.get(command)) {
++         for (RequiredArg<?> arg : (List<RequiredArg<?>>)requiredArgsField.get(command)) {
+             message.insert(" <").insert(Message.translation(arg.getName())).insert(">");
+          }
+       } catch (Exception var9) {
+@@ -650,7 +_,7 @@
+          Field requiredArgsField = AbstractCommand.class.getDeclaredField("requiredArguments");
+          requiredArgsField.setAccessible(true);
+ 
+-         for (RequiredArg<?> arg : (List)requiredArgsField.get(command)) {
++         for (RequiredArg<?> arg : (List<RequiredArg<?>>)requiredArgsField.get(command)) {
+             allArgumentTypes.add(arg.getArgumentType());
+          }
+ 

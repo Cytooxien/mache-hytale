@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/none/ChangeActiveSlotInteraction.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/none/ChangeActiveSlotInteraction.java
+@@ -80,7 +_,7 @@
+ 
+          Ref<EntityStore> ref = context.getEntity();
+          if (EntityUtils.getEntity(ref, commandBuffer) instanceof LivingEntity livingEntity) {
+-            DynamicMetaStore var15 = context.getMetaStore();
++            DynamicMetaStore<InteractionContext> var15 = context.getMetaStore();
+             byte slot;
+             if (this.targetSlot == Integer.MIN_VALUE) {
+                slot = var15.getMetaObject(TARGET_SLOT).byteValue();

@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/client/ChangeStateInteraction.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/client/ChangeStateInteraction.java
+@@ -30,7 +_,7 @@
+          ChangeStateInteraction.class, ChangeStateInteraction::new, SimpleBlockInteraction.CODEC
+       )
+       .documentation("Changes the state of the target block to another state based on the mapping provided.")
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("Changes", new MapCodec<>(Codec.STRING, HashMap::new)),
+          (interaction, changeMap) -> interaction.stateKeys = changeMap,
+          interaction -> interaction.stateKeys,

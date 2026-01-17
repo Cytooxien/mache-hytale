@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/type/fluid/DefaultFluidTicker.java
++++ b/com/hypixel/hytale/server/core/asset/type/fluid/DefaultFluidTicker.java
+@@ -36,7 +_,7 @@
+       )
+       .addValidator(Fluid.VALIDATOR_CACHE.getValidator().late())
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("Collisions", new MapCodec<>(DefaultFluidTicker.FluidCollisionConfig.CODEC, HashMap::new)),
+          (ticker, o) -> ticker.rawCollisionMap = MapUtil.combineUnmodifiable(ticker.rawCollisionMap, o),
+          ticker -> ticker.rawCollisionMap,

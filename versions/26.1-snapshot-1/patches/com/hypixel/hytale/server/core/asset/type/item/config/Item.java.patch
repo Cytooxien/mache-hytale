@@ -18,3 +18,12 @@
           new KeyedCodec<>(
              "ItemAppearanceConditions", new MapCodec<>(new ArrayCodec<>(ItemAppearanceCondition.CODEC, ItemAppearanceCondition[]::new), HashMap::new)
           ),
+@@ -1123,7 +_,7 @@
+    }
+ 
+    static {
+-      CODEC_BUILDER.<Map>appendInherited(
++      CODEC_BUILDER.appendInherited(
+             new KeyedCodec<>("State", new MapCodec(new ContainedAssetCodec<>(Item.class, CODEC, ContainedAssetCodec.Mode.INJECT_PARENT), HashMap::new)),
+             (item, m) -> item.stateToBlock = m,
+             item -> item.stateToBlock,
