@@ -1,0 +1,21 @@
+--- a/com/hypixel/hytale/server/flock/FlockPlugin.java
++++ b/com/hypixel/hytale/server/flock/FlockPlugin.java
+@@ -73,13 +_,11 @@
+       instance = this;
+       ComponentRegistryProxy<EntityStore> entityStoreRegistry = this.getEntityStoreRegistry();
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           FlockAsset.class, new IndexedLookupTableAssetMap<>(FlockAsset[]::new)
+-                        )
+-                        .setPath("NPC/Flocks"))
+-                     .setCodec(FlockAsset.CODEC))
+-                  .setKeyFunction(FlockAsset::getId))
+-               .setReplaceOnRemove(RangeSizeFlockAsset::getUnknownFor))
++         HytaleAssetStore.builder(FlockAsset.class, new IndexedLookupTableAssetMap<>(FlockAsset[]::new))
++            .setPath("NPC/Flocks")
++            .setCodec(FlockAsset.CODEC)
++            .setKeyFunction(FlockAsset::getId)
++            .setReplaceOnRemove(RangeSizeFlockAsset::getUnknownFor)
+             .build()
+       );
+       this.getEntityStoreRegistry().registerSystem(new FlockPlugin.PrefabPasteEventSystem(this));

@@ -1,0 +1,81 @@
+--- a/com/hypixel/hytale/server/npc/NPCPlugin.java
++++ b/com/hypixel/hytale/server/npc/NPCPlugin.java
+@@ -443,46 +_,38 @@
+       eventRegistry.register(AssetPackUnregisterEvent.class, event -> this.builderManager.unloadBuilders(event.getAssetPack()));
+       eventRegistry.register(GenerateSchemaEvent.class, this::onSchemaGenerate);
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              AttitudeGroup.class, new IndexedLookupTableAssetMap<>(AttitudeGroup[]::new)
+-                           )
+-                           .setPath("NPC/Attitude/Roles"))
+-                        .setCodec(AttitudeGroup.CODEC))
+-                     .setKeyFunction(AttitudeGroup::getId))
+-                  .setReplaceOnRemove(AttitudeGroup::new))
+-               .loadsAfter(NPCGroup.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              ItemAttitudeGroup.class, new IndexedLookupTableAssetMap<>(ItemAttitudeGroup[]::new)
+-                           )
+-                           .setPath("NPC/Attitude/Items"))
+-                        .setCodec(ItemAttitudeGroup.CODEC))
+-                     .setKeyFunction(ItemAttitudeGroup::getId))
+-                  .setReplaceOnRemove(ItemAttitudeGroup::new))
+-               .loadsAfter(Item.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           BalanceAsset.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("NPC/Balancing"))
+-                     .setCodec(BalanceAsset.CODEC))
+-                  .setKeyFunction(BalanceAsset::getId))
+-               .loadsAfter(Condition.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              Condition.class, new IndexedLookupTableAssetMap<>(Condition[]::new)
+-                           )
+-                           .setPath("NPC/DecisionMaking/Conditions"))
+-                        .setCodec(Condition.CODEC))
+-                     .setKeyFunction(Condition::getId))
+-                  .setReplaceOnRemove(Condition::getAlwaysTrueFor))
+-               .loadsAfter(ResponseCurve.class, NPCGroup.class, EntityStatType.class))
++         HytaleAssetStore.builder(AttitudeGroup.class, new IndexedLookupTableAssetMap<>(AttitudeGroup[]::new))
++            .setPath("NPC/Attitude/Roles")
++            .setCodec(AttitudeGroup.CODEC)
++            .setKeyFunction(AttitudeGroup::getId)
++            .setReplaceOnRemove(AttitudeGroup::new)
++            .loadsAfter(NPCGroup.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ItemAttitudeGroup.class, new IndexedLookupTableAssetMap<>(ItemAttitudeGroup[]::new))
++            .setPath("NPC/Attitude/Items")
++            .setCodec(ItemAttitudeGroup.CODEC)
++            .setKeyFunction(ItemAttitudeGroup::getId)
++            .setReplaceOnRemove(ItemAttitudeGroup::new)
++            .loadsAfter(Item.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BalanceAsset.class, new DefaultAssetMap<>())
++            .setPath("NPC/Balancing")
++            .setCodec(BalanceAsset.CODEC)
++            .setKeyFunction(BalanceAsset::getId)
++            .loadsAfter(Condition.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(Condition.class, new IndexedLookupTableAssetMap<>(Condition[]::new))
++            .setPath("NPC/DecisionMaking/Conditions")
++            .setCodec(Condition.CODEC)
++            .setKeyFunction(Condition::getId)
++            .setReplaceOnRemove(Condition::getAlwaysTrueFor)
++            .loadsAfter(ResponseCurve.class, NPCGroup.class, EntityStatType.class)
+             .build()
+       );
+       this.getEntityRegistry().registerEntity("NPC", NPCEntity.class, NPCEntity::new, NPCEntity.CODEC);

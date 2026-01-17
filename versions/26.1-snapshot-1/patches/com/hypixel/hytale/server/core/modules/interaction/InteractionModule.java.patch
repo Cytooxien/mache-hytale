@@ -1,0 +1,86 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/InteractionModule.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/InteractionModule.java
+@@ -178,51 +_,45 @@
+       ComponentRegistryProxy<EntityStore> entityStoreRegistry = this.getEntityStoreRegistry();
+       this.getCommandRegistry().registerCommand(new InteractionCommand());
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           UnarmedInteractions.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Item/Unarmed/Interactions"))
+-                     .setCodec(UnarmedInteractions.CODEC))
+-                  .setKeyFunction(UnarmedInteractions::getId))
+-               .loadsAfter(RootInteraction.class))
++         HytaleAssetStore.builder(UnarmedInteractions.class, new DefaultAssetMap<>())
++            .setPath("Item/Unarmed/Interactions")
++            .setCodec(UnarmedInteractions.CODEC)
++            .setKeyFunction(UnarmedInteractions::getId)
++            .loadsAfter(RootInteraction.class)
+             .setPacketGenerator(new UnarmedInteractionsPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                    Interaction.class, new IndexedLookupTableAssetMap<>(Interaction[]::new)
+-                                 )
+-                                 .setPath("Item/Interactions"))
+-                              .setCodec(Interaction.CODEC))
+-                           .setKeyFunction(Interaction::getId))
+-                        .setReplaceOnRemove(id -> new SendMessageInteraction(id, "Missing interaction: " + id)))
+-                     .setIsUnknown(Interaction::isUnknown))
+-                  .setPacketGenerator(new InteractionPacketGenerator())
+-                  .loadsAfter(
+-                     EntityStatType.class,
+-                     EntityEffect.class,
+-                     Trail.class,
+-                     ItemPlayerAnimations.class,
+-                     SoundEvent.class,
+-                     ParticleSystem.class,
+-                     ModelAsset.class,
+-                     HitboxCollisionConfig.class
+-                  ))
+-               .preLoadAssets(List.of(ChangeActiveSlotInteraction.DEFAULT_INTERACTION)))
++         HytaleAssetStore.builder(Interaction.class, new IndexedLookupTableAssetMap<>(Interaction[]::new))
++            .setPath("Item/Interactions")
++            .setCodec(Interaction.CODEC)
++            .setKeyFunction(Interaction::getId)
++            .setReplaceOnRemove(id -> new SendMessageInteraction(id, "Missing interaction: " + id))
++            .setIsUnknown(Interaction::isUnknown)
++            .setPacketGenerator(new InteractionPacketGenerator())
++            .loadsAfter(
++               EntityStatType.class,
++               EntityEffect.class,
++               Trail.class,
++               ItemPlayerAnimations.class,
++               SoundEvent.class,
++               ParticleSystem.class,
++               ModelAsset.class,
++               HitboxCollisionConfig.class
++            )
++            .preLoadAssets(List.of(ChangeActiveSlotInteraction.DEFAULT_INTERACTION))
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                    RootInteraction.class, new IndexedLookupTableAssetMap<>(RootInteraction[]::new)
+-                                 )
+-                                 .setPath("Item/RootInteractions"))
+-                              .setCodec(RootInteraction.CODEC))
+-                           .setKeyFunction(RootInteraction::getId))
+-                        .setReplaceOnRemove(x$0 -> new RootInteraction(x$0)))
+-                     .setPacketGenerator(new RootInteractionPacketGenerator())
+-                     .loadsAfter(Interaction.class))
+-                  .loadsBefore(BlockType.class, Item.class))
+-               .preLoadAssets(List.of(ChangeActiveSlotInteraction.DEFAULT_ROOT)))
++         HytaleAssetStore.builder(RootInteraction.class, new IndexedLookupTableAssetMap<>(RootInteraction[]::new))
++            .setPath("Item/RootInteractions")
++            .setCodec(RootInteraction.CODEC)
++            .setKeyFunction(RootInteraction::getId)
++            .setReplaceOnRemove(id -> new RootInteraction(id))
++            .setPacketGenerator(new RootInteractionPacketGenerator())
++            .loadsAfter(Interaction.class)
++            .loadsBefore(BlockType.class, Item.class)
++            .preLoadAssets(List.of(ChangeActiveSlotInteraction.DEFAULT_ROOT))
+             .build()
+       );
+       this.interactionManagerComponent = this.getEntityStoreRegistry().registerComponent(InteractionManager.class, () -> {

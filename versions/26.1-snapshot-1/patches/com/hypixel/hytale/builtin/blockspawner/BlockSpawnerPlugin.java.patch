@@ -1,0 +1,21 @@
+--- a/com/hypixel/hytale/builtin/blockspawner/BlockSpawnerPlugin.java
++++ b/com/hypixel/hytale/builtin/blockspawner/BlockSpawnerPlugin.java
+@@ -54,13 +_,11 @@
+    protected void setup() {
+       this.getCommandRegistry().registerCommand(new BlockSpawnerCommand());
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           BlockSpawnerTable.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Item/Block/Spawners"))
+-                     .setCodec(BlockSpawnerTable.CODEC))
+-                  .setKeyFunction(BlockSpawnerTable::getId))
+-               .loadsAfter(Item.class, BlockType.class))
++         HytaleAssetStore.builder(BlockSpawnerTable.class, new DefaultAssetMap<>())
++            .setPath("Item/Block/Spawners")
++            .setCodec(BlockSpawnerTable.CODEC)
++            .setKeyFunction(BlockSpawnerTable::getId)
++            .loadsAfter(Item.class, BlockType.class)
+             .build()
+       );
+       this.blockSpawnerComponentType = this.getChunkStoreRegistry().registerComponent(BlockSpawner.class, "BlockSpawner", BlockSpawner.CODEC);

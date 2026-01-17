@@ -1,0 +1,91 @@
+--- a/com/hypixel/hytale/builtin/hytalegenerator/assets/AssetManager.java
++++ b/com/hypixel/hytale/builtin/hytalegenerator/assets/AssetManager.java
+@@ -348,49 +_,45 @@
+ 
+    static {
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(BiomeAsset.class, new DefaultAssetMap())
+-                     .setPath("HytaleGenerator/Biomes"))
+-                  .setKeyFunction(BiomeAsset::getId))
+-               .setCodec(BiomeAsset.CODEC))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        WorldStructureAsset.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("HytaleGenerator/WorldStructures"))
+-                  .setKeyFunction(WorldStructureAsset::getId))
+-               .setCodec(WorldStructureAsset.CODEC))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(DensityAsset.class, new DefaultAssetMap())
+-                     .setPath("HytaleGenerator/Density"))
+-                  .setKeyFunction(DensityAsset::getId))
+-               .setCodec(DensityAsset.CODEC))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(BlockMaskAsset.class, new DefaultAssetMap())
+-                     .setPath("HytaleGenerator/MaterialMasks"))
+-                  .setKeyFunction(BlockMaskAsset::getId))
+-               .setCodec(BlockMaskAsset.CODEC))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        AssignmentsAsset.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("HytaleGenerator/Assignments"))
+-                  .setKeyFunction(AssignmentsAsset::getId))
+-               .setCodec(AssignmentsAsset.CODEC))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(SettingsAsset.class, new DefaultAssetMap())
+-                     .setPath("HytaleGenerator/Settings"))
+-                  .setKeyFunction(SettingsAsset::getId))
+-               .setCodec(SettingsAsset.CODEC))
++         HytaleAssetStore.builder(BiomeAsset.class, new DefaultAssetMap<>())
++            .setPath("HytaleGenerator/Biomes")
++            .setKeyFunction(BiomeAsset::getId)
++            .setCodec(BiomeAsset.CODEC)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(WorldStructureAsset.class, new DefaultAssetMap<>())
++            .setPath("HytaleGenerator/WorldStructures")
++            .setKeyFunction(WorldStructureAsset::getId)
++            .setCodec(WorldStructureAsset.CODEC)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(DensityAsset.class, new DefaultAssetMap<>())
++            .setPath("HytaleGenerator/Density")
++            .setKeyFunction(DensityAsset::getId)
++            .setCodec(DensityAsset.CODEC)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BlockMaskAsset.class, new DefaultAssetMap<>())
++            .setPath("HytaleGenerator/MaterialMasks")
++            .setKeyFunction(BlockMaskAsset::getId)
++            .setCodec(BlockMaskAsset.CODEC)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(AssignmentsAsset.class, new DefaultAssetMap<>())
++            .setPath("HytaleGenerator/Assignments")
++            .setKeyFunction(AssignmentsAsset::getId)
++            .setCodec(AssignmentsAsset.CODEC)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(SettingsAsset.class, new DefaultAssetMap<>())
++            .setPath("HytaleGenerator/Settings")
++            .setKeyFunction(SettingsAsset::getId)
++            .setCodec(SettingsAsset.CODEC)
+             .build()
+       );
+       DensityAsset.CODEC.register("SimplexNoise2D", SimplexNoise2dDensityAsset.class, SimplexNoise2dDensityAsset.CODEC);

@@ -1,0 +1,75 @@
+--- a/com/hypixel/hytale/builtin/adventure/objectives/ObjectivePlugin.java
++++ b/com/hypixel/hytale/builtin/adventure/objectives/ObjectivePlugin.java
+@@ -145,43 +_,35 @@
+    protected void setup() {
+       instance = this;
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           ObjectiveAsset.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Objective/Objectives"))
+-                     .setCodec(ObjectiveAsset.CODEC))
+-                  .setKeyFunction(ObjectiveAsset::getId))
+-               .loadsAfter(ItemDropList.class, Item.class, BlockType.class, ReachLocationMarkerAsset.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              ObjectiveLineAsset.class, new DefaultAssetMap()
+-                           )
+-                           .setPath("Objective/ObjectiveLines"))
+-                        .setCodec(ObjectiveLineAsset.CODEC))
+-                     .setKeyFunction(ObjectiveLineAsset::getId))
+-                  .loadsAfter(ObjectiveAsset.class))
+-               .loadsBefore(GameplayConfig.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           ObjectiveLocationMarkerAsset.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Objective/ObjectiveLocationMarkers"))
+-                     .setCodec(ObjectiveLocationMarkerAsset.CODEC))
+-                  .setKeyFunction(ObjectiveLocationMarkerAsset::getId))
+-               .loadsAfter(ObjectiveAsset.class, Environment.class, Weather.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        ReachLocationMarkerAsset.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("Objective/ReachLocationMarkers"))
+-                  .setCodec(ReachLocationMarkerAsset.CODEC))
+-               .setKeyFunction(ReachLocationMarkerAsset::getId))
++         HytaleAssetStore.builder(ObjectiveAsset.class, new DefaultAssetMap<>())
++            .setPath("Objective/Objectives")
++            .setCodec(ObjectiveAsset.CODEC)
++            .setKeyFunction(ObjectiveAsset::getId)
++            .loadsAfter(ItemDropList.class, Item.class, BlockType.class, ReachLocationMarkerAsset.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ObjectiveLineAsset.class, new DefaultAssetMap<>())
++            .setPath("Objective/ObjectiveLines")
++            .setCodec(ObjectiveLineAsset.CODEC)
++            .setKeyFunction(ObjectiveLineAsset::getId)
++            .loadsAfter(ObjectiveAsset.class)
++            .loadsBefore(GameplayConfig.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ObjectiveLocationMarkerAsset.class, new DefaultAssetMap<>())
++            .setPath("Objective/ObjectiveLocationMarkers")
++            .setCodec(ObjectiveLocationMarkerAsset.CODEC)
++            .setKeyFunction(ObjectiveLocationMarkerAsset::getId)
++            .loadsAfter(ObjectiveAsset.class, Environment.class, Weather.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ReachLocationMarkerAsset.class, new DefaultAssetMap<>())
++            .setPath("Objective/ReachLocationMarkers")
++            .setCodec(ReachLocationMarkerAsset.CODEC)
++            .setKeyFunction(ReachLocationMarkerAsset::getId)
+             .build()
+       );
+       this.objectiveDataStore = new ObjectiveDataStore(this.config.get().getDataStoreProvider().create(Objective.CODEC));

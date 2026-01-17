@@ -1,0 +1,27 @@
+--- a/com/hypixel/hytale/server/core/modules/entitystats/EntityStatsModule.java
++++ b/com/hypixel/hytale/server/core/modules/entitystats/EntityStatsModule.java
+@@ -93,16 +_,14 @@
+       Condition.CODEC.register("Gliding", GlidingCondition.class, GlidingCondition.CODEC);
+       Condition.CODEC.register("Stat", StatCondition.class, StatCondition.CODEC);
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 EntityStatType.class, new IndexedLookupTableAssetMap<>(EntityStatType[]::new)
+-                              )
+-                              .setPath("Entity/Stats"))
+-                           .setCodec(EntityStatType.CODEC))
+-                        .setKeyFunction(EntityStatType::getId))
+-                     .setPacketGenerator(new EntityStatTypePacketGenerator())
+-                     .setReplaceOnRemove(EntityStatType::getUnknownFor))
+-                  .preLoadAssets(Collections.singletonList(EntityStatType.UNKNOWN)))
+-               .loadsAfter(SoundEvent.class, ParticleSystem.class))
++         HytaleAssetStore.builder(EntityStatType.class, new IndexedLookupTableAssetMap<>(EntityStatType[]::new))
++            .setPath("Entity/Stats")
++            .setCodec(EntityStatType.CODEC)
++            .setKeyFunction(EntityStatType::getId)
++            .setPacketGenerator(new EntityStatTypePacketGenerator())
++            .setReplaceOnRemove(EntityStatType::getUnknownFor)
++            .preLoadAssets(Collections.singletonList(EntityStatType.UNKNOWN))
++            .loadsAfter(SoundEvent.class, ParticleSystem.class)
+             .build()
+       );
+       this.getEventRegistry().register(LoadedAssetsEvent.class, EntityStatType.class, this::onLoadedAssetsEvent);

@@ -1,0 +1,23 @@
+--- a/com/hypixel/hytale/builtin/tagset/TagSetPlugin.java
++++ b/com/hypixel/hytale/builtin/tagset/TagSetPlugin.java
+@@ -34,14 +_,12 @@
+    protected void setup() {
+       instance = this;
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              NPCGroup.class, new IndexedLookupTableAssetMap<>(NPCGroup[]::new)
+-                           )
+-                           .setPath("NPC/Groups"))
+-                        .setCodec(NPCGroup.CODEC))
+-                     .setKeyFunction(NPCGroup::getId))
+-                  .setReplaceOnRemove(NPCGroup::new))
+-               .loadsBefore(Interaction.class))
++         HytaleAssetStore.builder(NPCGroup.class, new IndexedLookupTableAssetMap<>(NPCGroup[]::new))
++            .setPath("NPC/Groups")
++            .setCodec(NPCGroup.CODEC)
++            .setKeyFunction(NPCGroup::getId)
++            .setReplaceOnRemove(NPCGroup::new)
++            .loadsBefore(Interaction.class)
+             .build()
+       );
+       this.registerTagSetType(NPCGroup.class);

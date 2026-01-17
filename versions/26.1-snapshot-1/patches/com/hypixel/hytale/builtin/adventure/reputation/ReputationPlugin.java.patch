@@ -1,0 +1,28 @@
+--- a/com/hypixel/hytale/builtin/adventure/reputation/ReputationPlugin.java
++++ b/com/hypixel/hytale/builtin/adventure/reputation/ReputationPlugin.java
+@@ -57,17 +_,17 @@
+    protected void setup() {
+       instance = this;
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(ReputationRank.class, new DefaultAssetMap())
+-                     .setPath("NPC/Reputation/Ranks"))
+-                  .setCodec(ReputationRank.CODEC))
+-               .setKeyFunction(ReputationRank::getId))
++         HytaleAssetStore.builder(ReputationRank.class, new DefaultAssetMap<>())
++            .setPath("NPC/Reputation/Ranks")
++            .setCodec(ReputationRank.CODEC)
++            .setKeyFunction(ReputationRank::getId)
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(ReputationGroup.class, new DefaultAssetMap())
+-                     .setPath("NPC/Reputation/Groups"))
+-                  .setCodec(ReputationGroup.CODEC))
+-               .setKeyFunction(ReputationGroup::getId))
++         HytaleAssetStore.builder(ReputationGroup.class, new DefaultAssetMap<>())
++            .setPath("NPC/Reputation/Groups")
++            .setCodec(ReputationGroup.CODEC)
++            .setKeyFunction(ReputationGroup::getId)
+             .build()
+       );
+       this.getCommandRegistry().registerCommand(new ReputationCommand());

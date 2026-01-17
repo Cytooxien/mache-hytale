@@ -1,0 +1,37 @@
+--- a/com/hypixel/hytale/builtin/buildertools/BuilderToolsPlugin.java
++++ b/com/hypixel/hytale/builtin/buildertools/BuilderToolsPlugin.java
+@@ -385,22 +_,22 @@
+       this.prefabEditSessionManager = new PrefabEditSessionManager(this);
+       this.prefabEditSessionResourceType = entityStoreRegistry.registerResource(PrefabEditSession.class, "PrefabEditSession", PrefabEditSession.CODEC);
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        PrefabEditorCreationSettings.class, new DefaultAssetMap()
++         HytaleAssetStore.builder(
++                        PrefabEditorCreationSettings.class, new DefaultAssetMap<>()
+                      )
+-                     .setPath("PrefabEditorCreationSettings"))
+-                  .setKeyFunction(PrefabEditorCreationSettings::getId))
+-               .setCodec(PrefabEditorCreationSettings.CODEC))
+-            .build()
++                     .setPath("PrefabEditorCreationSettings")
++                     .setKeyFunction(PrefabEditorCreationSettings::getId)
++                     .setCodec(PrefabEditorCreationSettings.CODEC)
++                     .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        ScriptedBrushAsset.class, new DefaultAssetMap()
++         HytaleAssetStore.builder(
++                        ScriptedBrushAsset.class, new DefaultAssetMap<>()
+                      )
+-                     .setPath("ScriptedBrushes"))
+-                  .setKeyFunction(ScriptedBrushAsset::getId))
+-               .setCodec(ScriptedBrushAsset.CODEC))
+-            .build()
++                     .setPath("ScriptedBrushes")
++                     .setKeyFunction(ScriptedBrushAsset::getId)
++                     .setCodec(ScriptedBrushAsset.CODEC)
++                     .build()
+       );
+       commandRegistry.registerCommand(new ClearBlocksCommand());
+       commandRegistry.registerCommand(new ClearEntitiesCommand());

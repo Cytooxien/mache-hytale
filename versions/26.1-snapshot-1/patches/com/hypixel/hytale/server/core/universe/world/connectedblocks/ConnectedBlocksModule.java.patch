@@ -1,0 +1,19 @@
+--- a/com/hypixel/hytale/server/core/universe/world/connectedblocks/ConnectedBlocksModule.java
++++ b/com/hypixel/hytale/server/core/universe/world/connectedblocks/ConnectedBlocksModule.java
+@@ -34,12 +_,10 @@
+    @Override
+    protected void setup() {
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        CustomConnectedBlockTemplateAsset.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("Item/CustomConnectedBlockTemplates"))
+-                  .setKeyFunction(CustomConnectedBlockTemplateAsset::getId))
+-               .setCodec(CustomConnectedBlockTemplateAsset.CODEC))
++         HytaleAssetStore.builder(CustomConnectedBlockTemplateAsset.class, new DefaultAssetMap<>())
++            .setPath("Item/CustomConnectedBlockTemplates")
++            .setKeyFunction(CustomConnectedBlockTemplateAsset::getId)
++            .setCodec(CustomConnectedBlockTemplateAsset.CODEC)
+             .build()
+       );
+       this.getEventRegistry().register(LoadedAssetsEvent.class, BlockType.class, ConnectedBlocksModule::onBlockTypesChanged);

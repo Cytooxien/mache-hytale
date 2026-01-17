@@ -1,0 +1,1007 @@
+--- a/com/hypixel/hytale/server/core/asset/AssetRegistryLoader.java
++++ b/com/hypixel/hytale/server/core/asset/AssetRegistryLoader.java
+@@ -466,572 +_,488 @@
+ 
+    static {
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 AmbienceFX.class, new IndexedAssetMap()
+-                              )
+-                              .setPath("Audio/AmbienceFX"))
+-                           .setCodec(AmbienceFX.CODEC))
+-                        .setKeyFunction(AmbienceFX::getId))
+-                     .setReplaceOnRemove(AmbienceFX::new))
+-                  .setPacketGenerator(new AmbienceFXPacketGenerator())
+-                  .loadsAfter(
+-                     Weather.class,
+-                     Environment.class,
+-                     FluidFX.class,
+-                     SoundEvent.class,
+-                     BlockSoundSet.class,
+-                     TagPattern.class,
+-                     AudioCategory.class,
+-                     ReverbEffect.class,
+-                     EqualizerEffect.class
+-                  ))
+-               .preLoadAssets(Collections.singletonList(AmbienceFX.EMPTY)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              BlockBoundingBoxes.class, new IndexedLookupTableAssetMap<>(BlockBoundingBoxes[]::new)
+-                           )
+-                           .setPath("Item/Block/Hitboxes"))
+-                        .setCodec(BlockBoundingBoxes.CODEC))
+-                     .setKeyFunction(BlockBoundingBoxes::getId))
+-                  .setReplaceOnRemove(BlockBoundingBoxes::getUnitBoxFor))
+-               .setPacketGenerator(new BlockBoundingBoxesPacketGenerator())
+-               .preLoadAssets(Collections.singletonList(BlockBoundingBoxes.UNIT_BOX)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              BlockSet.class, new IndexedLookupTableAssetMap<>(BlockSet[]::new)
+-                           )
+-                           .setPath("Item/Block/Sets"))
+-                        .setCodec(BlockSet.CODEC))
+-                     .setKeyFunction(BlockSet::getId))
+-                  .setReplaceOnRemove(BlockSet::new))
+-               .setPacketGenerator(new BlockSetPacketGenerator())
+-               .loadsBefore(Item.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 BlockSoundSet.class, new IndexedLookupTableAssetMap<>(BlockSoundSet[]::new)
+-                              )
+-                              .setPath("Item/Block/Sounds"))
+-                           .setCodec(BlockSoundSet.CODEC))
+-                        .setKeyFunction(BlockSoundSet::getId))
+-                     .setReplaceOnRemove(BlockSoundSet::new))
+-                  .setPacketGenerator(new BlockSoundSetPacketGenerator())
+-                  .loadsAfter(SoundEvent.class))
+-               .preLoadAssets(Collections.singletonList(BlockSoundSet.EMPTY_BLOCK_SOUND_SET)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              ItemSoundSet.class, new IndexedLookupTableAssetMap<>(ItemSoundSet[]::new)
+-                           )
+-                           .setPath("Audio/ItemSounds"))
+-                        .setCodec(ItemSoundSet.CODEC))
+-                     .setKeyFunction(ItemSoundSet::getId))
+-                  .setReplaceOnRemove(ItemSoundSet::new))
+-               .setPacketGenerator(new ItemSoundSetPacketGenerator())
+-               .loadsAfter(SoundEvent.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           BlockParticleSet.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Item/Block/Particles"))
+-                     .setCodec(BlockParticleSet.CODEC))
+-                  .setKeyFunction(BlockParticleSet::getId))
+-               .setPacketGenerator(new BlockParticleSetPacketGenerator())
+-               .loadsAfter(ParticleSystem.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        BlockBreakingDecal.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("Item/Block/BreakingDecals"))
+-                  .setCodec(BlockBreakingDecal.CODEC))
+-               .setKeyFunction(BlockBreakingDecal::getId))
++         HytaleAssetStore.builder(AmbienceFX.class, new IndexedAssetMap<>())
++            .setPath("Audio/AmbienceFX")
++            .setCodec(AmbienceFX.CODEC)
++            .setKeyFunction(AmbienceFX::getId)
++            .setReplaceOnRemove(AmbienceFX::new)
++            .setPacketGenerator(new AmbienceFXPacketGenerator())
++            .loadsAfter(
++               Weather.class,
++               Environment.class,
++               FluidFX.class,
++               SoundEvent.class,
++               BlockSoundSet.class,
++               TagPattern.class,
++               AudioCategory.class,
++               ReverbEffect.class,
++               EqualizerEffect.class
++            )
++            .preLoadAssets(Collections.singletonList(AmbienceFX.EMPTY))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BlockBoundingBoxes.class, new IndexedLookupTableAssetMap<>(BlockBoundingBoxes[]::new))
++            .setPath("Item/Block/Hitboxes")
++            .setCodec(BlockBoundingBoxes.CODEC)
++            .setKeyFunction(BlockBoundingBoxes::getId)
++            .setReplaceOnRemove(BlockBoundingBoxes::getUnitBoxFor)
++            .setPacketGenerator(new BlockBoundingBoxesPacketGenerator())
++            .preLoadAssets(Collections.singletonList(BlockBoundingBoxes.UNIT_BOX))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BlockSet.class, new IndexedLookupTableAssetMap<>(BlockSet[]::new))
++            .setPath("Item/Block/Sets")
++            .setCodec(BlockSet.CODEC)
++            .setKeyFunction(BlockSet::getId)
++            .setReplaceOnRemove(BlockSet::new)
++            .setPacketGenerator(new BlockSetPacketGenerator())
++            .loadsBefore(Item.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BlockSoundSet.class, new IndexedLookupTableAssetMap<>(BlockSoundSet[]::new))
++            .setPath("Item/Block/Sounds")
++            .setCodec(BlockSoundSet.CODEC)
++            .setKeyFunction(BlockSoundSet::getId)
++            .setReplaceOnRemove(BlockSoundSet::new)
++            .setPacketGenerator(new BlockSoundSetPacketGenerator())
++            .loadsAfter(SoundEvent.class)
++            .preLoadAssets(Collections.singletonList(BlockSoundSet.EMPTY_BLOCK_SOUND_SET))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ItemSoundSet.class, new IndexedLookupTableAssetMap<>(ItemSoundSet[]::new))
++            .setPath("Audio/ItemSounds")
++            .setCodec(ItemSoundSet.CODEC)
++            .setKeyFunction(ItemSoundSet::getId)
++            .setReplaceOnRemove(ItemSoundSet::new)
++            .setPacketGenerator(new ItemSoundSetPacketGenerator())
++            .loadsAfter(SoundEvent.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BlockParticleSet.class, new DefaultAssetMap<>())
++            .setPath("Item/Block/Particles")
++            .setCodec(BlockParticleSet.CODEC)
++            .setKeyFunction(BlockParticleSet::getId)
++            .setPacketGenerator(new BlockParticleSetPacketGenerator())
++            .loadsAfter(ParticleSystem.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BlockBreakingDecal.class, new DefaultAssetMap<>())
++            .setPath("Item/Block/BreakingDecals")
++            .setCodec(BlockBreakingDecal.CODEC)
++            .setKeyFunction(BlockBreakingDecal::getId)
+             .setPacketGenerator(new BlockBreakingDecalPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        Integer.class, BlockMigration.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("Item/Block/Migrations"))
+-                  .setCodec(BlockMigration.CODEC))
+-               .setKeyFunction(BlockMigration::getId))
++         HytaleAssetStore.builder(Integer.class, BlockMigration.class, new DefaultAssetMap<>())
++            .setPath("Item/Block/Migrations")
++            .setCodec(BlockMigration.CODEC)
++            .setKeyFunction(BlockMigration::getId)
+             .build()
+       );
+       BlockTypeAssetMap<String, BlockType> blockTypeAssetMap = new BlockTypeAssetMap<>(BlockType[]::new, BlockType::getGroup);
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                    BlockType.class, blockTypeAssetMap
+-                                 )
+-                                 .setPath("Item/Block/Blocks"))
+-                              .setCodec(BlockType.CODEC))
+-                           .setKeyFunction(BlockType::getId))
+-                        .setPacketGenerator(new BlockTypePacketGenerator())
+-                        .loadsAfter(
+-                           BlockBoundingBoxes.class,
+-                           BlockSoundSet.class,
+-                           SoundEvent.class,
+-                           BlockParticleSet.class,
+-                           BlockBreakingDecal.class,
+-                           CustomConnectedBlockTemplateAsset.class,
+-                           PrefabListAsset.class,
+-                           BlockTypeListAsset.class
+-                        ))
+-                     .setNotificationItemFunction(item -> new ItemStack(item, 1).toPacket())
+-                     .setReplaceOnRemove(BlockType::getUnknownFor))
+-                  .preLoadAssets(Arrays.asList(BlockType.EMPTY, BlockType.UNKNOWN, BlockType.DEBUG_CUBE, BlockType.DEBUG_MODEL)))
+-               .setIdProvider(Item.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 Fluid.class, new IndexedLookupTableAssetMap<>(Fluid[]::new)
+-                              )
+-                              .setPath("Item/Block/Fluids"))
+-                           .setCodec(Fluid.CODEC))
+-                        .setKeyFunction(Fluid::getId))
+-                     .setReplaceOnRemove(Fluid::getUnknownFor))
+-                  .setPacketGenerator(new FluidTypePacketGenerator())
+-                  .loadsAfter(FluidFX.class, BlockSoundSet.class, BlockParticleSet.class, SoundEvent.class))
+-               .preLoadAssets(List.of(Fluid.EMPTY, Fluid.UNKNOWN)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        ItemPlayerAnimations.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("Item/Animations"))
+-                  .setCodec(ItemPlayerAnimations.CODEC))
+-               .setKeyFunction(ItemPlayerAnimations::getId))
++         HytaleAssetStore.builder(BlockType.class, blockTypeAssetMap)
++            .setPath("Item/Block/Blocks")
++            .setCodec(BlockType.CODEC)
++            .setKeyFunction(BlockType::getId)
++            .setPacketGenerator(new BlockTypePacketGenerator())
++            .loadsAfter(
++               BlockBoundingBoxes.class,
++               BlockSoundSet.class,
++               SoundEvent.class,
++               BlockParticleSet.class,
++               BlockBreakingDecal.class,
++               CustomConnectedBlockTemplateAsset.class,
++               PrefabListAsset.class,
++               BlockTypeListAsset.class
++            )
++            .setNotificationItemFunction(item -> new ItemStack(item, 1).toPacket())
++            .setReplaceOnRemove(BlockType::getUnknownFor)
++            .preLoadAssets(Arrays.asList(BlockType.EMPTY, BlockType.UNKNOWN, BlockType.DEBUG_CUBE, BlockType.DEBUG_MODEL))
++            .setIdProvider(Item.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(Fluid.class, new IndexedLookupTableAssetMap<>(Fluid[]::new))
++            .setPath("Item/Block/Fluids")
++            .setCodec(Fluid.CODEC)
++            .setKeyFunction(Fluid::getId)
++            .setReplaceOnRemove(Fluid::getUnknownFor)
++            .setPacketGenerator(new FluidTypePacketGenerator())
++            .loadsAfter(FluidFX.class, BlockSoundSet.class, BlockParticleSet.class, SoundEvent.class)
++            .preLoadAssets(List.of(Fluid.EMPTY, Fluid.UNKNOWN))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ItemPlayerAnimations.class, new DefaultAssetMap<>())
++            .setPath("Item/Animations")
++            .setCodec(ItemPlayerAnimations.CODEC)
++            .setKeyFunction(ItemPlayerAnimations::getId)
+             .setPacketGenerator(new ItemPlayerAnimationsPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 Environment.class, new IndexedLookupTableAssetMap<>(Environment[]::new)
+-                              )
+-                              .setPath("Environments"))
+-                           .setCodec(Environment.CODEC))
+-                        .setKeyFunction(Environment::getId))
+-                     .setReplaceOnRemove(Environment::getUnknownFor))
+-                  .setPacketGenerator(new EnvironmentPacketGenerator())
+-                  .loadsAfter(Weather.class, FluidFX.class, ParticleSystem.class))
+-               .preLoadAssets(Collections.singletonList(Environment.UNKNOWN)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 FluidFX.class, new IndexedLookupTableAssetMap<>(FluidFX[]::new)
+-                              )
+-                              .setPath("Item/Block/FluidFX"))
+-                           .setCodec(FluidFX.CODEC))
+-                        .setKeyFunction(FluidFX::getId))
+-                     .setReplaceOnRemove(FluidFX::getUnknownFor))
+-                  .setPacketGenerator(new FluidFXPacketGenerator())
+-                  .loadsAfter(ParticleSystem.class))
+-               .preLoadAssets(Collections.singletonList(FluidFX.EMPTY_FLUID_FX)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        ItemCategory.class, new DefaultAssetMap(Collections.synchronizedMap(new Object2ObjectLinkedOpenHashMap()))
+-                     )
+-                     .setPath("Item/Category/CreativeLibrary"))
+-                  .setCodec(ItemCategory.CODEC))
+-               .setKeyFunction(ItemCategory::getId))
++         HytaleAssetStore.builder(Environment.class, new IndexedLookupTableAssetMap<>(Environment[]::new))
++            .setPath("Environments")
++            .setCodec(Environment.CODEC)
++            .setKeyFunction(Environment::getId)
++            .setReplaceOnRemove(Environment::getUnknownFor)
++            .setPacketGenerator(new EnvironmentPacketGenerator())
++            .loadsAfter(Weather.class, FluidFX.class, ParticleSystem.class)
++            .preLoadAssets(Collections.singletonList(Environment.UNKNOWN))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(FluidFX.class, new IndexedLookupTableAssetMap<>(FluidFX[]::new))
++            .setPath("Item/Block/FluidFX")
++            .setCodec(FluidFX.CODEC)
++            .setKeyFunction(FluidFX::getId)
++            .setReplaceOnRemove(FluidFX::getUnknownFor)
++            .setPacketGenerator(new FluidFXPacketGenerator())
++            .loadsAfter(ParticleSystem.class)
++            .preLoadAssets(Collections.singletonList(FluidFX.EMPTY_FLUID_FX))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ItemCategory.class, new DefaultAssetMap<>(Collections.synchronizedMap(new Object2ObjectLinkedOpenHashMap<>())))
++            .setPath("Item/Category/CreativeLibrary")
++            .setCodec(ItemCategory.CODEC)
++            .setKeyFunction(ItemCategory::getId)
+             .setPacketGenerator(new ItemCategoryPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        FieldcraftCategory.class, new DefaultAssetMap(Collections.synchronizedMap(new Object2ObjectLinkedOpenHashMap()))
+-                     )
+-                     .setPath("Item/Category/Fieldcraft"))
+-                  .setCodec(FieldcraftCategory.CODEC))
+-               .setKeyFunction(FieldcraftCategory::getId))
++         HytaleAssetStore.builder(FieldcraftCategory.class, new DefaultAssetMap<>(Collections.synchronizedMap(new Object2ObjectLinkedOpenHashMap<>())))
++            .setPath("Item/Category/Fieldcraft")
++            .setCodec(FieldcraftCategory.CODEC)
++            .setKeyFunction(FieldcraftCategory::getId)
+             .setPacketGenerator(new FieldcraftCategoryPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(ItemDropList.class, new DefaultAssetMap())
+-                     .setPath("Drops"))
+-                  .setCodec(ItemDropList.CODEC))
+-               .setKeyFunction(ItemDropList::getId))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(WordList.class, new DefaultAssetMap())
+-                     .setPath("WordLists"))
+-                  .setCodec(WordList.CODEC))
+-               .setKeyFunction(WordList::getId))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              ItemReticleConfig.class, new IndexedLookupTableAssetMap<>(ItemReticleConfig[]::new)
+-                           )
+-                           .setPath("Item/Reticles"))
+-                        .setCodec(ItemReticleConfig.CODEC))
+-                     .setKeyFunction(ItemReticleConfig::getId))
+-                  .setReplaceOnRemove(ItemReticleConfig::new))
+-               .setPacketGenerator(new ItemReticleConfigPacketGenerator())
+-               .preLoadAssets(Collections.singletonList(ItemReticleConfig.DEFAULT)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           ItemToolSpec.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Item/Unarmed/Gathering"))
+-                     .setCodec(ItemToolSpec.CODEC))
+-                  .setKeyFunction(ItemToolSpec::getGatherType))
+-               .loadsAfter(SoundEvent.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(PortalType.class, new DefaultAssetMap())
+-                     .setPath("PortalTypes"))
+-                  .setCodec(PortalType.CODEC))
+-               .setKeyFunction(PortalType::getId))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              Item.class, new DefaultAssetMap()
+-                           )
+-                           .setPath("Item/Items"))
+-                        .setCodec(Item.CODEC))
+-                     .setKeyFunction(Item::getId))
+-                  .setPacketGenerator(new ItemPacketGenerator())
+-                  .loadsAfter(
+-                     ItemCategory.class,
+-                     ItemPlayerAnimations.class,
+-                     UnarmedInteractions.class,
+-                     ResourceType.class,
+-                     BlockType.class,
+-                     EntityEffect.class,
+-                     ItemQuality.class,
+-                     ItemReticleConfig.class,
+-                     SoundEvent.class,
+-                     PortalType.class,
+-                     ItemSoundSet.class
+-                  ))
+-               .setNotificationItemFunction(item -> new ItemStack(item, 1).toPacket())
+-               .preLoadAssets(Collections.singletonList(Item.UNKNOWN)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           CraftingRecipe.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Item/Recipes"))
+-                     .setCodec(CraftingRecipe.CODEC))
+-                  .setKeyFunction(CraftingRecipe::getId))
+-               .setPacketGenerator(new CraftingRecipePacketGenerator())
+-               .loadsAfter(Item.class, BlockType.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              ModelAsset.class, new DefaultAssetMap()
+-                           )
+-                           .setPath("Models"))
+-                        .setCodec(ModelAsset.CODEC))
+-                     .setKeyFunction(ModelAsset::getId))
+-                  .loadsAfter(ParticleSystem.class, SoundEvent.class, Trail.class))
+-               .preLoadAssets(List.of(ModelAsset.DEBUG)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           ParticleSpawner.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Particles"))
+-                     .setExtension(".particlespawner"))
+-                  .setCodec(ParticleSpawner.CODEC))
+-               .setKeyFunction(ParticleSpawner::getId))
++         HytaleAssetStore.builder(ItemDropList.class, new DefaultAssetMap<>())
++            .setPath("Drops")
++            .setCodec(ItemDropList.CODEC)
++            .setKeyFunction(ItemDropList::getId)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(WordList.class, new DefaultAssetMap<>())
++            .setPath("WordLists")
++            .setCodec(WordList.CODEC)
++            .setKeyFunction(WordList::getId)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ItemReticleConfig.class, new IndexedLookupTableAssetMap<>(ItemReticleConfig[]::new))
++            .setPath("Item/Reticles")
++            .setCodec(ItemReticleConfig.CODEC)
++            .setKeyFunction(ItemReticleConfig::getId)
++            .setReplaceOnRemove(ItemReticleConfig::new)
++            .setPacketGenerator(new ItemReticleConfigPacketGenerator())
++            .preLoadAssets(Collections.singletonList(ItemReticleConfig.DEFAULT))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ItemToolSpec.class, new DefaultAssetMap<>())
++            .setPath("Item/Unarmed/Gathering")
++            .setCodec(ItemToolSpec.CODEC)
++            .setKeyFunction(ItemToolSpec::getGatherType)
++            .loadsAfter(SoundEvent.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(PortalType.class, new DefaultAssetMap<>())
++            .setPath("PortalTypes")
++            .setCodec(PortalType.CODEC)
++            .setKeyFunction(PortalType::getId)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(Item.class, new DefaultAssetMap<>())
++            .setPath("Item/Items")
++            .setCodec(Item.CODEC)
++            .setKeyFunction(Item::getId)
++            .setPacketGenerator(new ItemPacketGenerator())
++            .loadsAfter(
++               ItemCategory.class,
++               ItemPlayerAnimations.class,
++               UnarmedInteractions.class,
++               ResourceType.class,
++               BlockType.class,
++               EntityEffect.class,
++               ItemQuality.class,
++               ItemReticleConfig.class,
++               SoundEvent.class,
++               PortalType.class,
++               ItemSoundSet.class
++            )
++            .setNotificationItemFunction(item -> new ItemStack(item, 1).toPacket())
++            .preLoadAssets(Collections.singletonList(Item.UNKNOWN))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(CraftingRecipe.class, new DefaultAssetMap<>())
++            .setPath("Item/Recipes")
++            .setCodec(CraftingRecipe.CODEC)
++            .setKeyFunction(CraftingRecipe::getId)
++            .setPacketGenerator(new CraftingRecipePacketGenerator())
++            .loadsAfter(Item.class, BlockType.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ModelAsset.class, new DefaultAssetMap<>())
++            .setPath("Models")
++            .setCodec(ModelAsset.CODEC)
++            .setKeyFunction(ModelAsset::getId)
++            .loadsAfter(ParticleSystem.class, SoundEvent.class, Trail.class)
++            .preLoadAssets(List.of(ModelAsset.DEBUG))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ParticleSpawner.class, new DefaultAssetMap<>())
++            .setPath("Particles")
++            .setExtension(".particlespawner")
++            .setCodec(ParticleSpawner.CODEC)
++            .setKeyFunction(ParticleSpawner::getId)
+             .setPacketGenerator(new ParticleSpawnerPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              ParticleSystem.class, new DefaultAssetMap()
+-                           )
+-                           .setPath("Particles"))
+-                        .setExtension(".particlesystem"))
+-                     .setCodec(ParticleSystem.CODEC))
+-                  .setKeyFunction(ParticleSystem::getId))
+-               .setPacketGenerator(new ParticleSystemPacketGenerator())
+-               .loadsAfter(ParticleSpawner.class))
++         HytaleAssetStore.builder(ParticleSystem.class, new DefaultAssetMap<>())
++            .setPath("Particles")
++            .setExtension(".particlesystem")
++            .setCodec(ParticleSystem.CODEC)
++            .setKeyFunction(ParticleSystem::getId)
++            .setPacketGenerator(new ParticleSystemPacketGenerator())
++            .loadsAfter(ParticleSpawner.class)
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(Trail.class, new DefaultAssetMap())
+-                     .setPath("Entity/Trails"))
+-                  .setCodec(Trail.CODEC))
+-               .setKeyFunction(Trail::getId))
++         HytaleAssetStore.builder(Trail.class, new DefaultAssetMap<>())
++            .setPath("Entity/Trails")
++            .setCodec(Trail.CODEC)
++            .setKeyFunction(Trail::getId)
+             .setPacketGenerator(new TrailPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           Projectile.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Projectiles"))
+-                     .setCodec(Projectile.CODEC))
+-                  .setKeyFunction(Projectile::getId))
+-               .loadsAfter(SoundEvent.class, ModelAsset.class, ParticleSystem.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              EntityEffect.class, new IndexedLookupTableAssetMap<>(EntityEffect[]::new)
+-                           )
+-                           .setPath("Entity/Effects"))
+-                        .setCodec(EntityEffect.CODEC))
+-                     .setKeyFunction(EntityEffect::getId))
+-                  .setReplaceOnRemove(EntityEffect::new))
+-               .setPacketGenerator(new EntityEffectPacketGenerator())
+-               .loadsAfter(
+-                  ModelAsset.class, ParticleSystem.class, EntityStatType.class, ModelVFX.class, DamageCause.class, CameraEffect.class, SoundEvent.class
+-               ))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           ModelVFX.class, new IndexedLookupTableAssetMap<>(ModelVFX[]::new)
+-                        )
+-                        .setPath("Entity/ModelVFX"))
+-                     .setCodec(ModelVFX.CODEC))
+-                  .setKeyFunction(ModelVFX::getId))
+-               .setReplaceOnRemove(ModelVFX::new))
++         HytaleAssetStore.builder(Projectile.class, new DefaultAssetMap<>())
++            .setPath("Projectiles")
++            .setCodec(Projectile.CODEC)
++            .setKeyFunction(Projectile::getId)
++            .loadsAfter(SoundEvent.class, ModelAsset.class, ParticleSystem.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(EntityEffect.class, new IndexedLookupTableAssetMap<>(EntityEffect[]::new))
++            .setPath("Entity/Effects")
++            .setCodec(EntityEffect.CODEC)
++            .setKeyFunction(EntityEffect::getId)
++            .setReplaceOnRemove(EntityEffect::new)
++            .setPacketGenerator(new EntityEffectPacketGenerator())
++            .loadsAfter(
++               ModelAsset.class, ParticleSystem.class, EntityStatType.class, ModelVFX.class, DamageCause.class, CameraEffect.class, SoundEvent.class
++            )
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ModelVFX.class, new IndexedLookupTableAssetMap<>(ModelVFX[]::new))
++            .setPath("Entity/ModelVFX")
++            .setCodec(ModelVFX.CODEC)
++            .setKeyFunction(ModelVFX::getId)
++            .setReplaceOnRemove(ModelVFX::new)
+             .setPacketGenerator(new ModelVFXPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           GameModeType.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Entity/GameMode"))
+-                     .setCodec(GameModeType.CODEC))
+-                  .setKeyFunction(GameModeType::getId))
+-               .loadsAfter(Interaction.class))
++         HytaleAssetStore.builder(GameModeType.class, new DefaultAssetMap<>())
++            .setPath("Entity/GameMode")
++            .setCodec(GameModeType.CODEC)
++            .setKeyFunction(GameModeType::getId)
++            .loadsAfter(Interaction.class)
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(ResourceType.class, new DefaultAssetMap())
+-                     .setPath("Item/ResourceTypes"))
+-                  .setCodec(ResourceType.CODEC))
+-               .setKeyFunction(ResourceType::getId))
++         HytaleAssetStore.builder(ResourceType.class, new DefaultAssetMap<>())
++            .setPath("Item/ResourceTypes")
++            .setCodec(ResourceType.CODEC)
++            .setKeyFunction(ResourceType::getId)
+             .setPacketGenerator(new ResourceTypePacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 Weather.class, new IndexedLookupTableAssetMap<>(Weather[]::new)
+-                              )
+-                              .setPath("Weathers"))
+-                           .setCodec(Weather.CODEC))
+-                        .setKeyFunction(Weather::getId))
+-                     .setReplaceOnRemove(Weather::new))
+-                  .setPacketGenerator(new WeatherPacketGenerator())
+-                  .loadsAfter(ParticleSystem.class))
+-               .preLoadAssets(Collections.singletonList(Weather.UNKNOWN)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           GameplayConfig.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("GameplayConfigs"))
+-                     .setCodec(GameplayConfig.CODEC))
+-                  .setKeyFunction(GameplayConfig::getId))
+-               .loadsAfter(
+-                  Item.class,
+-                  SoundEvent.class,
+-                  SoundSet.class,
+-                  BlockType.class,
+-                  EntityEffect.class,
+-                  HitboxCollisionConfig.class,
+-                  DamageCause.class,
+-                  RepulsionConfig.class,
+-                  ParticleSystem.class,
+-                  AmbienceFX.class
+-               ))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 SoundEvent.class, new IndexedLookupTableAssetMap<>(SoundEvent[]::new)
+-                              )
+-                              .setPath("Audio/SoundEvents"))
+-                           .setCodec(SoundEvent.CODEC))
+-                        .setKeyFunction(SoundEvent::getId))
+-                     .setReplaceOnRemove(SoundEvent::new))
+-                  .setPacketGenerator(new SoundEventPacketGenerator())
+-                  .preLoadAssets(Collections.singletonList(SoundEvent.EMPTY_SOUND_EVENT)))
+-               .loadsAfter(AudioCategory.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 SoundSet.class, new IndexedLookupTableAssetMap<>(SoundSet[]::new)
+-                              )
+-                              .setPath("Audio/SoundSets"))
+-                           .setCodec(SoundSet.CODEC))
+-                        .setKeyFunction(SoundSet::getId))
+-                     .setReplaceOnRemove(SoundSet::new))
+-                  .setPacketGenerator(new SoundSetPacketGenerator())
+-                  .loadsAfter(SoundEvent.class))
+-               .preLoadAssets(Collections.singletonList(SoundSet.EMPTY_SOUND_SET)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              AudioCategory.class, new IndexedLookupTableAssetMap<>(AudioCategory[]::new)
+-                           )
+-                           .setPath("Audio/AudioCategories"))
+-                        .setCodec(AudioCategory.CODEC))
+-                     .setKeyFunction(AudioCategory::getId))
+-                  .setReplaceOnRemove(AudioCategory::new))
+-               .setPacketGenerator(new AudioCategoryPacketGenerator())
+-               .preLoadAssets(Collections.singletonList(AudioCategory.EMPTY_AUDIO_CATEGORY)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              ReverbEffect.class, new IndexedLookupTableAssetMap<>(ReverbEffect[]::new)
+-                           )
+-                           .setPath("Audio/Reverb"))
+-                        .setCodec(ReverbEffect.CODEC))
+-                     .setKeyFunction(ReverbEffect::getId))
+-                  .setReplaceOnRemove(ReverbEffect::new))
+-               .setPacketGenerator(new ReverbEffectPacketGenerator())
+-               .preLoadAssets(Collections.singletonList(ReverbEffect.EMPTY_REVERB_EFFECT)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              EqualizerEffect.class, new IndexedLookupTableAssetMap<>(EqualizerEffect[]::new)
+-                           )
+-                           .setPath("Audio/EQ"))
+-                        .setCodec(EqualizerEffect.CODEC))
+-                     .setKeyFunction(EqualizerEffect::getId))
+-                  .setReplaceOnRemove(EqualizerEffect::new))
+-               .setPacketGenerator(new EqualizerEffectPacketGenerator())
+-               .preLoadAssets(Collections.singletonList(EqualizerEffect.EMPTY_EQUALIZER_EFFECT)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           ResponseCurve.class, new IndexedLookupTableAssetMap<>(ResponseCurve[]::new)
+-                        )
+-                        .setPath("ResponseCurves"))
+-                     .setCodec(ResponseCurve.CODEC))
+-                  .setKeyFunction(ResponseCurve::getId))
+-               .setReplaceOnRemove(ExponentialResponseCurve::new))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 ItemQuality.class, new IndexedLookupTableAssetMap<>(ItemQuality[]::new)
+-                              )
+-                              .setPath("Item/Qualities"))
+-                           .setCodec(ItemQuality.CODEC))
+-                        .setKeyFunction(ItemQuality::getId))
+-                     .setPacketGenerator(new ItemQualityPacketGenerator())
+-                     .setReplaceOnRemove(ItemQuality::new))
+-                  .loadsAfter(ParticleSystem.class))
+-               .preLoadAssets(Collections.singletonList(ItemQuality.DEFAULT_ITEM_QUALITY)))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              DamageCause.class, new IndexedLookupTableAssetMap<>(DamageCause[]::new)
+-                           )
+-                           .setPath("Entity/Damage"))
+-                        .setCodec(DamageCause.CODEC))
+-                     .setKeyFunction(DamageCause::getId))
+-                  .setReplaceOnRemove(DamageCause::new))
+-               .loadsBefore(Item.class, Interaction.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           ProjectileConfig.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("ProjectileConfigs"))
+-                     .setCodec(ProjectileConfig.CODEC))
+-                  .setKeyFunction(ProjectileConfig::getId))
+-               .loadsAfter(Interaction.class, SoundEvent.class, ModelAsset.class, ParticleSystem.class))
++         HytaleAssetStore.builder(Weather.class, new IndexedLookupTableAssetMap<>(Weather[]::new))
++            .setPath("Weathers")
++            .setCodec(Weather.CODEC)
++            .setKeyFunction(Weather::getId)
++            .setReplaceOnRemove(Weather::new)
++            .setPacketGenerator(new WeatherPacketGenerator())
++            .loadsAfter(ParticleSystem.class)
++            .preLoadAssets(Collections.singletonList(Weather.UNKNOWN))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(GameplayConfig.class, new DefaultAssetMap<>())
++            .setPath("GameplayConfigs")
++            .setCodec(GameplayConfig.CODEC)
++            .setKeyFunction(GameplayConfig::getId)
++            .loadsAfter(
++               Item.class,
++               SoundEvent.class,
++               SoundSet.class,
++               BlockType.class,
++               EntityEffect.class,
++               HitboxCollisionConfig.class,
++               DamageCause.class,
++               RepulsionConfig.class,
++               ParticleSystem.class,
++               AmbienceFX.class
++            )
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(SoundEvent.class, new IndexedLookupTableAssetMap<>(SoundEvent[]::new))
++            .setPath("Audio/SoundEvents")
++            .setCodec(SoundEvent.CODEC)
++            .setKeyFunction(SoundEvent::getId)
++            .setReplaceOnRemove(SoundEvent::new)
++            .setPacketGenerator(new SoundEventPacketGenerator())
++            .preLoadAssets(Collections.singletonList(SoundEvent.EMPTY_SOUND_EVENT))
++            .loadsAfter(AudioCategory.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(SoundSet.class, new IndexedLookupTableAssetMap<>(SoundSet[]::new))
++            .setPath("Audio/SoundSets")
++            .setCodec(SoundSet.CODEC)
++            .setKeyFunction(SoundSet::getId)
++            .setReplaceOnRemove(SoundSet::new)
++            .setPacketGenerator(new SoundSetPacketGenerator())
++            .loadsAfter(SoundEvent.class)
++            .preLoadAssets(Collections.singletonList(SoundSet.EMPTY_SOUND_SET))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(AudioCategory.class, new IndexedLookupTableAssetMap<>(AudioCategory[]::new))
++            .setPath("Audio/AudioCategories")
++            .setCodec(AudioCategory.CODEC)
++            .setKeyFunction(AudioCategory::getId)
++            .setReplaceOnRemove(AudioCategory::new)
++            .setPacketGenerator(new AudioCategoryPacketGenerator())
++            .preLoadAssets(Collections.singletonList(AudioCategory.EMPTY_AUDIO_CATEGORY))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ReverbEffect.class, new IndexedLookupTableAssetMap<>(ReverbEffect[]::new))
++            .setPath("Audio/Reverb")
++            .setCodec(ReverbEffect.CODEC)
++            .setKeyFunction(ReverbEffect::getId)
++            .setReplaceOnRemove(ReverbEffect::new)
++            .setPacketGenerator(new ReverbEffectPacketGenerator())
++            .preLoadAssets(Collections.singletonList(ReverbEffect.EMPTY_REVERB_EFFECT))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(EqualizerEffect.class, new IndexedLookupTableAssetMap<>(EqualizerEffect[]::new))
++            .setPath("Audio/EQ")
++            .setCodec(EqualizerEffect.CODEC)
++            .setKeyFunction(EqualizerEffect::getId)
++            .setReplaceOnRemove(EqualizerEffect::new)
++            .setPacketGenerator(new EqualizerEffectPacketGenerator())
++            .preLoadAssets(Collections.singletonList(EqualizerEffect.EMPTY_EQUALIZER_EFFECT))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ResponseCurve.class, new IndexedLookupTableAssetMap<>(ResponseCurve[]::new))
++            .setPath("ResponseCurves")
++            .setCodec(ResponseCurve.CODEC)
++            .setKeyFunction(ResponseCurve::getId)
++            .setReplaceOnRemove(ExponentialResponseCurve::new)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ItemQuality.class, new IndexedLookupTableAssetMap<>(ItemQuality[]::new))
++            .setPath("Item/Qualities")
++            .setCodec(ItemQuality.CODEC)
++            .setKeyFunction(ItemQuality::getId)
++            .setPacketGenerator(new ItemQualityPacketGenerator())
++            .setReplaceOnRemove(ItemQuality::new)
++            .loadsAfter(ParticleSystem.class)
++            .preLoadAssets(Collections.singletonList(ItemQuality.DEFAULT_ITEM_QUALITY))
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(DamageCause.class, new IndexedLookupTableAssetMap<>(DamageCause[]::new))
++            .setPath("Entity/Damage")
++            .setCodec(DamageCause.CODEC)
++            .setKeyFunction(DamageCause::getId)
++            .setReplaceOnRemove(DamageCause::new)
++            .loadsBefore(Item.class, Interaction.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(ProjectileConfig.class, new DefaultAssetMap<>())
++            .setPath("ProjectileConfigs")
++            .setCodec(ProjectileConfig.CODEC)
++            .setKeyFunction(ProjectileConfig::getId)
++            .loadsAfter(Interaction.class, SoundEvent.class, ModelAsset.class, ParticleSystem.class)
+             .setPacketGenerator(new ProjectileConfigPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           BlockGroup.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Item/Groups"))
+-                     .setCodec(BlockGroup.CODEC))
+-                  .setKeyFunction(BlockGroup::getId))
+-               .loadsAfter(BlockType.class, Item.class))
++         HytaleAssetStore.builder(BlockGroup.class, new DefaultAssetMap<>())
++            .setPath("Item/Groups")
++            .setCodec(BlockGroup.CODEC)
++            .setKeyFunction(BlockGroup::getId)
++            .loadsAfter(BlockType.class, Item.class)
+             .setPacketGenerator(new BlockGroupPacketGenerator())
+             .build()
+       );
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           BuilderToolItemReferenceAsset.class, new DefaultAssetMap()
+-                        )
+-                        .setPath("Item/PlayerToolsMenuConfig"))
+-                     .setCodec(BuilderToolItemReferenceAsset.CODEC))
+-                  .setKeyFunction(BuilderToolItemReferenceAsset::getId))
+-               .loadsAfter(BlockType.class, Item.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        BlockTypeListAsset.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("BlockTypeList"))
+-                  .setKeyFunction(BlockTypeListAsset::getId))
+-               .setCodec(BlockTypeListAsset.CODEC))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(PrefabListAsset.class, new DefaultAssetMap())
+-                     .setPath("PrefabList"))
+-                  .setKeyFunction(PrefabListAsset::getId))
+-               .setCodec(PrefabListAsset.CODEC))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              CameraEffect.class, new IndexedLookupTableAssetMap<>(CameraEffect[]::new)
+-                           )
+-                           .loadsBefore(GameplayConfig.class, Interaction.class))
+-                        .setPath("Camera/CameraEffect"))
+-                     .setCodec(CameraEffect.CODEC))
+-                  .setKeyFunction(CameraEffect::getId))
+-               .setReplaceOnRemove(CameraEffect.MissingCameraEffect::new))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           TagPattern.class, new IndexedLookupTableAssetMap<>(TagPattern[]::new)
+-                        )
+-                        .setPath("TagPatterns"))
+-                     .setCodec(TagPattern.CODEC))
+-                  .setKeyFunction(TagPattern::getId))
+-               .setReplaceOnRemove(EqualsTagOp::new))
++         HytaleAssetStore.builder(BuilderToolItemReferenceAsset.class, new DefaultAssetMap<>())
++            .setPath("Item/PlayerToolsMenuConfig")
++            .setCodec(BuilderToolItemReferenceAsset.CODEC)
++            .setKeyFunction(BuilderToolItemReferenceAsset::getId)
++            .loadsAfter(BlockType.class, Item.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BlockTypeListAsset.class, new DefaultAssetMap<>())
++            .setPath("BlockTypeList")
++            .setKeyFunction(BlockTypeListAsset::getId)
++            .setCodec(BlockTypeListAsset.CODEC)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(PrefabListAsset.class, new DefaultAssetMap<>())
++            .setPath("PrefabList")
++            .setKeyFunction(PrefabListAsset::getId)
++            .setCodec(PrefabListAsset.CODEC)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(CameraEffect.class, new IndexedLookupTableAssetMap<>(CameraEffect[]::new))
++            .loadsBefore(GameplayConfig.class, Interaction.class)
++            .setPath("Camera/CameraEffect")
++            .setCodec(CameraEffect.CODEC)
++            .setKeyFunction(CameraEffect::getId)
++            .setReplaceOnRemove(CameraEffect.MissingCameraEffect::new)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(TagPattern.class, new IndexedLookupTableAssetMap<>(TagPattern[]::new))
++            .setPath("TagPatterns")
++            .setCodec(TagPattern.CODEC)
++            .setKeyFunction(TagPattern::getId)
++            .setReplaceOnRemove(EqualsTagOp::new)
+             .setPacketGenerator(new TagPatternPacketGenerator())
+             .build()
+       );

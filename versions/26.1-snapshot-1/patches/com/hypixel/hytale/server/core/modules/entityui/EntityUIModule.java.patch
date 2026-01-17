@@ -1,0 +1,25 @@
+--- a/com/hypixel/hytale/server/core/modules/entityui/EntityUIModule.java
++++ b/com/hypixel/hytale/server/core/modules/entityui/EntityUIModule.java
+@@ -46,15 +_,13 @@
+    @Override
+    protected void setup() {
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              EntityUIComponent.class, new IndexedLookupTableAssetMap<>(EntityUIComponent[]::new)
+-                           )
+-                           .setPath("Entity/UI"))
+-                        .setCodec(EntityUIComponent.CODEC))
+-                     .setKeyFunction(EntityUIComponent::getId))
+-                  .setPacketGenerator(new EntityUIComponentPacketGenerator())
+-                  .setReplaceOnRemove(EntityUIComponent::getUnknownFor))
+-               .loadsAfter(EntityStatType.class))
++         HytaleAssetStore.builder(EntityUIComponent.class, new IndexedLookupTableAssetMap<>(EntityUIComponent[]::new))
++            .setPath("Entity/UI")
++            .setCodec(EntityUIComponent.CODEC)
++            .setKeyFunction(EntityUIComponent::getId)
++            .setPacketGenerator(new EntityUIComponentPacketGenerator())
++            .setReplaceOnRemove(EntityUIComponent::getUnknownFor)
++            .loadsAfter(EntityStatType.class)
+             .build()
+       );
+       this.getCodecRegistry(EntityUIComponent.CODEC).register("EntityStat", EntityStatUIComponent.class, EntityStatUIComponent.CODEC);

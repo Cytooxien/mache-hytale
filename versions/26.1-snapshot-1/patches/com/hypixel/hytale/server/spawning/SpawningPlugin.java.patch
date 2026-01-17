@@ -1,0 +1,83 @@
+--- a/com/hypixel/hytale/server/spawning/SpawningPlugin.java
++++ b/com/hypixel/hytale/server/spawning/SpawningPlugin.java
+@@ -191,47 +_,39 @@
+       this.getEntityRegistry().registerEntity("LegacySpawnBeacon", LegacySpawnBeaconEntity.class, LegacySpawnBeaconEntity::new, LegacySpawnBeaconEntity.CODEC);
+       this.getEntityRegistry().registerEntity("SpawnBeacon", SpawnBeacon.class, SpawnBeacon::new, SpawnBeacon.CODEC);
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              SpawnMarker.class, new DefaultAssetMap()
+-                           )
+-                           .setPath("NPC/Spawn/Markers"))
+-                        .setCodec(SpawnMarker.CODEC))
+-                     .setKeyFunction(SpawnMarker::getId))
+-                  .loadsAfter(FlockAsset.class, ModelAsset.class))
+-               .loadsBefore(Interaction.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              WorldNPCSpawn.class, new IndexedLookupTableAssetMap<>(WorldNPCSpawn[]::new)
+-                           )
+-                           .setPath("NPC/Spawn/World"))
+-                        .setCodec(WorldNPCSpawn.CODEC))
+-                     .setKeyFunction(WorldNPCSpawn::getId))
+-                  .setReplaceOnRemove(WorldNPCSpawn::new))
+-               .loadsAfter(Environment.class, BlockSet.class, FlockAsset.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              BeaconNPCSpawn.class, new IndexedLookupTableAssetMap<>(BeaconNPCSpawn[]::new)
+-                           )
+-                           .setPath("NPC/Spawn/Beacons"))
+-                        .setCodec(BeaconNPCSpawn.CODEC))
+-                     .setKeyFunction(BeaconNPCSpawn::getId))
+-                  .setReplaceOnRemove(BeaconNPCSpawn::new))
+-               .loadsAfter(Environment.class, BlockSet.class, SpawnSuppression.class, FlockAsset.class, ModelAsset.class, ResponseCurve.class))
+-            .build()
+-      );
+-      AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              SpawnSuppression.class, new IndexedAssetMap()
+-                           )
+-                           .setPath("NPC/Spawn/Suppression"))
+-                        .setCodec(SpawnSuppression.CODEC))
+-                     .setKeyFunction(SpawnSuppression::getId))
+-                  .setReplaceOnRemove(SpawnSuppression::new))
+-               .loadsAfter(NPCGroup.class))
++         HytaleAssetStore.builder(SpawnMarker.class, new DefaultAssetMap<>())
++            .setPath("NPC/Spawn/Markers")
++            .setCodec(SpawnMarker.CODEC)
++            .setKeyFunction(SpawnMarker::getId)
++            .loadsAfter(FlockAsset.class, ModelAsset.class)
++            .loadsBefore(Interaction.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(WorldNPCSpawn.class, new IndexedLookupTableAssetMap<>(WorldNPCSpawn[]::new))
++            .setPath("NPC/Spawn/World")
++            .setCodec(WorldNPCSpawn.CODEC)
++            .setKeyFunction(WorldNPCSpawn::getId)
++            .setReplaceOnRemove(WorldNPCSpawn::new)
++            .loadsAfter(Environment.class, BlockSet.class, FlockAsset.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(BeaconNPCSpawn.class, new IndexedLookupTableAssetMap<>(BeaconNPCSpawn[]::new))
++            .setPath("NPC/Spawn/Beacons")
++            .setCodec(BeaconNPCSpawn.CODEC)
++            .setKeyFunction(BeaconNPCSpawn::getId)
++            .setReplaceOnRemove(BeaconNPCSpawn::new)
++            .loadsAfter(Environment.class, BlockSet.class, SpawnSuppression.class, FlockAsset.class, ModelAsset.class, ResponseCurve.class)
++            .build()
++      );
++      AssetRegistry.register(
++         HytaleAssetStore.builder(SpawnSuppression.class, new IndexedAssetMap<>())
++            .setPath("NPC/Spawn/Suppression")
++            .setCodec(SpawnSuppression.CODEC)
++            .setKeyFunction(SpawnSuppression::getId)
++            .setReplaceOnRemove(SpawnSuppression::new)
++            .loadsAfter(NPCGroup.class)
+             .build()
+       );
+       NPCPlugin.get().registerCoreComponentType("TriggerSpawnBeacon", BuilderActionTriggerSpawnBeacon::new);

@@ -1,0 +1,19 @@
+--- a/com/hypixel/hytale/builtin/commandmacro/MacroCommandPlugin.java
++++ b/com/hypixel/hytale/builtin/commandmacro/MacroCommandPlugin.java
+@@ -27,12 +_,10 @@
+    protected void setup() {
+       instance = this;
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        MacroCommandBuilder.class, new DefaultAssetMap()
+-                     )
+-                     .setPath("MacroCommands"))
+-                  .setKeyFunction(MacroCommandBuilder::getId))
+-               .setCodec(MacroCommandBuilder.CODEC))
++         HytaleAssetStore.builder(MacroCommandBuilder.class, new DefaultAssetMap<>())
++            .setPath("MacroCommands")
++            .setKeyFunction(MacroCommandBuilder::getId)
++            .setCodec(MacroCommandBuilder.CODEC)
+             .build()
+       );
+       this.getEventRegistry().register(LoadedAssetsEvent.class, MacroCommandBuilder.class, this::loadCommandMacroAsset);

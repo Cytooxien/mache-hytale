@@ -1,0 +1,67 @@
+--- a/com/hypixel/hytale/server/core/modules/entity/EntityModule.java
++++ b/com/hypixel/hytale/server/core/modules/entity/EntityModule.java
+@@ -533,14 +_,12 @@
+       entityStoreRegistry.registerSystem(new GenericVelocityInstructionSystem());
+       entityStoreRegistry.registerSystem(new PlayerVelocityInstructionSystem());
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           HitboxCollisionConfig.class, new IndexedLookupTableAssetMap<>(HitboxCollisionConfig[]::new)
+-                        )
+-                        .setPath("Entity/HitboxCollision"))
+-                     .setCodec(HitboxCollisionConfig.CODEC))
+-                  .setKeyFunction(HitboxCollisionConfig::getId))
+-               .setPacketGenerator(new HitboxCollisionConfigPacketGenerator())
+-               .setReplaceOnRemove(HitboxCollisionConfig::new))
++         HytaleAssetStore.builder(HitboxCollisionConfig.class, new IndexedLookupTableAssetMap<>(HitboxCollisionConfig[]::new))
++            .setPath("Entity/HitboxCollision")
++            .setCodec(HitboxCollisionConfig.CODEC)
++            .setKeyFunction(HitboxCollisionConfig::getId)
++            .setPacketGenerator(new HitboxCollisionConfigPacketGenerator())
++            .setReplaceOnRemove(HitboxCollisionConfig::new)
+             .build()
+       );
+       this.hitboxCollisionComponentType = entityStoreRegistry.registerComponent(HitboxCollision.class, "HitboxCollision", HitboxCollision.CODEC);
+@@ -548,14 +_,12 @@
+       entityStoreRegistry.registerSystem(new HitboxCollisionSystems.EntityTrackerUpdate(this.visibleComponentType, this.hitboxCollisionComponentType));
+       entityStoreRegistry.registerSystem(new HitboxCollisionSystems.EntityTrackerRemove(this.visibleComponentType, this.hitboxCollisionComponentType));
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                           RepulsionConfig.class, new IndexedLookupTableAssetMap<>(RepulsionConfig[]::new)
+-                        )
+-                        .setPath("Entity/Repulsion"))
+-                     .setCodec(RepulsionConfig.CODEC))
+-                  .setKeyFunction(RepulsionConfig::getId))
+-               .setPacketGenerator(new RepulsionConfigPacketGenerator())
+-               .setReplaceOnRemove(RepulsionConfig::new))
++         HytaleAssetStore.builder(RepulsionConfig.class, new IndexedLookupTableAssetMap<>(RepulsionConfig[]::new))
++            .setPath("Entity/Repulsion")
++            .setCodec(RepulsionConfig.CODEC)
++            .setKeyFunction(RepulsionConfig::getId)
++            .setPacketGenerator(new RepulsionConfigPacketGenerator())
++            .setReplaceOnRemove(RepulsionConfig::new)
+             .build()
+       );
+       this.repulsionComponentType = entityStoreRegistry.registerComponent(Repulsion.class, "Repulsion", Repulsion.CODEC);
+@@ -567,15 +_,13 @@
+       );
+       entityStoreRegistry.registerSystem(new EntitySystems.NewSpawnTick());
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 MovementConfig.class, new IndexedLookupTableAssetMap<>(MovementConfig[]::new)
+-                              )
+-                              .setPath("Entity/MovementConfig"))
+-                           .setCodec(MovementConfig.CODEC))
+-                        .setKeyFunction(MovementConfig::getId))
+-                     .setReplaceOnRemove(MovementConfig::new))
+-                  .loadsBefore(GameplayConfig.class))
+-               .preLoadAssets(Collections.singletonList(MovementConfig.DEFAULT_MOVEMENT)))
++         HytaleAssetStore.builder(MovementConfig.class, new IndexedLookupTableAssetMap<>(MovementConfig[]::new))
++            .setPath("Entity/MovementConfig")
++            .setCodec(MovementConfig.CODEC)
++            .setKeyFunction(MovementConfig::getId)
++            .setReplaceOnRemove(MovementConfig::new)
++            .loadsBefore(GameplayConfig.class)
++            .preLoadAssets(Collections.singletonList(MovementConfig.DEFAULT_MOVEMENT))
+             .build()
+       );
+       this.getEventRegistry().register(LoadedAssetsEvent.class, MovementConfig.class, this::onMovementConfigLoadedAssetsEvent);

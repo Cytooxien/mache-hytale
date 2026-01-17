@@ -1,22 +1,37 @@
 --- a/com/hypixel/hytale/builtin/adventure/camera/CameraPlugin.java
 +++ b/com/hypixel/hytale/builtin/adventure/camera/CameraPlugin.java
-@@ -38,8 +_,8 @@
-                            .loadsBefore(CameraEffect.class))
-                         .setCodec(CameraShake.CODEC))
-                      .setPath("Camera/CameraShake"))
+@@ -32,24 +_,20 @@
+       this.getCodecRegistry(CameraEffect.CODEC).register("CameraShake", CameraShakeEffect.class, CameraShakeEffect.CODEC);
+       this.getCodecRegistry(Interaction.CODEC).register("CameraShake", CameraShakeInteraction.class, CameraShakeInteraction.CODEC);
+       assetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              String.class, CameraShake.class, new IndexedAssetMap()
+-                           )
+-                           .loadsBefore(CameraEffect.class))
+-                        .setCodec(CameraShake.CODEC))
+-                     .setPath("Camera/CameraShake"))
 -                  .setKeyFunction(CameraShake::getId))
 -               .setReplaceOnRemove(CameraShake::new))
-+                  .setKeyFunction(asset -> ((CameraShake) asset).getId()))
-+               .setReplaceOnRemove(asset -> new CameraShake()))
++         HytaleAssetStore.builder(String.class, CameraShake.class, new IndexedAssetMap<>())
++            .loadsBefore(CameraEffect.class)
++            .setCodec(CameraShake.CODEC)
++            .setPath("Camera/CameraShake")
++            .setKeyFunction(CameraShake::getId)
++            .setReplaceOnRemove(asset -> new CameraShake())
              .setPacketGenerator(new CameraShakePacketGenerator())
              .build()
        );
-@@ -49,7 +_,7 @@
-                      )
-                      .setCodec(ViewBobbing.CODEC))
-                   .setPath("Camera/ViewBobbing"))
+       assetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                        MovementType.class, ViewBobbing.class, new DefaultAssetMap()
+-                     )
+-                     .setCodec(ViewBobbing.CODEC))
+-                  .setPath("Camera/ViewBobbing"))
 -               .setKeyFunction(ViewBobbing::getId))
-+               .setKeyFunction(asset -> ((ViewBobbing) asset).getId()))
++         HytaleAssetStore.builder(MovementType.class, ViewBobbing.class, new DefaultAssetMap<>())
++            .setCodec(ViewBobbing.CODEC)
++            .setPath("Camera/ViewBobbing")
++            .setKeyFunction(ViewBobbing::getId)
              .setPacketGenerator(new ViewBobbingPacketGenerator())
              .build()
        );

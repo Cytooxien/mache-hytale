@@ -1,0 +1,23 @@
+--- a/com/hypixel/hytale/builtin/deployables/DeployablesPlugin.java
++++ b/com/hypixel/hytale/builtin/deployables/DeployablesPlugin.java
+@@ -45,14 +_,12 @@
+    protected void setup() {
+       instance = this;
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              DeployableSpawner.class, new DefaultAssetMap()
+-                           )
+-                           .setPath("DeployableSpawners"))
+-                        .setCodec(DeployableSpawner.CODEC))
+-                     .setKeyFunction(DeployableSpawner::getId))
+-                  .loadsAfter(ModelAsset.class, EntityEffect.class, SoundEvent.class))
+-               .loadsBefore(Interaction.class))
++         HytaleAssetStore.builder(DeployableSpawner.class, new DefaultAssetMap<>())
++            .setPath("DeployableSpawners")
++            .setCodec(DeployableSpawner.CODEC)
++            .setKeyFunction(DeployableSpawner::getId)
++            .loadsAfter(ModelAsset.class, EntityEffect.class, SoundEvent.class)
++            .loadsBefore(Interaction.class)
+             .build()
+       );
+       ComponentRegistryProxy<EntityStore> entityStoreRegistry = this.getEntityStoreRegistry();

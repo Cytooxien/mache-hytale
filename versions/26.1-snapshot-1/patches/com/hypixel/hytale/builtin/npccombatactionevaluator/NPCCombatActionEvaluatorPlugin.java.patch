@@ -1,0 +1,25 @@
+--- a/com/hypixel/hytale/builtin/npccombatactionevaluator/NPCCombatActionEvaluatorPlugin.java
++++ b/com/hypixel/hytale/builtin/npccombatactionevaluator/NPCCombatActionEvaluatorPlugin.java
+@@ -53,15 +_,13 @@
+       instance = this;
+       BalanceAsset.CODEC.register("CombatActionEvaluator", CombatBalanceAsset.class, CombatBalanceAsset.CODEC);
+       AssetRegistry.register(
+-         ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                                 CombatActionOption.class, new IndexedLookupTableAssetMap<>(CombatActionOption[]::new)
+-                              )
+-                              .setPath("NPC/DecisionMaking/CombatActions"))
+-                           .setCodec(CombatActionOption.CODEC))
+-                        .setKeyFunction(CombatActionOption::getId))
+-                     .setReplaceOnRemove(CombatActionOption::getNothingFor))
+-                  .loadsAfter(Item.class, Condition.class, RootInteraction.class))
+-               .loadsBefore(BalanceAsset.class))
++         HytaleAssetStore.builder(CombatActionOption.class, new IndexedLookupTableAssetMap<>(CombatActionOption[]::new))
++            .setPath("NPC/DecisionMaking/CombatActions")
++            .setCodec(CombatActionOption.CODEC)
++            .setKeyFunction(CombatActionOption::getId)
++            .setReplaceOnRemove(CombatActionOption::getNothingFor)
++            .loadsAfter(Item.class, Condition.class, RootInteraction.class)
++            .loadsBefore(BalanceAsset.class)
+             .build()
+       );
+       NPCPlugin.get()
