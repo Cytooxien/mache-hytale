@@ -47,3 +47,14 @@ versions/**/runClient
 versions/*
 # Don't ignore the current version
 !versions/26.1-snapshot-1
+
+versions/26.1-snapshot-1/patches/aix
+versions/26.1-snapshot-1/patches/darwin
+versions/26.1-snapshot-1/patches/freebsd
+versions/26.1-snapshot-1/patches/google
+versions/26.1-snapshot-1/patches/joptsimple
+versions/26.1-snapshot-1/patches/linux
+versions/26.1-snapshot-1/patches/META-INF
+versions/26.1-snapshot-1/patches/org
+versions/26.1-snapshot-1/patches/win
+versions/26.1-snapshot-1/patches/manifests.json.patch

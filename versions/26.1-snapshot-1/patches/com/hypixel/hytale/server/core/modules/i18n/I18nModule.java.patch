@@ -1,0 +1,58 @@
+--- a/com/hypixel/hytale/server/core/modules/i18n/I18nModule.java
++++ b/com/hypixel/hytale/server/core/modules/i18n/I18nModule.java
+@@ -2,7 +_,9 @@
+ 
+ import com.hypixel.hytale.assetstore.AssetPack;
+ import com.hypixel.hytale.assetstore.event.LoadedAssetsEvent;
++import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
+ import com.hypixel.hytale.common.plugin.PluginManifest;
++import com.hypixel.hytale.event.IBaseEvent;
+ import com.hypixel.hytale.event.IEventDispatcher;
+ import com.hypixel.hytale.logger.sentry.SkipSentryException;
+ import com.hypixel.hytale.protocol.UpdateType;
+@@ -46,6 +_,7 @@
+ import java.util.Properties;
+ import java.util.Map.Entry;
+ import java.util.concurrent.ConcurrentHashMap;
++import java.util.function.Consumer;
+ import java.util.logging.Level;
+ import java.util.stream.Stream;
+ import javax.annotation.Nonnull;
+@@ -85,8 +_,8 @@
+       this.getEventRegistry()
+          .register(
+             LoadedAssetsEvent.class,
+-            BlockType.class,
+-            event -> {
++            BlockType.class, 
++                 (Consumer<LoadedAssetsEvent<String, BlockType, DefaultAssetMap<String, BlockType>>>) event -> {
+                Map<String, String> addedMessages = new Object2ObjectOpenHashMap<>();
+                event.getLoadedAssets()
+                   .values()
+@@ -118,7 +_,7 @@
+                this.addDefaultMessages(addedMessages, event.isInitial());
+             }
+          );
+-      this.getEventRegistry().register(LoadedAssetsEvent.class, FieldcraftCategory.class, event -> {
++      this.getEventRegistry().register(LoadedAssetsEvent.class, FieldcraftCategory.class, (Consumer<LoadedAssetsEvent<String, FieldcraftCategory, DefaultAssetMap<String, FieldcraftCategory>>>)  event -> {
+          Map<String, String> addedMessages = new Object2ObjectOpenHashMap<>();
+          event.getLoadedAssets().values().forEach(category -> {
+             if (category.getName() != null) {
+@@ -127,7 +_,7 @@
+          });
+          this.addDefaultMessages(addedMessages, event.isInitial());
+       });
+-      this.getEventRegistry().register(LoadedAssetsEvent.class, ResourceType.class, event -> {
++      this.getEventRegistry().register(LoadedAssetsEvent.class, ResourceType.class, (Consumer<LoadedAssetsEvent<String, ResourceType, DefaultAssetMap<String, ResourceType>>>) event -> {
+          Map<String, String> addedMessages = new Object2ObjectOpenHashMap<>();
+          event.getLoadedAssets().values().forEach(resourceType -> {
+             if (resourceType.getName() != null) {
+@@ -372,7 +_,7 @@
+                }
+ 
+                I18nModule.this.fallbacks.clear();
+-               properties.forEach((keyx, value) -> I18nModule.this.fallbacks.put((String)keyx, value));
++               properties.forEach((keyx, value) -> I18nModule.this.fallbacks.put((String)keyx, (String) value));
+             } else {
+                String languageKey = relativized.getName(0).toString();
+                Path langPath = this.languagesPath.resolve(languageKey).toAbsolutePath().normalize();
