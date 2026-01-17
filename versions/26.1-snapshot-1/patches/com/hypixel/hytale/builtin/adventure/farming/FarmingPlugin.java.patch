@@ -1,0 +1,39 @@
+--- a/com/hypixel/hytale/builtin/adventure/farming/FarmingPlugin.java
++++ b/com/hypixel/hytale/builtin/adventure/farming/FarmingPlugin.java
+@@ -62,24 +_,24 @@
+       instance = this;
+       this.getAssetRegistry()
+          .register(
+-            ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              GrowthModifierAsset.class, new DefaultAssetMap()
++            HytaleAssetStore.builder(
++                              GrowthModifierAsset.class, new DefaultAssetMap<>()
+                            )
+-                           .setPath("Farming/Modifiers"))
+-                        .setCodec(GrowthModifierAsset.CODEC))
+-                     .loadsAfter(Weather.class))
+-                  .setKeyFunction(GrowthModifierAsset::getId))
++                           .setPath("Farming/Modifiers")
++                        .setCodec(GrowthModifierAsset.CODEC)
++                     .loadsAfter(Weather.class)
++                  .setKeyFunction(GrowthModifierAsset::getId)
+                .build()
+          );
+       this.getAssetRegistry()
+          .register(
+-            ((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)((HytaleAssetStore.Builder)HytaleAssetStore.builder(
+-                              FarmingCoopAsset.class, new DefaultAssetMap()
++            HytaleAssetStore.builder(
++                              FarmingCoopAsset.class, new DefaultAssetMap<>()
+                            )
+-                           .setPath("Farming/Coops"))
+-                        .setCodec(FarmingCoopAsset.CODEC))
+-                     .loadsAfter(ItemDropList.class, NPCGroup.class))
+-                  .setKeyFunction(FarmingCoopAsset::getId))
++                           .setPath("Farming/Coops")
++                        .setCodec(FarmingCoopAsset.CODEC)
++                     .loadsAfter(ItemDropList.class, NPCGroup.class)
++                  .setKeyFunction(FarmingCoopAsset::getId)
+                .build()
+          );
+       this.getCodecRegistry(Interaction.CODEC)

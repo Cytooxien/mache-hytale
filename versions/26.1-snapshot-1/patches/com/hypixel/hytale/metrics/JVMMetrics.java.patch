@@ -1,0 +1,124 @@
+--- a/com/hypixel/hytale/metrics/JVMMetrics.java
++++ b/com/hypixel/hytale/metrics/JVMMetrics.java
+@@ -9,6 +_,7 @@
+ import java.lang.management.ClassLoadingMXBean;
+ import java.lang.management.GarbageCollectorMXBean;
+ import java.lang.management.ManagementFactory;
++import java.lang.management.MemoryMXBean;
+ import java.lang.management.MemoryManagerMXBean;
+ import java.lang.management.MemoryPoolMXBean;
+ import java.lang.management.MemoryType;
+@@ -58,22 +_,22 @@
+       MEMORY_POOL_METRICS_REGISTRY.register(
+          "UsageThreshold", memoryPoolMXBean -> !memoryPoolMXBean.isUsageThresholdSupported() ? null : memoryPoolMXBean, usageThreshold
+       );
+-      usageThreshold = new MetricsRegistry<>();
+-      usageThreshold.register("Threshold", MemoryPoolMXBean::getCollectionUsageThreshold, Codec.LONG);
+-      usageThreshold.register("ThresholdCount", MemoryPoolMXBean::getCollectionUsageThresholdCount, Codec.LONG);
+-      usageThreshold.register("ThresholdExceeded", MemoryPoolMXBean::isCollectionUsageThresholdExceeded, Codec.BOOLEAN);
++      MetricsRegistry<MemoryPoolMXBean> collectionUsageThreshold = new MetricsRegistry<>();
++      collectionUsageThreshold.register("Threshold", MemoryPoolMXBean::getCollectionUsageThreshold, Codec.LONG);
++      collectionUsageThreshold.register("ThresholdCount", MemoryPoolMXBean::getCollectionUsageThresholdCount, Codec.LONG);
++      collectionUsageThreshold.register("ThresholdExceeded", MemoryPoolMXBean::isCollectionUsageThresholdExceeded, Codec.BOOLEAN);
+       MEMORY_POOL_METRICS_REGISTRY.register(
+-         "CollectionUsageThreshold", memoryPoolMXBean -> !memoryPoolMXBean.isCollectionUsageThresholdSupported() ? null : memoryPoolMXBean, usageThreshold
++         "CollectionUsageThreshold", memoryPoolMXBean -> !memoryPoolMXBean.isCollectionUsageThresholdSupported() ? null : memoryPoolMXBean, collectionUsageThreshold
+       );
+-      usageThreshold = new MetricsRegistry<>();
++      MetricsRegistry<java.lang.management.OperatingSystemMXBean> operatingSystem = new MetricsRegistry<>();
+       METRICS_REGISTRY.register("PROCESSOR", unused -> System.getenv("PROCESSOR_IDENTIFIER"), Codec.STRING);
+       METRICS_REGISTRY.register("PROCESSOR_ARCHITECTURE", unused -> System.getenv("PROCESSOR_ARCHITECTURE"), Codec.STRING);
+       METRICS_REGISTRY.register("PROCESSOR_ARCHITEW6432", unused -> System.getenv("PROCESSOR_ARCHITEW6432"), Codec.STRING);
+-      usageThreshold.register("OSName", OperatingSystemMXBean::getName, Codec.STRING);
+-      usageThreshold.register("OSArch", OperatingSystemMXBean::getArch, Codec.STRING);
+-      usageThreshold.register("OSVersion", OperatingSystemMXBean::getVersion, Codec.STRING);
+-      usageThreshold.register("AvailableProcessors", unused -> Runtime.getRuntime().availableProcessors(), Codec.INTEGER);
+-      usageThreshold.register("SystemLoadAverage", OperatingSystemMXBean::getSystemLoadAverage, Codec.DOUBLE);
++      operatingSystem.register("OSName", OperatingSystemMXBean::getName, Codec.STRING);
++      operatingSystem.register("OSArch", OperatingSystemMXBean::getArch, Codec.STRING);
++      operatingSystem.register("OSVersion", OperatingSystemMXBean::getVersion, Codec.STRING);
++      operatingSystem.register("AvailableProcessors", unused -> Runtime.getRuntime().availableProcessors(), Codec.INTEGER);
++      operatingSystem.register("SystemLoadAverage", OperatingSystemMXBean::getSystemLoadAverage, Codec.DOUBLE);
+       if (ManagementFactory.getOperatingSystemMXBean() instanceof com.sun.management.OperatingSystemMXBean) {
+          usageThreshold.register(
+             "CpuLoad", operatingSystemMXBean -> ((com.sun.management.OperatingSystemMXBean)operatingSystemMXBean).getCpuLoad(), Codec.DOUBLE
+@@ -97,35 +_,35 @@
+          );
+       }
+ 
+-      METRICS_REGISTRY.register("System", aVoid -> ManagementFactory.getOperatingSystemMXBean(), usageThreshold);
+-      usageThreshold = new MetricsRegistry<>();
+-      usageThreshold.register("StartTime", runtimeMXBean -> Instant.ofEpochMilli(runtimeMXBean.getStartTime()), Codec.INSTANT);
+-      usageThreshold.register("Uptime", runtimeMXBean -> Duration.ofMillis(runtimeMXBean.getUptime()), Codec.DURATION);
+-      usageThreshold.register("RuntimeName", RuntimeMXBean::getName, Codec.STRING);
+-      usageThreshold.register("SpecName", RuntimeMXBean::getSpecName, Codec.STRING);
+-      usageThreshold.register("SpecVendor", RuntimeMXBean::getSpecVendor, Codec.STRING);
+-      usageThreshold.register("SpecVersion", RuntimeMXBean::getSpecVersion, Codec.STRING);
+-      usageThreshold.register("ManagementSpecVersion", RuntimeMXBean::getManagementSpecVersion, Codec.STRING);
+-      usageThreshold.register("VMName", RuntimeMXBean::getVmName, Codec.STRING);
+-      usageThreshold.register("VMVendor", RuntimeMXBean::getVmVendor, Codec.STRING);
+-      usageThreshold.register("VMVersion", RuntimeMXBean::getVmVersion, Codec.STRING);
+-      usageThreshold.register("LibraryPath", RuntimeMXBean::getLibraryPath, Codec.STRING);
++      METRICS_REGISTRY.register("System", aVoid -> ManagementFactory.getOperatingSystemMXBean(), operatingSystem);
++      MetricsRegistry<RuntimeMXBean> runtimeBean = new MetricsRegistry<RuntimeMXBean>();
++      runtimeBean.register("StartTime", runtimeMXBean -> Instant.ofEpochMilli(runtimeMXBean.getStartTime()), Codec.INSTANT);
++      runtimeBean.register("Uptime", runtimeMXBean -> Duration.ofMillis(runtimeMXBean.getUptime()), Codec.DURATION);
++      runtimeBean.register("RuntimeName", RuntimeMXBean::getName, Codec.STRING);
++      runtimeBean.register("SpecName", RuntimeMXBean::getSpecName, Codec.STRING);
++      runtimeBean.register("SpecVendor", RuntimeMXBean::getSpecVendor, Codec.STRING);
++      runtimeBean.register("SpecVersion", RuntimeMXBean::getSpecVersion, Codec.STRING);
++      runtimeBean.register("ManagementSpecVersion", RuntimeMXBean::getManagementSpecVersion, Codec.STRING);
++      runtimeBean.register("VMName", RuntimeMXBean::getVmName, Codec.STRING);
++      runtimeBean.register("VMVendor", RuntimeMXBean::getVmVendor, Codec.STRING);
++      runtimeBean.register("VMVersion", RuntimeMXBean::getVmVersion, Codec.STRING);
++      runtimeBean.register("LibraryPath", RuntimeMXBean::getLibraryPath, Codec.STRING);
+ 
+       try {
+          ManagementFactory.getRuntimeMXBean().getBootClassPath();
+-         usageThreshold.register("BootClassPath", RuntimeMXBean::getBootClassPath, Codec.STRING);
++         runtimeBean.register("BootClassPath", RuntimeMXBean::getBootClassPath, Codec.STRING);
+       } catch (UnsupportedOperationException var2) {
+       }
+ 
+-      usageThreshold.register("ClassPath", RuntimeMXBean::getClassPath, Codec.STRING);
+-      usageThreshold.register("InputArguments", runtimeMXBean -> runtimeMXBean.getInputArguments().toArray(String[]::new), Codec.STRING_ARRAY);
+-      usageThreshold.register("SystemProperties", RuntimeMXBean::getSystemProperties, new MapCodec<>(Codec.STRING, HashMap::new));
+-      METRICS_REGISTRY.register("Runtime", aVoid -> ManagementFactory.getRuntimeMXBean(), usageThreshold);
+-      usageThreshold = new MetricsRegistry<>();
+-      usageThreshold.register("ObjectPendingFinalizationCount", memoryMXBean -> memoryMXBean.getObjectPendingFinalizationCount(), Codec.INTEGER);
+-      usageThreshold.register("HeapMemoryUsage", memoryMXBean -> memoryMXBean.getHeapMemoryUsage(), MEMORY_USAGE_METRICS_REGISTRY);
+-      usageThreshold.register("NonHeapMemoryUsage", memoryMXBean -> memoryMXBean.getNonHeapMemoryUsage(), MEMORY_USAGE_METRICS_REGISTRY);
+-      METRICS_REGISTRY.register("Memory", aVoid -> ManagementFactory.getMemoryMXBean(), usageThreshold);
++      runtimeBean.register("ClassPath", RuntimeMXBean::getClassPath, Codec.STRING);
++      runtimeBean.register("InputArguments", runtimeMXBean -> runtimeMXBean.getInputArguments().toArray(String[]::new), Codec.STRING_ARRAY);
++      runtimeBean.register("SystemProperties", RuntimeMXBean::getSystemProperties, new MapCodec<>(Codec.STRING, HashMap::new));
++      METRICS_REGISTRY.register("Runtime", aVoid -> ManagementFactory.getRuntimeMXBean(), runtimeBean);
++      MetricsRegistry<MemoryMXBean> memoryBean = new MetricsRegistry<>();
++      memoryBean.register("ObjectPendingFinalizationCount", memoryMXBean -> memoryMXBean.getObjectPendingFinalizationCount(), Codec.INTEGER);
++      memoryBean.register("HeapMemoryUsage", memoryMXBean -> memoryMXBean.getHeapMemoryUsage(), MEMORY_USAGE_METRICS_REGISTRY);
++      memoryBean.register("NonHeapMemoryUsage", memoryMXBean -> memoryMXBean.getNonHeapMemoryUsage(), MEMORY_USAGE_METRICS_REGISTRY);
++      METRICS_REGISTRY.register("Memory", aVoid -> ManagementFactory.getMemoryMXBean(), memoryBean);
+       METRICS_REGISTRY.register(
+          "GarbageCollectors",
+          memoryMXBean -> ManagementFactory.getGarbageCollectorMXBeans().toArray(GarbageCollectorMXBean[]::new),
+@@ -159,13 +_,13 @@
+          SecurityManager securityManager = System.getSecurityManager();
+          return securityManager == null ? null : securityManager.getClass().getName();
+       }, Codec.STRING);
+-      usageThreshold = new MetricsRegistry<>();
+-      usageThreshold.register("LoadedClassCount", ClassLoadingMXBean::getLoadedClassCount, Codec.INTEGER);
+-      usageThreshold.register("UnloadedClassCount", ClassLoadingMXBean::getUnloadedClassCount, Codec.LONG);
+-      usageThreshold.register("TotalLoadedClassCount", ClassLoadingMXBean::getTotalLoadedClassCount, Codec.LONG);
+-      usageThreshold.register("SystemClassloader", unused -> ClassLoader.getSystemClassLoader(), CLASS_LOADER_METRICS_REGISTRY);
+-      usageThreshold.register("JVMMetricsClassloader", unused -> JVMMetrics.class.getClassLoader(), CLASS_LOADER_METRICS_REGISTRY);
+-      METRICS_REGISTRY.register("ClassLoading", aVoid -> ManagementFactory.getClassLoadingMXBean(), usageThreshold);
++      MetricsRegistry<ClassLoadingMXBean> classLoading = new MetricsRegistry<>();
++      classLoading.register("LoadedClassCount", ClassLoadingMXBean::getLoadedClassCount, Codec.INTEGER);
++      classLoading.register("UnloadedClassCount", ClassLoadingMXBean::getUnloadedClassCount, Codec.LONG);
++      classLoading.register("TotalLoadedClassCount", ClassLoadingMXBean::getTotalLoadedClassCount, Codec.LONG);
++      classLoading.register("SystemClassloader", unused -> ClassLoader.getSystemClassLoader(), CLASS_LOADER_METRICS_REGISTRY);
++      classLoading.register("JVMMetricsClassloader", unused -> JVMMetrics.class.getClassLoader(), CLASS_LOADER_METRICS_REGISTRY);
++      METRICS_REGISTRY.register("ClassLoading", aVoid -> ManagementFactory.getClassLoadingMXBean(), classLoading);
+    }
+ 
+    private static class ThreadMetricData {
