@@ -73,3 +73,21 @@
              .build()
        );
        this.objectiveDataStore = new ObjectiveDataStore(this.config.get().getDataStoreProvider().create(Objective.CODEC));
+@@ -307,7 +_,7 @@
+    ) {
+       ObjectiveTaskAsset.CODEC.register(id, assetClass, assetCodec);
+       ObjectiveTask.CODEC.register(id, implementationClass, implementationCodec);
+-      this.taskGenerators.put(assetClass, generator);
++      this.taskGenerators.put(assetClass, (TriFunction<ObjectiveTaskAsset, Integer, Integer, ? extends ObjectiveTask>) generator);
+       this.objectiveDataStore.registerTaskRef(implementationClass);
+    }
+ 
+@@ -315,7 +_,7 @@
+       String id, Class<T> assetClass, Codec<T> codec, Function<T, U> generator
+    ) {
+       ObjectiveCompletionAsset.CODEC.register(id, assetClass, codec);
+-      this.completionGenerators.put(assetClass, generator);
++      this.completionGenerators.put(assetClass, (Function<ObjectiveCompletionAsset, ? extends ObjectiveCompletion>) generator);
+    }
+ 
+    public ObjectiveTask createTask(@Nonnull ObjectiveTaskAsset task, int taskSetIndex, int taskIndex) {

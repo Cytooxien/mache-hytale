@@ -1,0 +1,15 @@
+--- a/com/hypixel/hytale/server/core/universe/world/chunk/section/BlockSection.java
++++ b/com/hypixel/hytale/server/core/universe/world/chunk/section/BlockSection.java
+@@ -958,9 +_,10 @@
+             this.chunkSection = tempSection;
+          }
+       } else if (blockMigration != null) {
+-         this.chunkSection.deserialize(bytebuf -> {
++          Function<String, String> finalBlockMigration1 = blockMigration;
++          this.chunkSection.deserialize(bytebuf -> {
+             String keyx = ByteBufUtil.readUTF(bytebuf);
+-            keyx = blockMigration.apply(keyx);
++            keyx = finalBlockMigration1.apply(keyx);
+             return BlockType.getBlockIdOrUnknown(keyx, "Unknown BlockType %s", keyx);
+          }, buf, version);
+       } else {

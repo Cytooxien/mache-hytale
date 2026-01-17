@@ -1,0 +1,47 @@
+--- a/com/hypixel/hytale/server/core/entity/InteractionManager.java
++++ b/com/hypixel/hytale/server/core/entity/InteractionManager.java
+@@ -1206,26 +_,27 @@
+                }
+ 
+                yield inventory.getArmor().getItemStack(equipSlot);
+-               if (itemStack != null && !itemStack.isEmpty()) {
+-                  String rootId = itemStack.getItem().getInteractions().get(type);
+-                  if (rootId == null) {
+-                     return;
+-                  } else {
+-                     RootInteraction root = RootInteraction.getAssetMap().getAsset(rootId);
+-                     if (root != null && this.canRun(type, equipSlot, root)) {
+-                        InteractionContext context = InteractionContext.forInteraction(this, ref, type, equipSlot, commandBuffer);
+-                        this.startChain(ref, commandBuffer, type, context, root);
+-                        return;
+-                     } else {
+-                        return;
+-                     }
+-                  }
+-               } else {
+-                  return;
+-               }
+             }
+             default -> throw new IllegalArgumentException();
+          };
++
++          if (itemStack != null && !itemStack.isEmpty()) {
++              String rootId = itemStack.getItem().getInteractions().get(type);
++              if (rootId == null) {
++                  return;
++              } else {
++                  RootInteraction root = RootInteraction.getAssetMap().getAsset(rootId);
++                  if (root != null && this.canRun(type, equipSlot, root)) {
++                      InteractionContext context = InteractionContext.forInteraction(this, ref, type, equipSlot, commandBuffer);
++                      this.startChain(ref, commandBuffer, type, context, root);
++                      return;
++                  } else {
++                      return;
++                  }
++              }
++          } else {
++              return;
++          }
+       }
+    }
+ 
