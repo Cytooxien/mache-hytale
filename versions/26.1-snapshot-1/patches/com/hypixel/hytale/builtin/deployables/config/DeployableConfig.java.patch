@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/deployables/config/DeployableConfig.java
++++ b/com/hypixel/hytale/builtin/deployables/config/DeployableConfig.java
+@@ -58,7 +_,7 @@
+       )
+       .documentation("Whether this deployable is invulnerable to damage or not")
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("Stats", new MapCodec<>(DeployableConfig.StatConfig.CODEC, Object2ObjectOpenHashMap::new)),
+          (o, i) -> o.statValues = i,
+          o -> o.statValues,

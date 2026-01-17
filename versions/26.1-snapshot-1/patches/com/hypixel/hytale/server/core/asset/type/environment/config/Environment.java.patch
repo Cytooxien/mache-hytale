@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/type/environment/config/Environment.java
++++ b/com/hypixel/hytale/server/core/asset/type/environment/config/Environment.java
+@@ -242,7 +_,7 @@
+             (environment, parent) -> environment.waterTint = parent.waterTint
+          )
+          .add()
+-         .<Map>appendInherited(
++         .appendInherited(
+             new KeyedCodec<>("FluidParticles", new MapCodec<>(FluidParticle.CODEC, HashMap::new)),
+             (environment, s) -> environment.fluidParticles = s,
+             environment -> environment.fluidParticles,

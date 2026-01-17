@@ -1,0 +1,15 @@
+--- a/com/hypixel/hytale/builtin/instances/page/ConfigureInstanceBlockPage.java
++++ b/com/hypixel/hytale/builtin/instances/page/ConfigureInstanceBlockPage.java
+@@ -161,9 +_,9 @@
+             }
+ 
+             blockComponentChunk.markNeedsSaving();
+-            UICommandBuilder commandBuilder = new UICommandBuilder();
+-            this.buildRotation(commandBuilder);
+-            this.sendUpdate(commandBuilder);
++            UICommandBuilder commandBuilder2 = new UICommandBuilder();
++            this.buildRotation(commandBuilder2);
++            this.sendUpdate(commandBuilder2);
+       }
+    }
+ 

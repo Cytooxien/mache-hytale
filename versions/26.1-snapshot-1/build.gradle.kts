@@ -1,4 +1,5 @@
 import io.papermc.sculptor.shared.util.MinecraftJarType
+import io.papermc.sculptor.version.tasks.DecompileJar
 
 plugins {
     id("io.papermc.sculptor.version") version "2.0.0-SNAPSHOT"
@@ -25,10 +26,24 @@ mache {
     }
 
     codebookArgs = args
+    decompilerArgs.convention(listOf(
+        "--only=com/hypixel/hytale",
+    ))
+}
+
+repositories {
+    mavenLocal()
+}
+
+
+tasks.withType<DecompileJar>() {
+    inputJar.set(file("${project.rootDir}/HytaleServer.jar"))
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    options.compilerArgs.add("-parameters")
+    options.encoding = "UTF-8"
+    options.compilerArgs.addAll(listOf("-parameters", "-Xlint:-deprecation", "-Xlint:-removal",
+        "-Xlint:-options", "-nowarn", "-Xmaxerrs", "500"))
 }
 
 dependencies {
@@ -40,5 +55,9 @@ dependencies {
 dependencies {
     compileOnly("org.jetbrains:annotations:24.0.1")
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
-    compileOnly("org.checkerframework:checker-qual:3.49.0")
+    //Hytale Libs
+    compileOnly("org.checkerframework:checker-compat-qual:2.5.5")
+    compileOnly("io.netty:netty-all:4.2.9.Final")
+    compileOnly("org.bouncycastle:bcpkix-jdk18on:1.83")
+    compileOnly("com.hypixel:ConcurrentFastUtil:1.2-SNAPSHOT")
 }

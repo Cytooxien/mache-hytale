@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/buildertools/scriptedbrushes/operations/sequential/masks/AppendMaskFromToolArgOperation.java
++++ b/com/hypixel/hytale/builtin/buildertools/scriptedbrushes/operations/sequential/masks/AppendMaskFromToolArgOperation.java
+@@ -82,7 +_,7 @@
+                      "AppendMaskFromToolArg: Tool arg '" + this.argNameArg + "' is not a Block type (found " + argValue.getClass().getSimpleName() + ")"
+                   );
+                } else {
+-                  ArrayList blockNames = new ArrayList();
++                  ArrayList<String> blockNames = new ArrayList<>();
+                   String patternStr = blockPattern.toString();
+                   if (!patternStr.isEmpty() && !patternStr.equals("-")) {
+                      for (String entry : patternStr.split(",")) {

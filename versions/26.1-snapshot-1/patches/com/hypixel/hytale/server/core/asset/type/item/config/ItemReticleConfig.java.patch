@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/type/item/config/ItemReticleConfig.java
++++ b/com/hypixel/hytale/server/core/asset/type/item/config/ItemReticleConfig.java
+@@ -51,7 +_,7 @@
+       .addValidator(Validators.nonEmptyArray())
+       .addValidator(CommonAssetValidator.UI_RETICLE_PARTS_ARRAY)
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("ServerEvents", new MapCodec<>(ItemReticleConfig.ItemReticleWithDuration.CODEC, HashMap::new)),
+          (itemReticleConfig, o) -> itemReticleConfig.serverEvents = o,
+          itemReticleConfig -> itemReticleConfig.serverEvents,

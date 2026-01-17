@@ -1,0 +1,40 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/selector/Selector.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/selector/Selector.java
+@@ -25,11 +_,11 @@
+       @Nonnull CommandBuffer<EntityStore> commandBuffer, @Nonnull Ref<EntityStore> attackerRef, double range, @Nonnull TriIntConsumer consumer
+    ) {
+       TransformComponent transformComponent = commandBuffer.getComponent(attackerRef, TransformComponent.getComponentType());
+-      if (!<unrepresentable>.$assertionsDisabled && transformComponent == null) {
++      if (false && transformComponent == null) {
+          throw new AssertionError();
+       } else {
+          ModelComponent modelComponent = commandBuffer.getComponent(attackerRef, ModelComponent.getComponentType());
+-         if (!<unrepresentable>.$assertionsDisabled && modelComponent == null) {
++         if (false && modelComponent == null) {
+             throw new AssertionError();
+          } else {
+             Vector3d position = transformComponent.getPosition();
+@@ -68,11 +_,11 @@
+       @Nonnull Predicate<Ref<EntityStore>> filter
+    ) {
+       TransformComponent transformComponent = commandBuffer.getComponent(attacker, TransformComponent.getComponentType());
+-      if (!<unrepresentable>.$assertionsDisabled && transformComponent == null) {
++      if (false && transformComponent == null) {
+          throw new AssertionError();
+       } else {
+          ModelComponent modelComponent = commandBuffer.getComponent(attacker, ModelComponent.getComponentType());
+-         if (!<unrepresentable>.$assertionsDisabled && modelComponent == null) {
++         if (false && modelComponent == null) {
+             throw new AssertionError();
+          } else {
+             Vector3d attackerPosition = transformComponent.getPosition();
+@@ -112,9 +_,4 @@
+    );
+ 
+    void selectTargetBlocks(@Nonnull CommandBuffer<EntityStore> var1, @Nonnull Ref<EntityStore> var2, @Nonnull TriIntConsumer var3);
+-
+-   static {
+-      if (<unrepresentable>.$assertionsDisabled) {
+-      }
+-   }
+ }

@@ -1,0 +1,162 @@
+--- a/com/hypixel/hytale/component/Store.java
++++ b/com/hypixel/hytale/component/Store.java
+@@ -278,9 +_,9 @@
+       int idx = 0;
+ 
+       for (int index = 0; index < resourceSize; index++) {
+-         ResourceType<ECS_TYPE, ? extends Resource<ECS_TYPE>> resourceType = (ResourceType<ECS_TYPE, ? extends Resource<ECS_TYPE>>)data.getResourceType(index);
++         ResourceType resourceType = data.getResourceType(index);
+          if (resourceType != null) {
+-            futures[idx++] = this.resourceStorage.save(this, data, resourceType, this.resources[index]);
++            futures[idx++] = (CompletableFuture) this.resourceStorage.save(this, data, resourceType, this.resources[index]);
+          }
+       }
+ 
+@@ -1434,7 +_,7 @@
+                }
+             }
+ 
+-            EntityDataSystem.SystemTaskData.invokeParallelTask(this.fetchTask, commandBuffer, results);
++            EntityDataSystem.SystemTaskData.invokeParallelTask((ParallelTask) this.fetchTask, commandBuffer, (List) results);
+          } finally {
+             this.processing.unlock();
+          }
+@@ -1474,7 +_,7 @@
+                }
+             }
+ 
+-            EntityDataSystem.SystemTaskData.invokeParallelTask(this.fetchTask, commandBuffer, results);
++            EntityDataSystem.SystemTaskData.invokeParallelTask((ParallelTask) this.fetchTask, commandBuffer, (List) results);
+          } finally {
+             this.processing.unlock();
+          }
+@@ -1485,9 +_,9 @@
+ 
+    @Override
+    public <Event extends EcsEvent> void invoke(@Nonnull Ref<ECS_TYPE> ref, @Nonnull Event param) {
+-      EntityEventType<ECS_TYPE, ?> eventType = this.registry.getEntityEventTypeForClass(param.getClass());
++      EntityEventType eventType = this.registry.getEntityEventTypeForClass(param.getClass());
+       if (eventType != null) {
+-         ((Store<ECS_TYPE>)this).invoke(eventType, ref, param);
++         ((Store)this).invoke(eventType, ref, param);
+       }
+    }
+ 
+@@ -1535,9 +_,9 @@
+ 
+    @Override
+    public <Event extends EcsEvent> void invoke(@Nonnull Event param) {
+-      WorldEventType<ECS_TYPE, ?> eventType = this.registry.getWorldEventTypeForClass(param.getClass());
++      WorldEventType eventType = this.registry.getWorldEventTypeForClass(param.getClass());
+       if (eventType != null) {
+-         ((Store<ECS_TYPE>)this).invoke(eventType, param);
++         ((Store)this).invoke(eventType, param);
+       }
+    }
+ 
+@@ -1568,9 +_,9 @@
+    }
+ 
+    protected <Event extends EcsEvent> void internal_invoke(CommandBuffer<ECS_TYPE> sourceCommandBuffer, Ref<ECS_TYPE> ref, Event param) {
+-      EntityEventType<ECS_TYPE, ?> eventType = this.registry.getEntityEventTypeForClass(param.getClass());
++      EntityEventType eventType = this.registry.getEntityEventTypeForClass(param.getClass());
+       if (eventType != null) {
+-         ((Store<ECS_TYPE>)this).internal_invoke(sourceCommandBuffer, eventType, ref, param);
++         ((Store)this).internal_invoke(sourceCommandBuffer, eventType, ref, param);
+       }
+    }
+ 
+@@ -1607,9 +_,9 @@
+    }
+ 
+    protected <Event extends EcsEvent> void internal_invoke(CommandBuffer<ECS_TYPE> sourceCommandBuffer, Event param) {
+-      WorldEventType<ECS_TYPE, ?> eventType = this.registry.getWorldEventTypeForClass(param.getClass());
++      WorldEventType eventType = this.registry.getWorldEventTypeForClass(param.getClass());
+       if (eventType != null) {
+-         ((Store<ECS_TYPE>)this).internal_invoke(sourceCommandBuffer, eventType, param);
++         ((Store)this).internal_invoke(sourceCommandBuffer, eventType, param);
+       }
+    }
+ 
+@@ -1754,8 +_,8 @@
+          this.processing.unlock();
+       }
+ 
+-      if (dataChange instanceof SystemChange<ECS_TYPE> systemChange) {
+-         ISystem<ECS_TYPE> system = systemChange.getSystem();
++      if (dataChange instanceof SystemChange systemChange) {
++         ISystem system = systemChange.getSystem();
+          switch (systemChange.getType()) {
+             case REGISTERED:
+                if (system instanceof StoreSystem) {
+@@ -1771,14 +_,14 @@
+    }
+ 
+    private void updateData0(@Nonnull ComponentRegistry.Data<ECS_TYPE> oldData, @Nonnull ComponentRegistry.Data<ECS_TYPE> newData, DataChange dataChange) {
+-      if (dataChange instanceof ComponentChange<ECS_TYPE, ? extends Component<ECS_TYPE>> componentChange) {
+-         ComponentType<ECS_TYPE, ? extends Component<ECS_TYPE>> componentType = componentChange.getComponentType();
++      if (dataChange instanceof ComponentChange componentChange) {
++         ComponentType componentType = componentChange.getComponentType();
+          ComponentType<ECS_TYPE, UnknownComponents<ECS_TYPE>> unknownComponentType = this.registry.getUnknownComponentType();
+          switch (componentChange.getType()) {
+             case REGISTERED:
+-               String componentId = newData.getComponentId(componentType);
+-               Codec<Component<ECS_TYPE>> componentCodec = newData.getComponentCodec((ComponentType<ECS_TYPE, Component<ECS_TYPE>>)componentType);
+-               if (componentCodec != null) {
++               String componentIdx = newData.getComponentId(componentType);
++               Codec<Component<ECS_TYPE>> componentCodecX = newData.getComponentCodec((ComponentType) componentType);
++               if (componentCodecX != null) {
+                   Holder<ECS_TYPE> tempInternalEntityHolder = this.registry._internal_newEntityHolder();
+                   int oldArchetypeSize = this.archetypeSize;
+ 
+@@ -1795,14 +_,14 @@
+ 
+                               assert unknownComponents != null;
+ 
+-                              return unknownComponents.contains(componentId);
++                              return unknownComponents.contains(componentIdx);
+                            }, entity -> {
+                               UnknownComponents<ECS_TYPE> unknownComponents = entity.getComponent(unknownComponentType);
+ 
+                               assert unknownComponents != null;
+ 
+-                              Component<ECS_TYPE> component = unknownComponents.removeComponent(componentId, componentCodec);
+-                              entity.addComponent(componentType, component);
++                              Component<ECS_TYPE> component = unknownComponents.removeComponent(componentIdx, componentCodecX);
++                              entity.addComponent((ComponentType) componentType, component);
+                            }, (newChunkEntityRef, ref) -> {
+                               this.entityToArchetypeChunk[ref.getIndex()] = toArchetypeIndex;
+                               this.entityChunkIndex[ref.getIndex()] = newChunkEntityRef;
+@@ -1838,7 +_,7 @@
+             case UNREGISTERED:
+                Holder<ECS_TYPE> tempInternalEntityHolder = this.registry._internal_newEntityHolder();
+                String componentId = oldData.getComponentId(componentType);
+-               Codec<Component<ECS_TYPE>> componentCodec = oldData.getComponentCodec((ComponentType<ECS_TYPE, Component<ECS_TYPE>>)componentType);
++               Codec<Component<ECS_TYPE>> componentCodec = oldData.getComponentCodec((ComponentType) componentType);
+                int oldArchetypeSize = this.archetypeSize;
+ 
+                for (int archetypeIndex = 0; archetypeIndex < oldArchetypeSize; archetypeIndex++) {
+@@ -1891,11 +_,11 @@
+                this.archetypeSize = highestUsedIndex + 1;
+                this.archetypeChunkReuse.clear(this.archetypeSize, oldArchetypeSize);
+          }
+-      } else if (dataChange instanceof SystemChange<ECS_TYPE> systemChange) {
+-         ISystem<ECS_TYPE> system = systemChange.getSystem();
++      } else if (dataChange instanceof SystemChange systemChange) {
++         ISystem system = systemChange.getSystem();
+          switch (systemChange.getType()) {
+             case REGISTERED:
+-               if (system instanceof ArchetypeChunkSystem<ECS_TYPE> archetypeChunkSystem) {
++               if ((ISystem) system instanceof ArchetypeChunkSystem archetypeChunkSystem) {
+                   for (int archetypeIndexxxx = 0; archetypeIndexxxx < this.archetypeSize; archetypeIndexxxx++) {
+                      ArchetypeChunk<ECS_TYPE> archetypeChunk = this.archetypeChunks[archetypeIndexxxx];
+                      if (archetypeChunk != null && archetypeChunkSystem.test(this.registry, archetypeChunk.getArchetype())) {
+@@ -1905,7 +_,7 @@
+                }
+                break;
+             case UNREGISTERED:
+-               if (system instanceof ArchetypeChunkSystem<ECS_TYPE> archetypeChunkSystem) {
++               if ((ISystem) system instanceof ArchetypeChunkSystem archetypeChunkSystem) {
+                   for (int archetypeIndexxx = 0; archetypeIndexxx < this.archetypeSize; archetypeIndexxx++) {
+                      ArchetypeChunk<ECS_TYPE> archetypeChunk = this.archetypeChunks[archetypeIndexxx];
+                      if (archetypeChunk != null && archetypeChunkSystem.test(this.registry, archetypeChunk.getArchetype())) {

@@ -1,0 +1,37 @@
+--- a/com/hypixel/hytale/codec/builder/BuilderCodec.java
++++ b/com/hypixel/hytale/codec/builder/BuilderCodec.java
+@@ -879,21 +_,21 @@
+          this.supplier = supplier;
+          this.parentCodec = parentCodec;
+          if (parentCodec != null) {
+-            this.stringTreeMap = new StringTreeMap<>((StringTreeMap<BuilderCodec.KeyEntry<T>>)parentCodec.stringTreeMap);
++            this.stringTreeMap = new StringTreeMap<>((StringTreeMap<BuilderCodec.KeyEntry<T>>) (StringTreeMap<?>) parentCodec.stringTreeMap);
+          } else {
+-            this.stringTreeMap = new StringTreeMap<>(
++            this.stringTreeMap = new StringTreeMap<KeyEntry<T>>(
+                Map.ofEntries(
+-                  Map.entry("$Title", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$Comment", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$TODO", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$Author", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$Position", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$FloatingFunctionNodes", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$Groups", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$WorkspaceID", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$NodeEditorMetadata", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("$NodeId", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE)),
+-                  Map.entry("Parent", new BuilderCodec.KeyEntry(BuilderCodec.EntryType.IGNORE_IN_BASE_OBJECT))
++                  Map.entry("$Title", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$Comment", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$TODO", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$Author", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$Position", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$FloatingFunctionNodes", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$Groups", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$WorkspaceID", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$NodeEditorMetadata", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("$NodeId", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE)),
++                  Map.entry("Parent", new BuilderCodec.KeyEntry<T>(BuilderCodec.EntryType.IGNORE_IN_BASE_OBJECT))
+                )
+             );
+          }

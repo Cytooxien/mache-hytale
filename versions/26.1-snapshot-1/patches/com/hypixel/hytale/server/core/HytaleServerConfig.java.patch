@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/HytaleServerConfig.java
++++ b/com/hypixel/hytale/server/core/HytaleServerConfig.java
+@@ -75,7 +_,7 @@
+          o.unmodifiableLogLevels = Collections.unmodifiableMap(o.logLevels);
+       }, o -> o.logLevels)
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>(
+             "Plugins",
+             new ObjectMapCodec<>(

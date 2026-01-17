@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/type/item/config/ItemUtility.java
++++ b/com/hypixel/hytale/server/core/asset/type/item/config/ItemUtility.java
+@@ -24,7 +_,7 @@
+       .add()
+       .append(new KeyedCodec<>("Compatible", Codec.BOOLEAN), (o, v) -> o.compatible = v, o -> o.compatible)
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("StatModifiers", new MapCodec<>(new ArrayCodec<>(StaticModifier.CODEC, StaticModifier[]::new), HashMap::new)),
+          (itemArmor, map) -> itemArmor.rawStatModifiers = map,
+          itemArmor -> itemArmor.rawStatModifiers

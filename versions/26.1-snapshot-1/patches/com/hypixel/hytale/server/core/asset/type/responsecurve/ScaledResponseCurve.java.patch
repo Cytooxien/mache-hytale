@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/type/responsecurve/ScaledResponseCurve.java
++++ b/com/hypixel/hytale/server/core/asset/type/responsecurve/ScaledResponseCurve.java
+@@ -9,7 +_,7 @@
+ import javax.annotation.Nonnull;
+ 
+ public abstract class ScaledResponseCurve implements JsonAssetWithMap<String, DefaultAssetMap<String, ScaledResponseCurve>> {
+-   public static final AssetCodecMapCodec<String, ScaledResponseCurve> CODEC = new AssetCodecMapCodec<String, ScaledXResponseCurve>(
++   public static final AssetCodecMapCodec<String, ScaledResponseCurve> CODEC = new AssetCodecMapCodec<String, ScaledResponseCurve>(
+          Codec.STRING, (t, k) -> t.id = k, t -> t.id, (t, data) -> t.data = data, t -> t.data, true
+       )
+       .register(Priority.DEFAULT, "Default", ScaledXResponseCurve.class, ScaledXResponseCurve.CODEC);

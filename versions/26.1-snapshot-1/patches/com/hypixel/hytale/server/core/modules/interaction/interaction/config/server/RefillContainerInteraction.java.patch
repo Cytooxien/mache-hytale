@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/modules/interaction/interaction/config/server/RefillContainerInteraction.java
++++ b/com/hypixel/hytale/server/core/modules/interaction/interaction/config/server/RefillContainerInteraction.java
+@@ -43,7 +_,7 @@
+          RefillContainerInteraction.class, RefillContainerInteraction::new, SimpleBlockInteraction.CODEC
+       )
+       .documentation("Refills a container item that is currently held.")
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("States", new MapCodec<>(RefillContainerInteraction.RefillState.CODEC, HashMap::new)),
+          (interaction, value) -> interaction.refillStateMap = value,
+          interaction -> interaction.refillStateMap,

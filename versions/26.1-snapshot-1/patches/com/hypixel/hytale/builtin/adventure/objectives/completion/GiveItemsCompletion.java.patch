@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/adventure/objectives/completion/GiveItemsCompletion.java
++++ b/com/hypixel/hytale/builtin/adventure/objectives/completion/GiveItemsCompletion.java
+@@ -43,7 +_,7 @@
+             (participantReference, asset, objectiveHistoryData) -> {
+                if (EntityUtils.getEntity(participantReference, componentAccessor) instanceof LivingEntity livingEntity) {
+                   Inventory inventory = livingEntity.getInventory();
+-                  List itemStacks = ItemModule.get().getRandomItemDrops(asset.getDropListId());
++                  List<ItemStack> itemStacks = ItemModule.get().getRandomItemDrops(asset.getDropListId());
+                   SimpleItemContainer.addOrDropItemStacks(store, participantReference, inventory.getCombinedHotbarFirst(), itemStacks);
+                   Player playerComponent = componentAccessor.getComponent(participantReference, Player.getComponentType());
+                   if (playerComponent != null) {

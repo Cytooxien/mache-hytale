@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/codec/store/CodecStore.java
++++ b/com/hypixel/hytale/codec/store/CodecStore.java
+@@ -48,7 +_,7 @@
+    }
+ 
+    public <T> void putCodecSupplier(CodecKey<T> key, Supplier<Codec<T>> supplier) {
+-      this.codecSuppliers.put(key, supplier);
++      this.codecSuppliers.put(key, (Supplier) supplier);
+    }
+ 
+    public <T> Supplier<Codec<?>> removeCodecSupplier(CodecKey<T> key) {

@@ -1,0 +1,21 @@
+--- a/com/hypixel/hytale/server/core/plugin/PluginBase.java
++++ b/com/hypixel/hytale/server/core/plugin/PluginBase.java
+@@ -42,12 +_,12 @@
+ 
+ public abstract class PluginBase implements CommandOwner {
+    @Nonnull
+-   public static final MetricsRegistry<PluginBase> METRICS_REGISTRY = new MetricsRegistry<>(MetricProvider.maybe(Function.identity()))
+-      .register("Identifier", plugin -> plugin.identifier.toString(), Codec.STRING)
+-      .register("Type", PluginBase::getType, new EnumCodec<>(PluginType.class))
+-      .register("Manifest", plugin -> plugin.manifest, PluginManifest.CODEC)
+-      .register("State", plugin -> plugin.state, new EnumCodec<>(PluginState.class))
+-      .register("Builtin", plugin -> plugin instanceof JavaPlugin jp && jp.getClassLoader().isInServerClassPath(), Codec.BOOLEAN);
++   public static final MetricsRegistry<PluginBase> METRICS_REGISTRY = (MetricsRegistry<PluginBase>) new MetricsRegistry<PluginBase>(MetricProvider.maybe(Function.identity()))
++      .register("Identifier", (plugin) -> ((PluginBase) plugin).getIdentifier().toString(), Codec.STRING)
++      .register("Type", (plugin) -> ((PluginBase) plugin).getType(), (Codec) new EnumCodec<>(PluginType.class))
++      .register("Manifest", (plugin) -> ((PluginBase) plugin).getManifest(), (Codec) PluginManifest.CODEC)
++      .register("State", (plugin) -> ((PluginBase) plugin).getState(), (Codec) new EnumCodec<>(PluginState.class))
++      .register("Builtin", (plugin) -> plugin instanceof JavaPlugin jp && jp.getClassLoader().isInServerClassPath(), Codec.BOOLEAN);
+    @Nonnull
+    private final HytaleLogger logger;
+    @Nonnull

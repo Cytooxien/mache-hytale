@@ -1,0 +1,22 @@
+--- a/com/hypixel/hytale/builtin/adventure/camera/CameraPlugin.java
++++ b/com/hypixel/hytale/builtin/adventure/camera/CameraPlugin.java
+@@ -38,8 +_,8 @@
+                            .loadsBefore(CameraEffect.class))
+                         .setCodec(CameraShake.CODEC))
+                      .setPath("Camera/CameraShake"))
+-                  .setKeyFunction(CameraShake::getId))
+-               .setReplaceOnRemove(CameraShake::new))
++                  .setKeyFunction(asset -> ((CameraShake) asset).getId()))
++               .setReplaceOnRemove(asset -> new CameraShake()))
+             .setPacketGenerator(new CameraShakePacketGenerator())
+             .build()
+       );
+@@ -49,7 +_,7 @@
+                      )
+                      .setCodec(ViewBobbing.CODEC))
+                   .setPath("Camera/ViewBobbing"))
+-               .setKeyFunction(ViewBobbing::getId))
++               .setKeyFunction(asset -> ((ViewBobbing) asset).getId()))
+             .setPacketGenerator(new ViewBobbingPacketGenerator())
+             .build()
+       );

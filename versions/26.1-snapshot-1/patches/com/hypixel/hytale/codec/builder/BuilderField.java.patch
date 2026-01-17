@@ -1,0 +1,12 @@
+--- a/com/hypixel/hytale/codec/builder/BuilderField.java
++++ b/com/hypixel/hytale/codec/builder/BuilderField.java
+@@ -189,7 +_,8 @@
+                Codec<FieldType> child = this.codec.getChildCodec();
+                if (child instanceof InheritCodec) {
+                   FieldType parentValue = parent != null ? this.getter.apply(parent, extraInfo) : null;
+-                  FieldType value = ((InheritCodec)child).decodeAndInheritJson(reader, parentValue, extraInfo);
++                  @SuppressWarnings("unchecked")
++                  FieldType value = (FieldType) ((InheritCodec)child).decodeAndInheritJson(reader, parentValue, extraInfo);
+                   this.setValue(t, value, extraInfo);
+                } else {
+                   FieldType value = child.decodeJson(reader, extraInfo);

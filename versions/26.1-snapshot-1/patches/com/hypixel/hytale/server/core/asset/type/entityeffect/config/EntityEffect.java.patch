@@ -1,0 +1,20 @@
+--- a/com/hypixel/hytale/server/core/asset/type/entityeffect/config/EntityEffect.java
++++ b/com/hypixel/hytale/server/core/asset/type/entityeffect/config/EntityEffect.java
+@@ -127,7 +_,7 @@
+       .addValidator(ModelAsset.VALIDATOR_CACHE.getValidator())
+       .documentation("A model to change the affected entity's appearance to.")
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("RawStatModifiers", new MapCodec<>(new ArrayCodec<>(StaticModifier.CODEC, StaticModifier[]::new), HashMap::new)),
+          (entityEffect, map) -> entityEffect.rawStatModifiers = map,
+          entityEffect -> entityEffect.rawStatModifiers
+@@ -218,7 +_,7 @@
+       )
+       .documentation("Determines whether this effect applies the invulnerable component to the entity whilst active.")
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("DamageResistance", new MapCodec<>(new ArrayCodec<>(StaticModifier.CODEC, StaticModifier[]::new), HashMap::new)),
+          (entityEffect, map) -> entityEffect.damageResistanceValuesRaw = map,
+          entityEffect -> entityEffect.damageResistanceValuesRaw,

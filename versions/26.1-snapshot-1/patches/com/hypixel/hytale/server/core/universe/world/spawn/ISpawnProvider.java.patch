@@ -1,0 +1,28 @@
+--- a/com/hypixel/hytale/server/core/universe/world/spawn/ISpawnProvider.java
++++ b/com/hypixel/hytale/server/core/universe/world/spawn/ISpawnProvider.java
+@@ -14,11 +_,11 @@
+ 
+ public interface ISpawnProvider {
+    @Nonnull
+-   BuilderCodecMapCodec<ISpawnProvider> CODEC;
++   BuilderCodecMapCodec<ISpawnProvider> CODEC = new BuilderCodecMapCodec<>(true);
+ 
+    default Transform getSpawnPoint(@Nonnull Ref<EntityStore> ref, @Nonnull ComponentAccessor<EntityStore> componentAccessor) {
+       UUIDComponent uuidComponent = componentAccessor.getComponent(ref, UUIDComponent.getComponentType());
+-      if (!<unrepresentable>.$assertionsDisabled && uuidComponent == null) {
++      if (false && uuidComponent == null) {
+          throw new AssertionError();
+       } else {
+          World world = componentAccessor.getExternalData().getWorld();
+@@ -37,11 +_,4 @@
+    Transform[] getSpawnPoints();
+ 
+    boolean isWithinSpawnDistance(@Nonnull Vector3d var1, double var2);
+-
+-   static {
+-      if (<unrepresentable>.$assertionsDisabled) {
+-      }
+-
+-      CODEC = new BuilderCodecMapCodec<>(true);
+-   }
+ }

@@ -1,0 +1,133 @@
+--- a/com/hypixel/hytale/server/core/universe/world/WorldConfig.java
++++ b/com/hypixel/hytale/server/core/universe/world/WorldConfig.java
+@@ -126,77 +_,77 @@
+       .setVersionRange(1, 3)
+       .addValidator(Validators.deprecated())
+       .add()
+-      .<Map>append(
+-         new KeyedCodec<>(
++      .append(
++         (KeyedCodec) new KeyedCodec<>(
+             "RequiredPlugins", new ObjectMapCodec<>(SemverRange.CODEC, HashMap::new, PluginIdentifier::toString, PluginIdentifier::fromString, false)
+          ),
+-         (o, i) -> o.requiredPlugins = i,
++         (o, i) -> o.requiredPlugins = (Map) i,
+          o -> o.requiredPlugins
+       )
+       .documentation("Sets the plugins that are required to be enabled for this world to function.")
+       .add()
+-      .<GameMode>append(new KeyedCodec<>("GameMode", ProtocolCodecs.GAMEMODE), (o, i) -> o.gameMode = i, o -> o.gameMode)
++      .append(new KeyedCodec<>("GameMode", ProtocolCodecs.GAMEMODE), (o, i) -> ((WorldConfig) o).setGameMode((GameMode) i), o -> ((WorldConfig) o).getGameMode())
+       .documentation("Sets the default gamemode for this world.")
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("IsSpawningNPC", Codec.BOOLEAN), (o, i) -> o.isSpawningNPC = i, o -> o.isSpawningNPC)
++      .append(new KeyedCodec<>("IsSpawningNPC", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setSpawningNPC((Boolean) i), o -> ((WorldConfig) o).isSpawningNPC())
+       .documentation("Whether NPCs can spawn in this world or not.")
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("IsSpawnMarkersEnabled", Codec.BOOLEAN), (o, i) -> o.isSpawnMarkersEnabled = i, o -> o.isSpawnMarkersEnabled)
++      .append(new KeyedCodec<>("IsSpawnMarkersEnabled", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setIsSpawnMarkersEnabled((Boolean) i), o -> ((WorldConfig) o).isSpawnMarkersEnabled())
+       .documentation("Whether spawn markers are enabled for this world.")
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("IsAllNPCFrozen", Codec.BOOLEAN), (o, i) -> o.isAllNPCFrozen = i, o -> o.isAllNPCFrozen)
++      .append(new KeyedCodec<>("IsAllNPCFrozen", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setIsAllNPCFrozen((Boolean) i), o -> ((WorldConfig) o).isAllNPCFrozen())
+       .documentation("Whether all NPCs are frozen for this world")
+       .add()
+-      .<String>append(new KeyedCodec<>("GameplayConfig", Codec.STRING), (o, i) -> o.gameplayConfig = i, o -> o.gameplayConfig)
+-      .addValidator(GameplayConfig.VALIDATOR_CACHE.getValidator())
++      .append(new KeyedCodec<>("GameplayConfig", Codec.STRING), (o, i) -> ((WorldConfig) o).setGameplayConfig((String) i), o -> ((WorldConfig) o).getGameplayConfig())
++      .addValidator((com.hypixel.hytale.codec.validation.Validator) GameplayConfig.VALIDATOR_CACHE.getValidator())
+       .documentation("The gameplay configuration being used by this world")
+       .add()
+-      .<DeathConfig>append(new KeyedCodec<>("Death", DeathConfig.CODEC), (o, i) -> o.deathConfigOverride = i, o -> o.deathConfigOverride)
++      .append(new KeyedCodec<>("Death", DeathConfig.CODEC), (o, i) -> ((WorldConfig) o).deathConfigOverride = (DeathConfig) i, o -> ((WorldConfig) o).getDeathConfigOverride())
+       .documentation("Inline death configuration overrides for this world. If set, these values take precedence over the referenced GameplayConfig.")
+       .add()
+-      .<Integer>append(
+-         new KeyedCodec<>("DaytimeDurationSeconds", Codec.INTEGER), (o, i) -> o.daytimeDurationSecondsOverride = i, o -> o.daytimeDurationSecondsOverride
++      .append(
++         new KeyedCodec<>("DaytimeDurationSeconds", Codec.INTEGER), (o, i) -> ((WorldConfig) o).daytimeDurationSecondsOverride = (Integer) i, o -> ((WorldConfig) o).getDaytimeDurationSecondsOverride()
+       )
+       .documentation("Override for the duration of daytime in seconds. If set, takes precedence over the referenced GameplayConfig.")
+       .add()
+-      .<Integer>append(
+-         new KeyedCodec<>("NighttimeDurationSeconds", Codec.INTEGER), (o, i) -> o.nighttimeDurationSecondsOverride = i, o -> o.nighttimeDurationSecondsOverride
++      .append(
++         new KeyedCodec<>("NighttimeDurationSeconds", Codec.INTEGER), (o, i) -> ((WorldConfig) o).nighttimeDurationSecondsOverride = (Integer) i, o -> ((WorldConfig) o).getNighttimeDurationSecondsOverride()
+       )
+       .documentation("Override for the duration of nighttime in seconds. If set, takes precedence over the referenced GameplayConfig.")
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("IsCompassUpdating", Codec.BOOLEAN), (o, i) -> o.isCompassUpdating = i, o -> o.isCompassUpdating)
++      .append(new KeyedCodec<>("IsCompassUpdating", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setCompassUpdating((Boolean) i), o -> ((WorldConfig) o).isCompassUpdating())
+       .documentation("Whether the compass is updating in this world")
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("IsSavingPlayers", Codec.BOOLEAN), (o, i) -> o.isSavingPlayers = i, o -> o.isSavingPlayers)
++      .append(new KeyedCodec<>("IsSavingPlayers", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setSavingPlayers((Boolean) i), o -> ((WorldConfig) o).isSavingPlayers())
+       .documentation("Whether the configuration for player's is being saved for players in this world.")
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("IsSavingChunks", Codec.BOOLEAN), (o, i) -> o.canSaveChunks = i, o -> o.canSaveChunks)
++      .append(new KeyedCodec<>("IsSavingChunks", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setCanSaveChunks((Boolean) i), o -> ((WorldConfig) o).canSaveChunks())
+       .documentation("Whether the chunk data is allowed to be saved to the disk for this world.")
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("SaveNewChunks", Codec.BOOLEAN), (o, i) -> o.saveNewChunks = i, o -> o.saveNewChunks)
++      .append(new KeyedCodec<>("SaveNewChunks", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setSaveNewChunks((Boolean) i), o -> ((WorldConfig) o).shouldSaveNewChunks())
+       .documentation(
+          "Whether newly generated chunks should be marked for saving or not.\nEnabling this can prevent random chunks from being out of place if/when worldgen changes but will increase the size of the world on disk."
+       )
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("IsUnloadingChunks", Codec.BOOLEAN), (o, i) -> o.canUnloadChunks = i, o -> o.canUnloadChunks)
++      .append(new KeyedCodec<>("IsUnloadingChunks", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setCanUnloadChunks((Boolean) i), o -> ((WorldConfig) o).canUnloadChunks())
+       .documentation("Whether the chunks should be unloaded like normally, or should be prevented from unloading at all.")
+       .add()
+-      .<Boolean>append(
+-         new KeyedCodec<>("IsObjectiveMarkersEnabled", Codec.BOOLEAN), (o, i) -> o.isObjectiveMarkersEnabled = i, o -> o.isObjectiveMarkersEnabled
++      .append(
++         new KeyedCodec<>("IsObjectiveMarkersEnabled", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setObjectiveMarkersEnabled((Boolean) i), o -> ((WorldConfig) o).isObjectiveMarkersEnabled()
+       )
+       .documentation("Whether objective markers are enabled for this world.")
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("DeleteOnUniverseStart", Codec.BOOLEAN), (o, i) -> o.deleteOnUniverseStart = i, o -> o.deleteOnUniverseStart)
++      .append(new KeyedCodec<>("DeleteOnUniverseStart", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setDeleteOnUniverseStart((Boolean) i), o -> ((WorldConfig) o).isDeleteOnUniverseStart())
+       .documentation(
+          "Whether this world should be deleted when loaded from Universe start. By default this is when going through the world folders in the universe directory."
+       )
+       .add()
+-      .<Boolean>append(new KeyedCodec<>("DeleteOnRemove", Codec.BOOLEAN), (o, i) -> o.deleteOnRemove = i, o -> o.deleteOnRemove)
++      .append(new KeyedCodec<>("DeleteOnRemove", Codec.BOOLEAN), (o, i) -> ((WorldConfig) o).setDeleteOnRemove((Boolean) i), o -> ((WorldConfig) o).isDeleteOnRemove())
+       .documentation("Whether this world should be deleted once its been removed from the server")
+       .add()
+       .<BsonDocument>append(
+          new KeyedCodec<>("Instance", Codec.BSON_DOCUMENT),
+-         (o, i, e) -> o.pluginConfig.put(PLUGIN_CODEC.getKeyForId("Instance"), PLUGIN_CODEC.decodeById("Instance", i, e)),
++         (o, i, e) -> ((WorldConfig) o).getPluginConfig().put(PLUGIN_CODEC.getKeyForId("Instance"), (Object) PLUGIN_CODEC.decodeById("Instance", (org.bson.BsonValue) i, (com.hypixel.hytale.codec.ExtraInfo) e)),
+          (o, e) -> null
+       )
+       .setVersionRange(0, 2)
+@@ -204,19 +_,21 @@
+       .addValidator(Validators.deprecated())
+       .add()
+       .<IResourceStorageProvider>append(
+-         new KeyedCodec<>("ResourceStorage", IResourceStorageProvider.CODEC), (o, i) -> o.resourceStorageProvider = i, o -> o.resourceStorageProvider
++         new KeyedCodec<>("ResourceStorage", IResourceStorageProvider.CODEC), (o, i) -> ((WorldConfig) o).setResourceStorageProvider((IResourceStorageProvider) i), o -> ((WorldConfig) o).getResourceStorageProvider()
+       )
+       .documentation("Sets the storage system that will be used to store resources.")
+       .add()
+       .<MapKeyMapCodec.TypeMap<Object>>appendInherited(new KeyedCodec<>("Plugin", PLUGIN_CODEC), (o, i) -> {
+-         if (o.pluginConfig.isEmpty()) {
+-            o.pluginConfig = i;
++         WorldConfig wo = (WorldConfig) o;
++         MapKeyMapCodec.TypeMap<Object> input = (MapKeyMapCodec.TypeMap<Object>) i;
++         if (wo.getPluginConfig().isEmpty()) {
++            wo.pluginConfig = input;
+          } else {
+-            MapKeyMapCodec.TypeMap<Object> temp = o.pluginConfig;
+-            o.pluginConfig.putAll(temp);
+-            o.pluginConfig.putAll(i);
++            MapKeyMapCodec.TypeMap<Object> temp = wo.getPluginConfig();
++            wo.getPluginConfig().putAll(temp);
++            wo.getPluginConfig().putAll(input);
+          }
+-      }, o -> o.pluginConfig, (o, p) -> o.pluginConfig = p.pluginConfig)
++      }, o -> ((WorldConfig) o).getPluginConfig(), (o, p) -> ((WorldConfig) o).pluginConfig = ((WorldConfig) p).getPluginConfig())
+       .addValidator(Validators.nonNull())
+       .add()
+       .build();

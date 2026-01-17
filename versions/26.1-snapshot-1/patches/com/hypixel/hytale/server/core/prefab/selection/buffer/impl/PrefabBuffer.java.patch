@@ -1,0 +1,100 @@
+--- a/com/hypixel/hytale/server/core/prefab/selection/buffer/impl/PrefabBuffer.java
++++ b/com/hypixel/hytale/server/core/prefab/selection/buffer/impl/PrefabBuffer.java
+@@ -120,36 +_,73 @@
+       ) {
+          int mask = 0;
+ 
+-         mask = switch (blockBytes) {
+-            case 0 -> {
+-            }
+-            case 1 -> 1;
+-            case 2 -> 2;
+-            default -> throw new IllegalArgumentException("Unsupported amount of bytes for blocks (0, 1, 2, 4). Given: " + blockBytes);
+-            case 4 -> 3;
+-         };
++         switch (blockBytes) {
++              case 0: {
++                  break;
++              }
++              case 1: {
++                  mask |= 0x1;
++                  break;
++              }
++              case 2: {
++                  mask |= 0x2;
++                  break;
++              }
++              case 4: {
++                  mask |= 0x3;
++                  break;
++              }
++              default: {
++                  throw new IllegalArgumentException("Unsupported amount of bytes for blocks (0, 1, 2, 4). Given: " + blockBytes);
++              }
++          }
+          if (chance) {
+             mask |= 4;
+          }
+-         mask = switch (offsetBytes) {
+-            case 0 -> {
+-            }
+-            case 1 -> 8;
+-            case 2 -> 16;
+-            default -> throw new IllegalArgumentException("Unsupported amount of bytes for offset (0, 1, 2, 4). Given: " + offsetBytes);
+-            case 4 -> 24;
+-         };
++          switch (offsetBytes) {
++              case 0: {
++                  break;
++              }
++              case 1: {
++                  mask |= 0x8;
++                  break;
++              }
++              case 2: {
++                  mask |= 0x10;
++                  break;
++              }
++              case 4: {
++                  mask |= 0x18;
++                  break;
++              }
++              default: {
++                  throw new IllegalArgumentException("Unsupported amount of bytes for offset (0, 1, 2, 4). Given: " + offsetBytes);
++              }
++          }
+          if (holder != null) {
+             mask |= 32;
+          }
+-         mask = switch (fluidBytes) {
+-            case 0 -> {
+-            }
+-            case 1 -> 64;
+-            case 2 -> 128;
+-            default -> throw new IllegalArgumentException("Unsupported amount of bytes for fluids (0, 1, 2, 4). Given: " + fluidBytes);
+-            case 4 -> 192;
+-         } | supportValue << 8 & 3840;
++          switch (fluidBytes) {
++              case 0: {
++                  break;
++              }
++              case 1: {
++                  mask |= 0x40;
++                  break;
++              }
++              case 2: {
++                  mask |= 0x80;
++                  break;
++              }
++              case 4: {
++                  mask |= 0xC0;
++                  break;
++              }
++              default: {
++                  throw new IllegalArgumentException("Unsupported amount of bytes for fluids (0, 1, 2, 4). Given: " + fluidBytes);
++              }
++          }
++          mask |= (supportValue << 8 & 0xF00);
+          if (filler != 0) {
+             mask |= 4096;
+          }

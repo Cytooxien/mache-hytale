@@ -1,0 +1,72 @@
+--- a/com/hypixel/hytale/assetstore/AssetStore.java
++++ b/com/hypixel/hytale/assetstore/AssetStore.java
+@@ -257,7 +_,8 @@
+                for (List<? extends BuilderField<?, ?>> value : builderCodec.getEntries().values()) {
+                   for (BuilderField<?, ?> field : value) {
+                      if (field.supportsVersion(extraInfo.getVersion())) {
+-                        List<Validator<?>> validators = field.getValidators();
++                        @SuppressWarnings("unchecked")
++                        List<Validator<?>> validators = (List<Validator<?>>) (List<?>) field.getValidators();
+                         if (validators != null) {
+                            for (Validator<?> validator : validators) {
+                               if (validator instanceof ArrayValidator<?> arrayValidator) {
+@@ -679,12 +_,10 @@
+                return toBeRemoved;
+             }
+ 
+-            pathsToReload = toBeRemoved;
++            return toBeRemoved;
+          } finally {
+             AssetRegistry.ASSET_LOCK.writeLock().unlock();
+          }
+-
+-         return pathsToReload;
+       }
+    }
+ 
+@@ -969,9 +_,9 @@
+             }
+          }
+ 
+-         if (allChildKeys != null && !allChildKeys.isEmpty()) {
+-            AssetRegistry.<Object, T, M>getAssetStore(k).removeAssets(packKey, false, allChildKeys, AssetUpdateQuery.DEFAULT);
+-         }
++            if (allChildKeys != null && !allChildKeys.isEmpty()) {
++               AssetRegistry.getAssetStore(k).removeAssets(packKey, false, (Collection) allChildKeys, AssetUpdateQuery.DEFAULT);
++            }
+       }
+    }
+ 
+@@ -1003,15 +_,15 @@
+ 
+             for (Object contained : containedEntry.getValue()) {
+                Object containedKey = assetStore.getKeyFunction().apply(contained);
+-               this.childAssetsMap
+-                  .computeIfAbsent(assetStore.getAssetClass(), k -> new ConcurrentHashMap<>())
+-                  .computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet())
++               ((Map) this.childAssetsMap)
++                  .computeIfAbsent(assetStore.getAssetClass(), k -> new ConcurrentHashMap<>());
++               ((Set) ((Map) this.childAssetsMap.get(assetStore.getAssetClass())).computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet()))
+                   .add(containedKey);
+                childList.add(contained);
+             }
+          }
+ 
+-         AssetLoadResult result = assetStore.loadAssets(packKey, (List<T>)childList, query, forceLoadAll);
++         AssetLoadResult result = assetStore.loadAssets(packKey, (List) childList, query, forceLoadAll);
+          childAssetsResults.put(assetClass, result);
+       }
+ 
+@@ -1036,9 +_,9 @@
+ 
+             for (RawAsset<Object> contained : containedEntry.getValue()) {
+                Object containedKey = contained.getKey();
+-               this.childAssetsMap
+-                  .computeIfAbsent(assetStore.getAssetClass(), k -> new ConcurrentHashMap<>())
+-                  .computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet())
++               ((Map) this.childAssetsMap)
++                  .computeIfAbsent(assetStore.getAssetClass(), k -> new ConcurrentHashMap<>());
++               ((Set) ((Map) this.childAssetsMap.get(assetStore.getAssetClass())).computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet()))
+                   .add(containedKey);
+ 
+                RawAsset<Object> resolvedContained = switch (contained.getContainedAssetMode()) {

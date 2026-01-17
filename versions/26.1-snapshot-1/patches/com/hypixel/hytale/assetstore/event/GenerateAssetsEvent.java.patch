@@ -1,0 +1,20 @@
+--- a/com/hypixel/hytale/assetstore/event/GenerateAssetsEvent.java
++++ b/com/hypixel/hytale/assetstore/event/GenerateAssetsEvent.java
+@@ -92,7 +_,7 @@
+    }
+ 
+    public <P extends JsonAssetWithMap<PK, ?>, PK> void addChildAssetWithReference(K childKey, T asset, Class<P> parentAssetClass, @Nonnull PK parentKey) {
+-      if (AssetRegistry.<PK, T, AssetMap<PK, T>>getAssetStore(parentAssetClass).getAssetMap().getAsset(parentKey) == null) {
++      if (((AssetStore) AssetRegistry.getStoreMap().get(parentAssetClass)).getAssetMap().getAsset(parentKey) == null) {
+          throw new IllegalArgumentException("Parent '" + parentKey + "' from " + parentAssetClass + " doesn't exist!");
+       } else if (parentKey.equals(childKey)) {
+          throw new IllegalArgumentException("Unable to to add asset '" + parentKey + "' because it is its own parent!");
+@@ -112,7 +_,7 @@
+    public void addChildAssetWithReferences(K childKey, T asset, @Nonnull GenerateAssetsEvent.ParentReference<?, ?>... parents) {
+       for (int i = 0; i < parents.length; i++) {
+          GenerateAssetsEvent.ParentReference<?, ?> parent = parents[i];
+-         if (AssetRegistry.getAssetStore(parent.getParentAssetClass()).getAssetMap().getAsset((K)parent.getParentKey()) == null) {
++         if (((AssetStore) AssetRegistry.getStoreMap().get(parent.getParentAssetClass())).getAssetMap().getAsset(parent.getParentKey()) == null) {
+             throw new IllegalArgumentException("Parent at " + i + " '" + parent + "' doesn't exist!");
+          }
+ 

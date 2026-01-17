@@ -1,0 +1,23 @@
+--- a/com/hypixel/hytale/builtin/adventure/teleporter/page/TeleporterSettingsPage.java
++++ b/com/hypixel/hytale/builtin/adventure/teleporter/page/TeleporterSettingsPage.java
+@@ -138,16 +_,16 @@
+                );
+                break;
+             case WARP:
+-               List<DropdownEntryInfo> warps = new ObjectArrayList<>();
+-               warps.add(new DropdownEntryInfo(LocalizableString.fromMessageId("server.customUI.teleporter.noWarp"), ""));
++               List<DropdownEntryInfo> warps2 = new ObjectArrayList<>();
++               warps2.add(new DropdownEntryInfo(LocalizableString.fromMessageId("server.customUI.teleporter.noWarp"), ""));
+ 
+                for (Warp warpx : TeleportPlugin.get().getWarps().values()) {
+                   if (warpx.getWorld().equals(store.getExternalData().getWorld().getName()) && !warpx.getId().equalsIgnoreCase(teleporter.getOwnedWarp())) {
+-                     warps.add(new DropdownEntryInfo(LocalizableString.fromString(warpx.getId()), warpx.getId().toLowerCase()));
++                     warps2.add(new DropdownEntryInfo(LocalizableString.fromString(warpx.getId()), warpx.getId().toLowerCase()));
+                   }
+                }
+ 
+-               commandBuilder.set("#WarpDropdown.Entries", warps);
++               commandBuilder.set("#WarpDropdown.Entries", warps2);
+                commandBuilder.set("#WarpDropdown.Value", teleporter.getWarp() != null ? teleporter.getWarp() : "");
+                Message placeholder;
+                if (teleporter.hasOwnedWarp() && !teleporter.isCustomName()) {

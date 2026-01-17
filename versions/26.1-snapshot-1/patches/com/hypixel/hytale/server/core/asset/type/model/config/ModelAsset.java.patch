@@ -1,0 +1,20 @@
+--- a/com/hypixel/hytale/server/core/asset/type/model/config/ModelAsset.java
++++ b/com/hypixel/hytale/server/core/asset/type/model/config/ModelAsset.java
+@@ -204,7 +_,7 @@
+       .metadata(new UIEditorSectionStart("Attachments"))
+       .metadata(UIDefaultCollapsedState.UNCOLLAPSED)
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("RandomAttachmentSets", new MapCodec<>(new MapCodec<>(ModelAttachment.CODEC, HashMap::new), HashMap::new)),
+          (modelAsset, l) -> modelAsset.randomAttachmentSets = l,
+          modelAsset -> modelAsset.randomAttachmentSets,
+@@ -212,7 +_,7 @@
+       )
+       .metadata(UIDefaultCollapsedState.UNCOLLAPSED)
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("AnimationSets", new MapCodec<>(ModelAsset.AnimationSet.CODEC, HashMap::new)),
+          (model, m) -> model.animationSetMap = MapUtil.combineUnmodifiable(model.animationSetMap, m),
+          model -> model.animationSetMap,

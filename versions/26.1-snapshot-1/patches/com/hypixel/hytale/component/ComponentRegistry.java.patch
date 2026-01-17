@@ -1,0 +1,44 @@
+--- a/com/hypixel/hytale/component/ComponentRegistry.java
++++ b/com/hypixel/hytale/component/ComponentRegistry.java
+@@ -171,7 +_,7 @@
+       }
+ 
+       this.data = new ComponentRegistry.Data<>(this);
+-      this.unknownComponentType = this.registerComponent(UnknownComponents.class, "Unknown", UnknownComponents.CODEC);
++      this.unknownComponentType = (ComponentType) this.registerComponent(UnknownComponents.class, "Unknown", UnknownComponents.CODEC);
+       this.nonTickingComponentType = this.registerComponent(NonTicking.class, NonTicking::get);
+       this.nonSerializedComponentType = this.registerComponent(NonSerialized.class, NonSerialized::get);
+       this.holderSystemType = this.registerSystemType(HolderSystem.class);
+@@ -636,7 +_,7 @@
+                   throw new IllegalArgumentException("System of type " + systemClass.getName() + " is already registered!");
+                }
+             } else {
+-               this.systemBypassClassCheck.put(systemClass, true);
++               ((Map) this.systemBypassClassCheck).put(systemClass, true);
+             }
+ 
+             if (ArrayUtil.indexOf(this.systems, system) != -1) {
+@@ -668,12 +_,12 @@
+ 
+             if (system instanceof EntityEventSystem<ECS_TYPE, ?> eventSystem && !this.entityEventTypeClassToIndex.containsKey(eventSystem.getEventType())) {
+                EntityEventType<ECS_TYPE, ?> eventType = this.registerEntityEventType0(eventSystem.getEventType());
+-               changes.add(new SystemTypeChange<>(ChangeType.REGISTERED, (SystemType<ECS_TYPE, EntityEventSystem<ECS_TYPE, EcsEvent>>)eventType));
++               changes.add(new SystemTypeChange<>(ChangeType.REGISTERED, (SystemType) eventType));
+             }
+ 
+             if (system instanceof WorldEventSystem<ECS_TYPE, ?> eventSystem && !this.worldEventTypeClassToIndex.containsKey(eventSystem.getEventType())) {
+                WorldEventType<ECS_TYPE, ?> eventType = this.registerWorldEventType0(eventSystem.getEventType());
+-               changes.add(new SystemTypeChange<>(ChangeType.REGISTERED, (SystemType<ECS_TYPE, WorldEventSystem<ECS_TYPE, EcsEvent>>)eventType));
++               changes.add(new SystemTypeChange<>(ChangeType.REGISTERED, (SystemType) eventType));
+             }
+ 
+             lock = this.dataLock.tryConvertToReadLock(lock);
+@@ -1459,7 +_,7 @@
+       private BuilderCodec<Holder<ECS_TYPE>> createCodec() {
+          Function<Codec<Component<ECS_TYPE>>, Codec<Component<ECS_TYPE>>> function = componentCodec -> componentCodec != null
+             ? componentCodec
+-            : TempUnknownComponent.COMPONENT_CODEC;
++            : (Codec) TempUnknownComponent.COMPONENT_CODEC;
+          return BuilderCodec.builder(Holder.class, this.registry::newHolder)
+             .addField(
+                new KeyedCodec<>("Components", new MapProvidedMapCodec<>(this.codecMap, function, LinkedHashMap::new, false)),

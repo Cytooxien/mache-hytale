@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/universe/world/connectedblocks/CustomConnectedBlockPattern.java
++++ b/com/hypixel/hytale/server/core/universe/world/connectedblocks/CustomConnectedBlockPattern.java
+@@ -105,7 +_,7 @@
+          }
+ 
+          int blockTypeListAsset = BlockType.getAssetMap().getIndex(blockToTest);
+-         Set shapeNames = checkingConnectedBlockRuleSet.getShapesForBlockType(blockTypeListAsset);
++         Set<String> shapeNames = checkingConnectedBlockRuleSet.getShapesForBlockType(blockTypeListAsset);
+          CustomConnectedBlockTemplateAsset checkingTemplateAsset = checkingConnectedBlockRuleSet.getShapeTemplateAsset();
+          if (checkingTemplateAsset == null) {
+             return !rule.isInclude();

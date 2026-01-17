@@ -1,0 +1,20 @@
+--- a/com/hypixel/hytale/server/core/asset/type/item/config/Item.java
++++ b/com/hypixel/hytale/server/core/asset/type/item/config/Item.java
+@@ -410,7 +_,7 @@
+       )
+       .addValidator(Validators.nonNull())
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("InteractionVars", new MapCodec<>(RootInteraction.CHILD_ASSET_CODEC, HashMap::new)),
+          (item, v) -> item.interactionVars = MapUtil.combineUnmodifiable(item.interactionVars, v),
+          item -> item.interactionVars,
+@@ -418,7 +_,7 @@
+       )
+       .addValidator(RootInteraction.VALIDATOR_CACHE.getMapValueValidator())
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>(
+             "ItemAppearanceConditions", new MapCodec<>(new ArrayCodec<>(ItemAppearanceCondition.CODEC, ItemAppearanceCondition[]::new), HashMap::new)
+          ),

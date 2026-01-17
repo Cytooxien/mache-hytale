@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/adventure/farming/config/FarmingCoopAsset.java
++++ b/com/hypixel/hytale/builtin/adventure/farming/config/FarmingCoopAsset.java
+@@ -30,7 +_,7 @@
+          (asset, parent) -> asset.maxResidents = parent.maxResidents
+       )
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("ProduceDrops", new MapCodec<>(ItemDropList.CHILD_ASSET_CODEC, HashMap::new)),
+          (asset, drops) -> asset.produceDrops = drops,
+          asset -> asset.produceDrops

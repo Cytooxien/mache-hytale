@@ -1,0 +1,18 @@
+--- a/com/hypixel/hytale/server/npc/corecomponents/timer/SensorAlarm.java
++++ b/com/hypixel/hytale/server/npc/corecomponents/timer/SensorAlarm.java
+@@ -30,14 +_,13 @@
+       if (!super.matches(ref, role, dt, store)) {
+          return false;
+       } else {
++         WorldTimeResource worldTimeResource = store.getResource(WorldTimeResource.getResourceType());
+          switch (this.state) {
+             case SET:
+-               WorldTimeResource worldTimeResource = store.getResource(WorldTimeResource.getResourceType());
+                return this.alarm.isSet() && !this.alarm.hasPassed(worldTimeResource.getGameTime());
+             case UNSET:
+                return !this.alarm.isSet();
+             case PASSED:
+-               WorldTimeResource worldTimeResource = store.getResource(WorldTimeResource.getResourceType());
+                boolean passed = this.alarm.hasPassed(worldTimeResource.getGameTime());
+                if (passed && this.clear) {
+                   this.alarm.set(ref, null, store);

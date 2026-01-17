@@ -1,0 +1,126 @@
+--- a/com/hypixel/hytale/assetstore/codec/ContainedAssetCodec.java
++++ b/com/hypixel/hytale/assetstore/codec/ContainedAssetCodec.java
+@@ -55,59 +_,59 @@
+    @Nullable
+    @Override
+    public K decode(@Nonnull BsonValue bsonValue, ExtraInfo extraInfo) {
+-      if (!(extraInfo instanceof AssetExtraInfo<K> assetExtraInfo)) {
++      if (!(extraInfo instanceof AssetExtraInfo<?> assetExtraInfoGeneric)) {
+          throw new UnsupportedOperationException("Unable to decode asset from codec used outside of an AssetStore");
+-      } else if (bsonValue.isString()) {
+-         return this.codec.getKeyCodec().getChildCodec().decode(bsonValue, extraInfo);
+       } else {
+-         KeyedCodec<K> parentCodec = this.codec.getParentCodec();
+-         K parentId = parentCodec != null ? parentCodec.getOrNull(bsonValue.asDocument(), extraInfo) : null;
+-         AssetStore<K, T, M> assetStore = AssetRegistry.getAssetStore(this.assetClass);
+-         K id;
+-         switch (this.mode) {
+-            case GENERATE_ID: {
+-               id = this.keyGenerator.apply(assetExtraInfo);
+-               boolean inheritContainerTags = false;
+-               break;
+-            }
+-            case INHERIT_ID: {
+-               id = assetStore.transformKey(assetExtraInfo.getKey());
+-               boolean inheritContainerTags = true;
+-               break;
+-            }
+-            case INHERIT_ID_AND_PARENT: {
+-               id = assetStore.transformKey(assetExtraInfo.getKey());
+-               if (parentId == null) {
+-                  Object thisAssetParentId = assetExtraInfo.getData().getParentKey();
+-                  if (thisAssetParentId != null) {
+-                     parentId = assetStore.transformKey(thisAssetParentId);
+-                  }
+-               }
+-
+-               boolean inheritContainerTags = true;
+-               break;
+-            }
+-            case INJECT_PARENT: {
+-               id = this.keyGenerator.apply(assetExtraInfo);
+-               if (parentId == null && !assetExtraInfo.getKey().equals(id)) {
+-                  parentId = assetExtraInfo.getKey();
+-               }
+-
+-               boolean inheritContainerTags = true;
+-               break;
+-            }
+-            default:
+-               throw new UnsupportedOperationException("Contained asset mode can't be NONE!");
+-         }
+-
+-         T parent = parentId != null ? assetStore.getAssetMap().getAsset(parentId) : null;
+-         if (parentId != null && parent != null) {
+-         }
+-
+-         char[] clone = bsonValue.asDocument().toJson().toCharArray();
+-         Path path = assetExtraInfo.getAssetPath();
+-         assetExtraInfo.getData().addContainedAsset(this.assetClass, new RawAsset<>(path, id, parentId, 0, clone, assetExtraInfo.getData(), this.mode));
+-         return id;
++         @SuppressWarnings("unchecked")
++         AssetExtraInfo<K> assetExtraInfo = (AssetExtraInfo<K>) assetExtraInfoGeneric;
++         if (bsonValue.isString()) {
++            return this.codec.getKeyCodec().getChildCodec().decode(bsonValue, extraInfo);
++         } else {
++            KeyedCodec<K> parentCodec = this.codec.getParentCodec();
++            K parentId = parentCodec != null ? parentCodec.getOrNull(bsonValue.asDocument(), extraInfo) : null;
++            AssetStore<K, T, M> assetStore = AssetRegistry.getAssetStore(this.assetClass);
++            K id;
++            switch (this.mode) {
++               case GENERATE_ID: {
++                  id = this.keyGenerator.apply(assetExtraInfo);
++                  break;
++               }
++               case INHERIT_ID: {
++                  id = assetStore.transformKey(assetExtraInfo.getKey());
++                  break;
++               }
++               case INHERIT_ID_AND_PARENT: {
++                  id = assetStore.transformKey(assetExtraInfo.getKey());
++                  if (parentId == null) {
++                     Object thisAssetParentId = assetExtraInfo.getData().getParentKey();
++                     if (thisAssetParentId != null) {
++                        parentId = assetStore.transformKey(thisAssetParentId);
++                     }
++                  }
++
++                  break;
++               }
++               case INJECT_PARENT: {
++                  id = this.keyGenerator.apply(assetExtraInfo);
++                  if (parentId == null && !assetExtraInfo.getKey().equals(id)) {
++                     parentId = assetExtraInfo.getKey();
++                  }
++
++                  break;
++               }
++               default:
++                  throw new UnsupportedOperationException("Contained asset mode can't be NONE!");
++            }
++
++            T parent = parentId != null ? assetStore.getAssetMap().getAsset(parentId) : null;
++            if (parentId != null && parent != null) {
++            }
++
++            char[] clone = bsonValue.asDocument().toJson().toCharArray();
++            Path path = assetExtraInfo.getAssetPath();
++            assetExtraInfo.getData().addContainedAsset(this.assetClass, new RawAsset<>(path, id, parentId, 0, clone, assetExtraInfo.getData(), this.mode));
++            return id;
++         }
+       }
+    }
+ 
+@@ -126,9 +_,11 @@
+    @Nullable
+    @Override
+    public K decodeJson(@Nonnull RawJsonReader reader, ExtraInfo extraInfo) throws IOException {
+-      if (!(extraInfo instanceof AssetExtraInfo<K> assetExtraInfo)) {
++      if (!(extraInfo instanceof AssetExtraInfo<?> assetExtraInfoGeneric)) {
+          throw new UnsupportedOperationException("Unable to decode asset from codec used outside of an AssetStore");
+       } else {
++         @SuppressWarnings("unchecked")
++         AssetExtraInfo<K> assetExtraInfo = (AssetExtraInfo<K>) assetExtraInfoGeneric;
+          int lineStart = reader.getLine() - 1;
+          if (reader.peekFor('"')) {
+             return this.codec.getKeyCodec().getChildCodec().decodeJson(reader, extraInfo);

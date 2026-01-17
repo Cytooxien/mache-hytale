@@ -1,0 +1,21 @@
+{
+    "sha256": "4d8b996ec53f6b7c43578f256785f86a739a4cf512c0fca906842f18911f1720",
+  "libraries": [
+    "io.netty:netty-all:4.2.9.Final",
+    "com.google.flogger:flogger:0.6",
+    "com.google.flogger:flogger-system-backend:0.6",
+    "com.google.errorprone:error_prone_annotations:2.45.0",
+    "com.google.crypto.tink:tink:1.20.0",
+    "org.bouncycastle:bcpkix-jdk18on:1.83",
+    "com.nimbusds:nimbus-jose-jwt:10.6",
+    "it.unimi.dsi:fastutil:8.5.12",
+    "com.github.luben:zstd-jni:1.5.6-3",
+    "org.mongodb:bson:5.3.1",
+    "ch.randelshofer:fastdoubleparser:2.0.1",
+    "org.jline:jline:3.30.6",
+    "org.fusesource.jansi:jansi:2.4.2",
+    "net.sf.jopt-simple:jopt-simple:5.0.4",
+    "io.sentry:sentry:8.29.0",
+    "com.google.code.gson:gson:2.13.1"
+  ]
+}

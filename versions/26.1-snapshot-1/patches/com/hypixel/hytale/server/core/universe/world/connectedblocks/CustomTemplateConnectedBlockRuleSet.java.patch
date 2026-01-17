@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/universe/world/connectedblocks/CustomTemplateConnectedBlockRuleSet.java
++++ b/com/hypixel/hytale/server/core/universe/world/connectedblocks/CustomTemplateConnectedBlockRuleSet.java
+@@ -32,7 +_,7 @@
+       .addValidator(CustomConnectedBlockTemplateAsset.VALIDATOR_CACHE.getValidator())
+       .documentation("The name of a ConnectedBlockTemplateAsset asset")
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("TemplateShapeBlockPatterns", new MapCodec<>(BlockPattern.CODEC, HashMap::new), true),
+          (material, shapeNameToBlockPatternMap) -> material.shapeNameToBlockPatternMap = shapeNameToBlockPatternMap,
+          material -> material.shapeNameToBlockPatternMap

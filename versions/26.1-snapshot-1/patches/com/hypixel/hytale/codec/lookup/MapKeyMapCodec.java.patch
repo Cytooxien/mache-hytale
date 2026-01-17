@@ -1,0 +1,29 @@
+--- a/com/hypixel/hytale/codec/lookup/MapKeyMapCodec.java
++++ b/com/hypixel/hytale/codec/lookup/MapKeyMapCodec.java
+@@ -43,7 +_,7 @@
+       long lock = DATA_LOCK.writeLock();
+ 
+       try {
+-         if (this.codecProvider.put(tClass, codec) != null) {
++         if (((Map) this.codecProvider).put(tClass, codec) != null) {
+             throw new IllegalArgumentException("Id already registered");
+          }
+ 
+@@ -56,7 +_,7 @@
+          }
+ 
+          for (Reference<MapKeyMapCodec.TypeMap<?>> mapRef : ACTIVE_MAPS) {
+-            MapKeyMapCodec.TypeMap<?> map = mapRef.get();
++            MapKeyMapCodec.TypeMap map = mapRef.get();
+             if (map != null && map.codec == this) {
+                map.tryUpgrade(tClass, id, codec);
+             }
+@@ -78,7 +_,7 @@
+          String id = this.classToId.get(tClass);
+ 
+          for (Reference<MapKeyMapCodec.TypeMap<?>> mapRef : ACTIVE_MAPS) {
+-            MapKeyMapCodec.TypeMap<?> map = mapRef.get();
++            MapKeyMapCodec.TypeMap map = mapRef.get();
+             if (map != null && map.codec == this) {
+                map.tryDowngrade(tClass, id, codec);
+             }

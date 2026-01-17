@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/type/item/config/BlockGroup.java
++++ b/com/hypixel/hytale/server/core/asset/type/item/config/BlockGroup.java
+@@ -31,7 +_,7 @@
+       if (blockId == null) {
+          return null;
+       } else {
+-         for (BlockGroup group : ((DefaultAssetMap)AssetRegistry.getAssetStore(BlockGroup.class).getAssetMap()).getAssetMap().values()) {
++         for (BlockGroup group : AssetRegistry.getAssetStore(BlockGroup.class).getAssetMap().getAssetMap().values()) {
+             if (ArrayUtil.contains(group.blocks, blockId)) {
+                return group;
+             }

@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/adventure/farming/states/TilledSoilBlock.java
++++ b/com/hypixel/hytale/builtin/adventure/farming/states/TilledSoilBlock.java
+@@ -22,7 +_,7 @@
+       .codecVersion(VERSION)
+       .append(new KeyedCodec<>("Planted", Codec.BOOLEAN), (state, planted) -> state.planted = planted, state -> state.planted ? Boolean.TRUE : null)
+       .add()
+-      .<Map>append(new KeyedCodec<>("ModifierTimes", new MapCodec<>(Codec.INSTANT, Object2ObjectOpenHashMap::new, false)), (state, times) -> {
++      .append(new KeyedCodec<>("ModifierTimes", new MapCodec<>(Codec.INSTANT, Object2ObjectOpenHashMap::new, false)), (state, times) -> {
+          if (times != null) {
+             state.wateredUntil = (Instant)times.get("WateredUntil");
+          }

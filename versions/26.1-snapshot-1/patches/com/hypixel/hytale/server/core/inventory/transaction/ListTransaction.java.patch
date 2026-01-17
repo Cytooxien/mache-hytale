@@ -1,0 +1,20 @@
+--- a/com/hypixel/hytale/server/core/inventory/transaction/ListTransaction.java
++++ b/com/hypixel/hytale/server/core/inventory/transaction/ListTransaction.java
+@@ -60,7 +_,7 @@
+ 
+    @Nonnull
+    public ListTransaction<T> toParent(ItemContainer parent, short start, ItemContainer container) {
+-      List<T> list = this.list.stream().map(transaction -> transaction.toParent(parent, start, container)).collect(Collectors.toList());
++      List<T> list = this.list.stream().map(transaction -> (T) transaction.toParent(parent, start, container)).collect(Collectors.toList());
+       return new ListTransaction<>(this.succeeded, list);
+    }
+ 
+@@ -68,7 +_,7 @@
+    public ListTransaction<T> fromParent(ItemContainer parent, short start, ItemContainer container) {
+       List<T> list = this.list
+          .stream()
+-         .map(transactionx -> transactionx.fromParent(parent, start, container))
++         .map(transactionx -> (T) transactionx.fromParent(parent, start, container))
+          .filter(Objects::nonNull)
+          .collect(Collectors.toList());
+       if (list.isEmpty()) {

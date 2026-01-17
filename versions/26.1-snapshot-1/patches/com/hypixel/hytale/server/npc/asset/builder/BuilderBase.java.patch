@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/npc/asset/builder/BuilderBase.java
++++ b/com/hypixel/hytale/server/npc/asset/builder/BuilderBase.java
+@@ -1027,7 +_,7 @@
+             if (haveValue) {
+                JsonObject object = this.expectJsonObject(element, name);
+                object.entrySet()
+-                  .forEach(stringJsonElementEntry -> setter.accept((T)((String)stringJsonElementEntry.getKey()), stringJsonElementEntry.getValue()));
++                  .forEach(stringJsonElementEntry -> setter.accept(stringJsonElementEntry.getKey(), stringJsonElementEntry.getValue()));
+             }
+ 
+             return haveValue;

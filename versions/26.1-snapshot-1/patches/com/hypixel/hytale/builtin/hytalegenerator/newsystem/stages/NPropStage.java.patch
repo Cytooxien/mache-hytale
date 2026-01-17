@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/hytalegenerator/newsystem/stages/NPropStage.java
++++ b/com/hypixel/hytale/builtin/hytalegenerator/newsystem/stages/NPropStage.java
+@@ -169,7 +_,7 @@
+                   Vector3i position2d_voxelGrid = positionInt_voxelGrid.clone();
+                   position2d_voxelGrid.setY(0);
+                   double distanceToBiomeEdge = biomeDistanceSpace.getContent(position2d_voxelGrid).distanceToClosestOtherBiome(biomeAtPosition);
+-                  Prop prop = propField.getPropDistribution().propAt(position, context.workerId, distanceToBiomeEdge);
++                  Prop prop = propFieldx.getPropDistribution().propAt(position, context.workerId, distanceToBiomeEdge);
+                   Bounds3i propWriteBounds = prop.getWriteBounds().clone();
+                   propWriteBounds.offset(positionInt_voxelGrid);
+                   if (propWriteBounds.intersects(localOutputBounds_voxelGrid)) {

@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/assetstore/iterator/AssetStoreIterator.java
++++ b/com/hypixel/hytale/assetstore/iterator/AssetStoreIterator.java
+@@ -47,7 +_,7 @@
+ 
+    public boolean isWaitingForDependencies(@Nonnull AssetStore<?, ?, ?> assetStore) {
+       for (Class<? extends JsonAsset<?>> aClass : assetStore.getLoadsAfter()) {
+-         AssetStore otherStore = AssetRegistry.getAssetStore(aClass);
++         AssetStore otherStore = (AssetStore) AssetRegistry.getStoreMap().get(aClass);
+          if (otherStore == null) {
+             throw new IllegalArgumentException("Unable to find asset store: " + aClass);
+          }

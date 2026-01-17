@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/npccombatactionevaluator/evaluator/combatactions/AbilityCombatAction.java
++++ b/com/hypixel/hytale/builtin/npccombatactionevaluator/evaluator/combatactions/AbilityCombatAction.java
+@@ -119,7 +_,7 @@
+       .addValidator(Validators.nonEmptyString())
+       .documentation("An optional substate to switch to when selecting this combat action to modify motion or other available actions.")
+       .add()
+-      .<Map>appendInherited(
++      .appendInherited(
+          new KeyedCodec<>("InteractionVars", new MapCodec<>(RootInteraction.CHILD_ASSET_CODEC, Object2ObjectOpenHashMap::new)),
+          (option, v) -> option.interactionVars = v,
+          option -> option.interactionVars,

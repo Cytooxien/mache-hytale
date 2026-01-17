@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/plugin/PluginManager.java
++++ b/com/hypixel/hytale/server/core/plugin/PluginManager.java
+@@ -205,7 +_,7 @@
+             this.lock.writeLock().unlock();
+          }
+ 
+-         CompletableFuture.allOf(var24.toArray(CompletableFuture[]::new)).join();
++         CompletableFuture.allOf((CompletableFuture<?>[]) var24.toArray(new CompletableFuture[0])).join();
+ 
+          for (PendingLoadPlugin pendingPlugin : this.loadOrder) {
+             PluginBase plugin = this.loading.get(pendingPlugin.getIdentifier());

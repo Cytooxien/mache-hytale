@@ -1,0 +1,55 @@
+--- a/com/hypixel/hytale/assetstore/AssetExtraInfo.java
++++ b/com/hypixel/hytale/assetstore/AssetExtraInfo.java
+@@ -188,7 +_,9 @@
+             this.containedRawAssets = new HashMap<>();
+          }
+ 
+-         this.containedRawAssets.computeIfAbsent(assetClass, k -> new ArrayList<>()).add(rawAsset);
++         @SuppressWarnings("unchecked")
++         List<RawAsset<Object>> list = this.containedRawAssets.computeIfAbsent(assetClass, k -> new ArrayList<>());
++         list.add((RawAsset<Object>) rawAsset);
+       }
+ 
+       public <K> void fetchContainedAssets(K key, @Nonnull Map<Class<? extends JsonAssetWithMap>, Map<K, List<Object>>> containedAssets) {
+@@ -209,23 +_,27 @@
+ 
+       public <K, T extends JsonAssetWithMap<K, M>, M extends AssetMap<K, T>> boolean containsAsset(Class<T> tClass, K key) {
+          if (this.containedAssets != null) {
+-            List<T> assets = (List<T>)this.containedAssets.get(tClass);
+-            if (assets != null) {
+-               Function<T, K> keyFunction = AssetRegistry.<K, T, M>getAssetStore(tClass).getKeyFunction();
++             List<Object> assets = this.containedAssets.get(tClass);
++             if (assets != null) {
++                 Function<T, K> keyFunction = AssetRegistry.<K, T, M>getAssetStore(tClass).getKeyFunction();
+ 
+-               for (T asset : assets) {
+-                  if (key.equals(keyFunction.apply(asset))) {
+-                     return true;
+-                  }
+-               }
+-            }
++                 for (Object assetObj : assets) {
++                     @SuppressWarnings("unchecked")
++                     T asset = (T) assetObj;
++                     if (key.equals(keyFunction.apply(asset))) {
++                         return true;
++                     }
++                 }
++             }
+          }
+ 
+-         if (this.containedRawAssets != null) {
+-            List<RawAsset<T>> rawAssets = (List<RawAsset<T>>)this.containedRawAssets.get(tClass);
+-            if (rawAssets != null) {
+-               for (RawAsset<T> rawAsset : rawAssets) {
+-                  if (key.equals(rawAsset.getKey())) {
++          if (this.containedRawAssets != null) {
++              List<RawAsset<Object>> rawAssets = this.containedRawAssets.get(tClass);
++              if (rawAssets != null) {
++                  for (RawAsset<Object> rawAssetObj : rawAssets) {
++                      @SuppressWarnings("unchecked")
++                      RawAsset<K> rawAsset = (RawAsset<K>) rawAssetObj;
++                      if (key.equals(rawAsset.getKey())) {
+                      return true;
+                   }
+                }

@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/npccombatactionevaluator/evaluator/CombatActionEvaluatorConfig.java
++++ b/com/hypixel/hytale/builtin/npccombatactionevaluator/evaluator/CombatActionEvaluatorConfig.java
+@@ -30,7 +_,7 @@
+       .addValidator(CombatActionOption.VALIDATOR_CACHE.getMapValueValidator())
+       .documentation("A map of all available combat actions this NPC can take.")
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("ActionSets", new MapCodec<>(CombatActionEvaluatorConfig.ActionSet.CODEC, Object2ObjectOpenHashMap::new)),
+          (option, o) -> option.actionSets = o,
+          option -> option.actionSets

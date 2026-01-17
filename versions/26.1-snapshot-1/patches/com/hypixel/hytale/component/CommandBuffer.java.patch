@@ -1,0 +1,25 @@
+--- a/com/hypixel/hytale/component/CommandBuffer.java
++++ b/com/hypixel/hytale/component/CommandBuffer.java
+@@ -361,20 +_,8 @@
+    }
+ 
+    public boolean setThread() {
+-      boolean areAssertionsEnabled = false;
+-      if (!$assertionsDisabled) {
+-         areAssertionsEnabled = true;
+-         if (false) {
+-            throw new AssertionError();
+-         }
+-      }
+-
+-      if (!areAssertionsEnabled) {
+-         throw new AssertionError("setThread should only be called when assertions are enabled!");
+-      } else {
+-         this.thread = Thread.currentThread();
+-         return true;
+-      }
++      this.thread = Thread.currentThread();
++      return true;
+    }
+ 
+    public void validateEmpty() {

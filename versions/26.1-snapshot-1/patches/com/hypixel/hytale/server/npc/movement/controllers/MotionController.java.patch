@@ -1,0 +1,28 @@
+--- a/com/hypixel/hytale/server/npc/movement/controllers/MotionController.java
++++ b/com/hypixel/hytale/server/npc/movement/controllers/MotionController.java
+@@ -182,11 +_,11 @@
+    // Please report this to the Vineflower issue tracker, at https://github.com/Vineflower/vineflower/issues with a copy of the class file (if you have the rights to distribute it!)
+    static boolean isInMovementState(@Nonnull Ref<EntityStore> ref, @Nonnull MovementState state, @Nonnull ComponentAccessor<EntityStore> componentAccessor) {
+       MovementStatesComponent movementStatesComponent = componentAccessor.getComponent(ref, MovementStatesComponent.getComponentType());
+-      if (!<unrepresentable>.$assertionsDisabled && movementStatesComponent == null) {
++      if (false && movementStatesComponent == null) {
+          throw new AssertionError();
+       } else {
+          Velocity velocityComponent = componentAccessor.getComponent(ref, Velocity.getComponentType());
+-         if (!<unrepresentable>.$assertionsDisabled && velocityComponent == null) {
++         if (false && velocityComponent == null) {
+             throw new AssertionError();
+          } else {
+             MovementStates states = movementStatesComponent.getMovementStates();
+@@ -211,11 +_,6 @@
+                case ANY -> true;
+             };
+          }
+-      }
+-   }
+-
+-   static {
+-      if (<unrepresentable>.$assertionsDisabled) {
+       }
+    }
+ 

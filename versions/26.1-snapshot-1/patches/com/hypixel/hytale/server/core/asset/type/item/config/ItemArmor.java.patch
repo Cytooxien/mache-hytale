@@ -1,0 +1,44 @@
+--- a/com/hypixel/hytale/server/core/asset/type/item/config/ItemArmor.java
++++ b/com/hypixel/hytale/server/core/asset/type/item/config/ItemArmor.java
+@@ -43,14 +_,14 @@
+       )
+       .addValidator(Validators.nonNull())
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("DamageResistance", new MapCodec<>(new ArrayCodec<>(StaticModifier.CODEC, StaticModifier[]::new), HashMap::new)),
+          (itemArmor, map) -> itemArmor.damageResistanceValuesRaw = map,
+          itemArmor -> itemArmor.damageResistanceValuesRaw
+       )
+       .addValidator(DamageCause.VALIDATOR_CACHE.getMapKeyValidator())
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("DamageEnhancement", new MapCodec<>(new ArrayCodec<>(StaticModifier.CODEC, StaticModifier[]::new), HashMap::new)),
+          (itemArmor, map) -> itemArmor.damageEnhancementValuesRaw = map,
+          itemArmor -> itemArmor.damageEnhancementValuesRaw
+@@ -65,21 +_,21 @@
+       )
+       .addValidator(Validators.nonNull())
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("KnockbackResistances", new MapCodec<>(Codec.FLOAT, HashMap::new)),
+          (itemArmor, map) -> itemArmor.knockbackResistancesRaw = map,
+          itemArmor -> itemArmor.knockbackResistancesRaw
+       )
+       .addValidator(DamageCause.VALIDATOR_CACHE.getMapKeyValidator())
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("KnockbackEnhancements", new MapCodec<>(Codec.FLOAT, HashMap::new)),
+          (itemArmor, map) -> itemArmor.knockbackEnhancementsRaw = map,
+          itemArmor -> itemArmor.knockbackEnhancementsRaw
+       )
+       .addValidator(DamageCause.VALIDATOR_CACHE.getMapKeyValidator())
+       .add()
+-      .<Map>append(
++      .append(
+          new KeyedCodec<>("Regenerating", new MapCodec<>(new ArrayCodec<>(EntityStatType.Regenerating.CODEC, EntityStatType.Regenerating[]::new), HashMap::new)),
+          (itemArmor, map) -> itemArmor.regenerating = map,
+          itemArmor -> itemArmor.regenerating

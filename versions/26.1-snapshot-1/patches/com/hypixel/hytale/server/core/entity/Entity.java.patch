@@ -1,0 +1,13 @@
+--- a/com/hypixel/hytale/server/core/entity/Entity.java
++++ b/com/hypixel/hytale/server/core/entity/Entity.java
+@@ -308,8 +_,8 @@
+          if (this instanceof Player) {
+             holder.addComponent(Player.getComponentType(), (Player)this);
+          } else {
+-            ComponentType<EntityStore, ? extends Entity> componentType = EntityModule.get().getComponentType((Class<? extends Entity>)this.getClass());
+-            holder.addComponent(componentType, this);
++            ComponentType componentType = EntityModule.get().getComponentType((Class<? extends Entity>)this.getClass());
++            holder.addComponent(componentType, (Component) this);
+          }
+ 
+          DirectDecodeCodec<? extends Entity> codec = EntityModule.get().getCodec((Class<? extends Entity>)this.getClass());

@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/universe/world/meta/BlockState.java
++++ b/com/hypixel/hytale/server/core/universe/world/meta/BlockState.java
+@@ -195,7 +_,7 @@
+          if (componentType == null) {
+             throw new IllegalArgumentException("Unable to find component type for: " + this);
+          } else {
+-            holder.addComponent(componentType, this);
++            holder.addComponent(componentType, (BlockState) this);
+             return holder;
+          }
+       }

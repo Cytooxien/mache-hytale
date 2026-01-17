@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/ui/builder/UICommandBuilder.java
++++ b/com/hypixel/hytale/server/core/ui/builder/UICommandBuilder.java
+@@ -90,7 +_,7 @@
+       if (ref.getValue() != null) {
+          throw new IllegalArgumentException("Method only accepts references without a direct value");
+       } else {
+-         return this.setBsonValue(selector, ValueCodec.REFERENCE_ONLY.encode(ref));
++         return this.setBsonValue(selector, ValueCodec.REFERENCE_ONLY.encode((Value<Object>) ref));
+       }
+    }
+ 

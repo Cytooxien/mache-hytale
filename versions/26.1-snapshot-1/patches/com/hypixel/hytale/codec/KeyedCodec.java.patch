@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/codec/KeyedCodec.java
++++ b/com/hypixel/hytale/codec/KeyedCodec.java
+@@ -190,7 +_,7 @@
+       } else {
+          try {
+             return bsonValue != null && bsonValue.isDocument() && this.codec instanceof InheritCodec
+-               ? ((InheritCodec)this.codec).decodeAndInherit(bsonValue.asDocument(), parent, extraInfo)
++               ? (T)((InheritCodec)this.codec).decodeAndInherit(bsonValue.asDocument(), parent, extraInfo)
+                : this.codec.decode(bsonValue, extraInfo);
+          } catch (Exception var5) {
+             throw new CodecException("Failed to decode", bsonValue, extraInfo, var5);

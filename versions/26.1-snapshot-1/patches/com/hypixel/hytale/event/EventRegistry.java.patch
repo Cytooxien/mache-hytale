@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/event/EventRegistry.java
++++ b/com/hypixel/hytale/event/EventRegistry.java
+@@ -26,7 +_,7 @@
+    }
+ 
+    public <KeyType, EventType extends IBaseEvent<KeyType>> EventRegistration<KeyType, EventType> register(@Nonnull EventRegistration<KeyType, EventType> evt) {
+-      return super.register(evt);
++      return (EventRegistration<KeyType, EventType>) super.register((EventRegistration) evt);
+    }
+ 
+    @Override

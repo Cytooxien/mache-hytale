@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/component/system/data/EntityDataSystem.java
++++ b/com/hypixel/hytale/component/system/data/EntityDataSystem.java
+@@ -49,7 +_,7 @@
+          int i = 0;
+ 
+          for (int systemTaskSize = systemTask.size(); i < systemTaskSize; i++) {
+-            ((EntityDataSystem.SystemTaskData<ECS_TYPE, Q, ?>)systemTask.get(i)).init(system, archetypeChunk, store, commandBuffer.fork(), query);
++            ((EntityDataSystem.SystemTaskData) systemTask.get(i)).init(system, archetypeChunk, store, commandBuffer.fork(), query);
+          }
+       } else {
+          int index = 0;

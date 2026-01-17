@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/common/collection/BucketList.java
++++ b/com/hypixel/hytale/common/collection/BucketList.java
+@@ -277,7 +_,7 @@
+          if (this.size > 1) {
+             BucketItem[] sortBuffer = sortBufferProvider.apply(this.size);
+             System.arraycopy(this.bucketItems, 0, sortBuffer, 0, this.size);
+-            ObjectArrays.mergeSort(this.bucketItems, 0, this.size, (Comparator<BucketItem<E>>)BucketList.CLOSER_TO_SELF, sortBuffer);
++            ObjectArrays.mergeSort(this.bucketItems, 0, this.size, BucketList.CLOSER_TO_SELF, sortBuffer);
+          }
+       }
+    }

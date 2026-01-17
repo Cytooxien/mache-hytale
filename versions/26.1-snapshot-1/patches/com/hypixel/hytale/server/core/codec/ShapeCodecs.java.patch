@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/codec/ShapeCodecs.java
++++ b/com/hypixel/hytale/server/core/codec/ShapeCodecs.java
+@@ -31,7 +_,7 @@
+       .build();
+    public static final BuilderCodec<OriginShape<Shape>> ORIGIN_SHAPE = BuilderCodec.builder(OriginShape.class, OriginShape::new)
+       .addField(new KeyedCodec<>("Origin", Vector3d.CODEC), (shape, origin) -> shape.origin.assign(origin), shape -> shape.origin)
+-      .addField(new KeyedCodec<>("Shape", SHAPE), (shape, childShape) -> shape.shape = (S)childShape, shape -> shape.shape)
++      .addField(new KeyedCodec<>("Shape", SHAPE), (shape, childShape) -> shape.shape = childShape, shape -> shape.shape)
+       .build();
+ 
+    static {

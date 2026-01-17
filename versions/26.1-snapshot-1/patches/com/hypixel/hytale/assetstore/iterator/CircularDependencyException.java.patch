@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/assetstore/iterator/CircularDependencyException.java
++++ b/com/hypixel/hytale/assetstore/iterator/CircularDependencyException.java
+@@ -22,7 +_,7 @@
+             sb.append(store.getAssetClass()).append("\n");
+ 
+             for (Class<? extends JsonAsset<?>> aClass : store.getLoadsAfter()) {
+-               AssetStore otherStore = AssetRegistry.getAssetStore(aClass);
++               AssetStore otherStore = (AssetStore) AssetRegistry.getStoreMap().get(aClass);
+                if (otherStore == null) {
+                   throw new IllegalArgumentException("Unable to find asset store: " + aClass);
+                }

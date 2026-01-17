@@ -1,0 +1,22 @@
+--- a/com/hypixel/hytale/codec/lookup/ACodecMapCodec.java
++++ b/com/hypixel/hytale/codec/lookup/ACodecMapCodec.java
+@@ -235,7 +_,7 @@
+             codec = defaultCodec;
+          }
+ 
+-         BsonValue encode = codec.encode(t, extraInfo);
++         BsonValue encode = ((Codec) codec).encode(t, extraInfo);
+          if (id == null) {
+             return encode;
+          } else {
+@@ -403,8 +_,8 @@
+          }
+ 
+          Schema schema = context.refDefinition(c);
+-         if (schema.getRef() != null && c instanceof BuilderCodec<? extends T> bc && context.getRawDefinition(bc) instanceof ObjectSchema objectSchema) {
+-            this.mutateChildSchema(entry.getKey().toString(), context, bc, objectSchema);
++         if (schema.getRef() != null && (Codec) c instanceof BuilderCodec bc && context.getRawDefinition(bc) instanceof ObjectSchema objectSchema) {
++            this.mutateChildSchema(entry.getKey().toString(), context, (BuilderCodec<? extends T>) bc, objectSchema);
+          }
+ 
+          options.add(schema);

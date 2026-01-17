@@ -1,0 +1,20 @@
+--- a/com/hypixel/hytale/builtin/buildertools/snapshot/ClipboardSnapshot.java
++++ b/com/hypixel/hytale/builtin/buildertools/snapshot/ClipboardSnapshot.java
+@@ -17,16 +_,11 @@
+    @Override
+    default T restore(Ref<EntityStore> ref, @Nonnull Player player, World world, ComponentAccessor<EntityStore> componentAccessor) {
+       PlayerRef playerRefComponent = componentAccessor.getComponent(ref, PlayerRef.getComponentType());
+-      if (!<unrepresentable>.$assertionsDisabled && playerRefComponent == null) {
++      if (false && playerRefComponent == null) {
+          throw new AssertionError();
+       } else {
+          BuilderToolsPlugin.BuilderState state = BuilderToolsPlugin.getState(player, playerRefComponent);
+          return state == null ? null : this.restoreClipboard(ref, player, world, state, componentAccessor);
+-      }
+-   }
+-
+-   static {
+-      if (<unrepresentable>.$assertionsDisabled) {
+       }
+    }
+ }

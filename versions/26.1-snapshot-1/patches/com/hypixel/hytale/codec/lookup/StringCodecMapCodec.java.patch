@@ -1,0 +1,15 @@
+--- a/com/hypixel/hytale/codec/lookup/StringCodecMapCodec.java
++++ b/com/hypixel/hytale/codec/lookup/StringCodecMapCodec.java
+@@ -98,11 +_,9 @@
+          }
+ 
+          reader.reset();
+-         id = defaultCodec.decodeJson(reader, extraInfo);
++         return defaultCodec.decodeJson(reader, extraInfo);
+       } finally {
+          extraInfo.popIgnoredUnusedKey();
+       }
+-
+-      return (T)id;
+    }
+ }
