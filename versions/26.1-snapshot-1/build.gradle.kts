@@ -61,3 +61,26 @@ dependencies {
     compileOnly("org.bouncycastle:bcpkix-jdk18on:1.83")
     compileOnly("com.hypixel:ConcurrentFastUtil:1.2-SNAPSHOT")
 }
+
+val repackageJar by tasks.registering(Jar::class) {
+    group = "build"
+    description = "Repackages the Hytale Server jar with modified classes."
+
+    val inputJarFile = tasks.withType<DecompileJar>().first().inputJar.get().asFile
+    from(zipTree(inputJarFile)) {
+        exclude("com/hypixel/hytale/**/*.class")
+        exclude("META-INF/MANIFEST.MF")
+    }
+
+    manifest.from(zipTree(inputJarFile).matching {
+        include("META-INF/MANIFEST.MF")
+    }.singleFile)
+
+    val compileJava = tasks.named<JavaCompile>("compileJava")
+    from(compileJava.map { it.destinationDirectory }) {
+        include("com/hypixel/hytale/**")
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    archiveFileName.set("HytaleServer-repackaged.jar")
+}
