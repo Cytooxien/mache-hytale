@@ -1,0 +1,94 @@
+--- a/com/hypixel/hytale/server/core/entity/effect/EffectControllerComponent.java
++++ b/com/hypixel/hytale/server/core/entity/effect/EffectControllerComponent.java
+@@ -15,6 +_,7 @@
+ import com.hypixel.hytale.server.core.asset.type.entityeffect.config.RemovalBehavior;
+ import com.hypixel.hytale.server.core.asset.type.model.config.Model;
+ import com.hypixel.hytale.server.core.asset.type.model.config.ModelAsset;
++import com.hypixel.hytale.server.core.entity.Entity;
+ import com.hypixel.hytale.server.core.entity.EntityUtils;
+ import com.hypixel.hytale.server.core.entity.LivingEntity;
+ import com.hypixel.hytale.server.core.modules.entity.EntityModule;
+@@ -120,56 +_,34 @@
+    ) {
+       if (!LivingEntityEffectSystem.canApplyEffect(ownerRef, entityEffect, componentAccessor)) {
+          return false;
+-      } else {
+-         ActiveEntityEffect currentActiveEntityEffectEntry = this.activeEffects.get(entityEffectIndex);
+-         label21:
+-         if (currentActiveEntityEffectEntry == null) {
+-            ActiveEntityEffect activeEntityEffectEntry = new ActiveEntityEffect(
+-               entityEffect.getId(), entityEffectIndex, duration, entityEffect.isDebuff(), entityEffect.getStatusEffectIcon(), entityEffect.isInvulnerable()
+-            );
+-            this.activeEffects.put(entityEffectIndex, activeEntityEffectEntry);
+-            if (EntityUtils.getEntity(ownerRef, componentAccessor) instanceof LivingEntity ownerLivingEntity) {
+-               ownerLivingEntity.getStatModifiersManager().setRecalculate(true);
+-            }
+-
+-            this.setModelChange(ownerRef, entityEffect, entityEffectIndex, componentAccessor);
+-            this.addChange(
+-               new EntityEffectUpdate(
+-                  EffectOp.Add,
+-                  entityEffectIndex,
+-                  activeEntityEffectEntry.remainingDuration,
+-                  false,
+-                  activeEntityEffectEntry.debuff,
+-                  activeEntityEffectEntry.statusEffectIcon
+-               )
+-            );
+-            this.invalidateCache();
+-            return true;
+-         } else if (currentActiveEntityEffectEntry.isInfinite()) {
+-            return true;
+-         } else {
+-            switch (overlapBehavior) {
+-               case EXTEND:
+-                  currentActiveEntityEffectEntry.remainingDuration += duration;
+-                  this.addChange(
+-                     new EntityEffectUpdate(
+-                        EffectOp.Add,
+-                        entityEffectIndex,
+-                        currentActiveEntityEffectEntry.remainingDuration,
+-                        false,
+-                        currentActiveEntityEffectEntry.debuff,
+-                        currentActiveEntityEffectEntry.statusEffectIcon
+-                     )
+-                  );
+-                  return true;
+-               case IGNORE:
+-                  return true;
+-               case OVERWRITE:
+-               default:
+-                  break label21;
+-            }
+-         }
+       }
++       ActiveEntityEffect currentActiveEntityEffectEntry = (ActiveEntityEffect)this.activeEffects.get(entityEffectIndex);
++       if (currentActiveEntityEffectEntry != null) {
++           if (currentActiveEntityEffectEntry.isInfinite()) {
++               return true;
++           }
++           switch (overlapBehavior) {
++               case EXTEND: {
++                   currentActiveEntityEffectEntry.remainingDuration += duration;
++                   this.addChange(new EntityEffectUpdate(EffectOp.Add, entityEffectIndex, currentActiveEntityEffectEntry.remainingDuration, false, currentActiveEntityEffectEntry.debuff, currentActiveEntityEffectEntry.statusEffectIcon));
++                   return true;
++               }
++               case IGNORE: {
++                   return true;
++               }
++           }
++       }
++       ActiveEntityEffect activeEntityEffectEntry = new ActiveEntityEffect(entityEffect.getId(), entityEffectIndex, duration, entityEffect.isDebuff(), entityEffect.getStatusEffectIcon(), entityEffect.isInvulnerable());
++       this.activeEffects.put(entityEffectIndex, activeEntityEffectEntry);
++       Entity ownerEntity = EntityUtils.getEntity(ownerRef, componentAccessor);
++       if (ownerEntity instanceof LivingEntity) {
++           LivingEntity ownerLivingEntity = (LivingEntity)ownerEntity;
++           ownerLivingEntity.getStatModifiersManager().setRecalculate(true);
++       }
++       this.setModelChange(ownerRef, entityEffect, entityEffectIndex, componentAccessor);
++       this.addChange(new EntityEffectUpdate(EffectOp.Add, entityEffectIndex, activeEntityEffectEntry.remainingDuration, false, activeEntityEffectEntry.debuff, activeEntityEffectEntry.statusEffectIcon));
++       this.invalidateCache();
++       return true;
+    }
+ 
+    public boolean addInfiniteEffect(

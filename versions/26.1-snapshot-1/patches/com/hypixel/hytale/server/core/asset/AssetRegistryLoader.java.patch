@@ -1,5 +1,17 @@
 --- a/com/hypixel/hytale/server/core/asset/AssetRegistryLoader.java
 +++ b/com/hypixel/hytale/server/core/asset/AssetRegistryLoader.java
+@@ -203,9 +_,9 @@
+                Class<? extends JsonAssetWithMap<?, ? extends AssetMap<?, ?>>> assetClass = assetStore.getAssetClass();
+ 
+                try {
+-                  List<?> preAddedAssets = assetStore.getPreAddedAssets();
++                  List preAddedAssets = assetStore.getPreAddedAssets();
+                   if (preAddedAssets != null && !preAddedAssets.isEmpty()) {
+-                     AssetLoadResult loadResult = assetStore.loadAssets("Hytale:Hytale", preAddedAssets);
++                     AssetLoadResult loadResult = assetStore.loadAssets("Hytale:Hytale", (List)preAddedAssets);
+                      failedToLoadAsset |= loadResult.hasFailed();
+                   }
+                } catch (Exception var14) {
 @@ -466,572 +_,488 @@
  
     static {

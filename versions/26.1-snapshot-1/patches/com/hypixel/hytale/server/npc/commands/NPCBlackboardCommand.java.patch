@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/npc/commands/NPCBlackboardCommand.java
++++ b/com/hypixel/hytale/server/npc/commands/NPCBlackboardCommand.java
+@@ -205,7 +_,7 @@
+          Store<ChunkStore> chunkStore = world.getChunkStore().getStore();
+          StringBuilder sb = new StringBuilder("Blackboard chunk info:\n");
+          int[] count = new int[]{0};
+-         chunkStore.forEachChunk(BlockPositionProvider.getComponentType(), (archetypeChunk, commandBuffer) -> count[0] += archetypeChunk.size());
++         chunkStore.forEachChunk(BlockPositionProvider.getComponentType(), (java.util.function.BiConsumer<com.hypixel.hytale.component.ArchetypeChunk<ChunkStore>, com.hypixel.hytale.component.CommandBuffer<ChunkStore>>)(archetypeChunk, commandBuffer) -> count[0] += archetypeChunk.size());
+          sb.append(" Total sections: ").append(count[0]).append('\n');
+          sb.append(" Chunk sections:\n");
+          Message msg = Message.translation("server.commands.npc.blackboard.chunks.chunkInfo").param("nb", count[0]);

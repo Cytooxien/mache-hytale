@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/builtin/adventure/objectives/ObjectiveDataStore.java
++++ b/com/hypixel/hytale/builtin/adventure/objectives/ObjectiveDataStore.java
+@@ -47,7 +_,7 @@
+    }
+ 
+    public <T extends ObjectiveTask> Set<ObjectiveTaskRef<T>> getTaskRefsForType(Class<T> taskClass) {
+-      return (Set<ObjectiveTaskRef<T>>)this.taskRefByType.get(taskClass);
++      return (Set<ObjectiveTaskRef<T>>)(Object)this.taskRefByType.get(taskClass);
+    }
+ 
+    public <T extends ObjectiveTask> void addTaskRef(@Nonnull ObjectiveTaskRef<T> taskRef) {

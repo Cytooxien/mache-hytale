@@ -1,0 +1,24 @@
+--- a/com/hypixel/hytale/builtin/blockphysics/BlockPhysicsUtil.java
++++ b/com/hypixel/hytale/builtin/blockphysics/BlockPhysicsUtil.java
+@@ -407,18 +_,9 @@
+          hasSupport = doesMatchFaceType(blockFillerOffset, requiredBlockFaceSupport.getSelfFaceType(), blockFace, blockType.getSupporting(neighbourRotation));
+       }
+       return switch (requiredBlockFaceSupport.getMatchSelf()) {
+-         case IGNORED -> {
+-         }
+-         case REQUIRED -> {
+-            if (hasSupport) {
+-               yield blockType.getId().equals(neighbourBlockTypeKey);
+-            }
+-         }
+-         case DISALLOWED -> {
+-            if (hasSupport) {
+-               yield !blockType.getId().equals(neighbourBlockTypeKey);
+-            }
+-         }
++         case IGNORED -> hasSupport;
++         case REQUIRED -> hasSupport && blockType.getId().equals(neighbourBlockTypeKey);
++         case DISALLOWED -> hasSupport && !blockType.getId().equals(neighbourBlockTypeKey);
+          default -> throw new IllegalArgumentException("Unknown MatchSelf type: " + requiredBlockFaceSupport.getMatchSelf());
+       };
+    }

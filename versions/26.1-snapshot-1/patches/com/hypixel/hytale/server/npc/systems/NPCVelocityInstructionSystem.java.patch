@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/npc/systems/NPCVelocityInstructionSystem.java
++++ b/com/hypixel/hytale/server/npc/systems/NPCVelocityInstructionSystem.java
+@@ -27,7 +_,7 @@
+    @Nonnull
+    private final Set<Dependency<EntityStore>> dependencies = Set.of(
+       new SystemDependency<>(Order.BEFORE, GenericVelocityInstructionSystem.class),
+-      new SystemTypeDependency<EntityStore, GenericVelocityInstructionSystem>(Order.AFTER, EntityModule.get().getVelocityModifyingSystemType())
++      new SystemTypeDependency(Order.AFTER, EntityModule.get().getVelocityModifyingSystemType())
+    );
+    @Nonnull
+    private final Query<EntityStore> query = Query.and(NPCEntity.getComponentType(), Velocity.getComponentType());

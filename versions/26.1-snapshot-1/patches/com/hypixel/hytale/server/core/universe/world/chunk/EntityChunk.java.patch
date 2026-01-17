@@ -1,0 +1,13 @@
+--- a/com/hypixel/hytale/server/core/universe/world/chunk/EntityChunk.java
++++ b/com/hypixel/hytale/server/core/universe/world/chunk/EntityChunk.java
+@@ -43,7 +_,9 @@
+    public static final BuilderCodec<EntityChunk> CODEC = BuilderCodec.builder(EntityChunk.class, EntityChunk::new)
+       .addField(new KeyedCodec<>("Entities", new ArrayCodec<>(new StoredCodec<>(EntityStore.HOLDER_CODEC_KEY), Holder[]::new)), (entityChunk, array) -> {
+          entityChunk.entityHolders.clear();
+-         Collections.addAll(entityChunk.entityHolders, array);
++         for (Holder holder : array) {
++            entityChunk.entityHolders.add(holder);
++         }
+       }, entityChunk -> {
+          if (entityChunk.entityReferences.isEmpty()) {
+             return entityChunk.entityHolders.toArray(new Holder[entityChunk.entityHolders.size()]);

@@ -1,0 +1,12 @@
+--- a/com/hypixel/hytale/server/core/util/MessageUtil.java
++++ b/com/hypixel/hytale/server/core/util/MessageUtil.java
+@@ -214,7 +_,8 @@
+ 
+                                  formattedReplacement = formatText(selected, params, messageParams);
+                               }
+-                           case null:
++                           case null, default:
++                              break;
+                         }
+ 
+                         if (format == null) {

@@ -1,0 +1,48 @@
+--- a/com/hypixel/hytale/builtin/beds/sleep/systems/player/EnterBedSystem.java
++++ b/com/hypixel/hytale/builtin/beds/sleep/systems/player/EnterBedSystem.java
+@@ -86,44 +_,7 @@
+    }
+ 
+    private Message getMessage(CanSleepInWorld.Result param1) {
+-      // $VF: Couldn't be decompiled
+-      // Please report this to the Vineflower issue tracker, at https://github.com/Vineflower/vineflower/issues with a copy of the class file (if you have the rights to distribute it!)
+-      // java.lang.IllegalStateException: Invalid switch case set: [[const(0)], [var1_1 instanceof x], [null]] for selector of type Lcom/hypixel/hytale/builtin/beds/sleep/systems/world/CanSleepInWorld$Result;
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.exps.SwitchHeadExprent.checkExprTypeBounds(SwitchHeadExprent.java:66)
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.vars.VarTypeProcessor.checkTypeExpr(VarTypeProcessor.java:140)
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.vars.VarTypeProcessor.checkTypeExprent(VarTypeProcessor.java:126)
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.vars.VarTypeProcessor.lambda$processVarTypes$2(VarTypeProcessor.java:114)
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.flow.DirectGraph.iterateExprents(DirectGraph.java:107)
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.vars.VarTypeProcessor.processVarTypes(VarTypeProcessor.java:114)
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.vars.VarTypeProcessor.calculateVarTypes(VarTypeProcessor.java:44)
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.vars.VarVersionsProcessor.setVarVersions(VarVersionsProcessor.java:68)
+-      //   at org.jetbrains.java.decompiler.modules.decompiler.vars.VarProcessor.setVarVersions(VarProcessor.java:47)
+-      //   at org.jetbrains.java.decompiler.main.rels.MethodProcessor.codeToJava(MethodProcessor.java:302)
+-      //
+-      // Bytecode:
+-      // 00: aload 1
+-      // 01: dup
+-      // 02: invokestatic java/util/Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+-      // 05: pop
+-      // 06: astore 3
+-      // 07: bipush 0
+-      // 08: istore 4
+-      // 0a: aload 3
+-      // 0b: iload 4
+-      // 0d: invokedynamic typeSwitch (Ljava/lang/Object;I)I bsm=java/lang/runtime/SwitchBootstraps.typeSwitch (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite; args=[ null.invoke Ljava/lang/Enum$EnumDesc;, com/hypixel/hytale/builtin/beds/sleep/systems/world/CanSleepInWorld$NotDuringSleepHoursRange ]
+-      // 12: lookupswitch 42 2 0 26 1 31
+-      // 2c: ldc "server.interactions.sleep.gameTimePaused"
+-      // 2e: goto 3e
+-      // 31: aload 3
+-      // 32: checkcast com/hypixel/hytale/builtin/beds/sleep/systems/world/CanSleepInWorld$NotDuringSleepHoursRange
+-      // 35: astore 5
+-      // 37: ldc "server.interactions.sleep.notWithinHours"
+-      // 39: goto 3e
+-      // 3c: ldc "server.interactions.sleep.disabled"
+-      // 3e: astore 2
+-      // 3f: aload 2
+-      // 40: invokestatic com/hypixel/hytale/server/core/Message.translation (Ljava/lang/String;)Lcom/hypixel/hytale/server/core/Message;
+-      // 43: areturn
++      return null; //TODO
+    }
+ 
+    private static Message formatTime(LocalTime time) {

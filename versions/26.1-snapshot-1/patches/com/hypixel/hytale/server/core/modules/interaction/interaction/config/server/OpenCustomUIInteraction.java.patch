@@ -5,7 +5,7 @@
              id,
              (Class<? extends OpenCustomUIInteraction.CustomPageSupplier>)supplier.getClass(),
 -            (Codec<? extends OpenCustomUIInteraction.CustomPageSupplier>)BuilderCodec.builder(tClass, () -> supplier).build()
-+            BuilderCodec.builder(tClass, () -> supplier).build()
++            BuilderCodec.builder((Class<S>)tClass, () -> supplier).build()
           );
     }
  

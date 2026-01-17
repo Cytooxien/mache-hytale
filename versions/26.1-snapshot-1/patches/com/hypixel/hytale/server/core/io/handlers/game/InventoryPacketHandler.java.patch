@@ -1,5 +1,27 @@
 --- a/com/hypixel/hytale/server/core/io/handlers/game/InventoryPacketHandler.java
 +++ b/com/hypixel/hytale/server/core/io/handlers/game/InventoryPacketHandler.java
+@@ -128,10 +_,11 @@
+          Store<EntityStore> store = ref.getStore();
+          World world = store.getExternalData().getWorld();
+          ItemStack itemStack = ItemStack.fromPacket(packet.item);
++         final ItemStack finalItemStack = itemStack;
+          if (itemStack != null) {
+             Item item = itemStack.getItem();
+             if (item != Item.UNKNOWN) {
+-               itemStack = itemStack.withQuantity(Math.min(itemStack.getQuantity(), item.getMaxStack()));
++               final ItemStack limitedStack = finalItemStack.withQuantity(Math.min(finalItemStack.getQuantity(), item.getMaxStack()));
+                world.execute(
+                   () -> {
+                      Player playerComponent = store.getComponent(ref, Player.getComponentType());
+@@ -147,7 +_,7 @@
+                            playerRefComponent.getPacketHandler(), Message.translation("server.general.setCreativeItem.notInCreativeMode")
+                         );
+                      } else {
+-                        ItemUtils.dropItem(ref, itemStack, store);
++                        ItemUtils.dropItem(ref, limitedStack, store);
+                      }
+                   }
+                );
 @@ -452,8 +_,8 @@
                          return;
                       }

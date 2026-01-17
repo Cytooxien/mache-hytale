@@ -1,0 +1,17 @@
+--- a/com/hypixel/hytale/server/npc/util/expression/compile/ast/ASTOperand.java
++++ b/com/hypixel/hytale/server/npc/util/expression/compile/ast/ASTOperand.java
+@@ -126,6 +_,7 @@
+       // b6: invokespecial java/lang/IllegalStateException.<init> (Ljava/lang/String;)V
+       // b9: athrow
+       // ba: areturn
++       return null; //TODO
+    }
+ 
+    @Nonnull
+@@ -218,5 +_,6 @@
+       // bd: invokespecial java/lang/IllegalStateException.<init> (Ljava/lang/String;)V
+       // c0: athrow
+       // c1: areturn
++       return null; //TODO
+    }
+ }

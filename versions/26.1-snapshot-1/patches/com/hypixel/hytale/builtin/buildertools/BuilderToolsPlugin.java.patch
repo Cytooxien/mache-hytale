@@ -35,6 +35,20 @@
        );
        commandRegistry.registerCommand(new ClearBlocksCommand());
        commandRegistry.registerCommand(new ClearEntitiesCommand());
+@@ -2268,11 +_,12 @@
+                      if (entities) {
+                         Store<EntityStore> store = world.getEntityStore().getStore();
+                         ArrayList<Ref<EntityStore>> entitiesToRemove = cut ? new ArrayList<>() : null;
++                        List<SelectionSnapshot<?>> snapshotsFinal = snapshots;
+                         BuilderToolsPlugin.forEachCopyableInSelection(world, xMin, yMin, zMin, width, height, depth, e -> {
+                            Holder<EntityStore> holder = store.copyEntity(e);
+                            this.selection.addEntityFromWorld(holder);
+                            if (cut) {
+-                              snapshots.add(new EntityRemoveSnapshot(e));
++                              snapshotsFinal.add(new EntityRemoveSnapshot(e));
+                               entitiesToRemove.add(e);
+                            }
+                         });
 @@ -2487,7 +_,7 @@
                             rotatedLocation.x + x,
                             rotatedLocation.y + y,

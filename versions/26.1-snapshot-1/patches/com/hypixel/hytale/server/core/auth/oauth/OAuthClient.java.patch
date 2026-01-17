@@ -1,0 +1,19 @@
+--- a/com/hypixel/hytale/server/core/auth/oauth/OAuthClient.java
++++ b/com/hypixel/hytale/server/core/auth/oauth/OAuthClient.java
+@@ -51,6 +_,7 @@
+                String encodedState = this.encodeStateWithPort(csrfState, port);
+                String redirectUri = "https://accounts.hytale.com/consent/client";
+                CompletableFuture<String> authCodeFuture = new CompletableFuture<>();
++               final HttpServer finalServer = server;
+                server.createContext(
+                   "/",
+                   exchange -> {
+@@ -102,7 +_,7 @@
+                      } catch (Exception var20x) {
+                         LOGGER.at(Level.WARNING).withCause(var20x).log("Error handling OAuth callback");
+                      } finally {
+-                        HytaleServer.SCHEDULED_EXECUTOR.schedule(() -> server.stop(0), 1L, TimeUnit.SECONDS);
++                        HytaleServer.SCHEDULED_EXECUTOR.schedule(() -> finalServer.stop(0), 1L, TimeUnit.SECONDS);
+                      }
+                   }
+                );

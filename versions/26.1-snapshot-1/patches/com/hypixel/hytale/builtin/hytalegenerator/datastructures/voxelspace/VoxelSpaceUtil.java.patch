@@ -1,0 +1,13 @@
+--- a/com/hypixel/hytale/builtin/hytalegenerator/datastructures/voxelspace/VoxelSpaceUtil.java
++++ b/com/hypixel/hytale/builtin/hytalegenerator/datastructures/voxelspace/VoxelSpaceUtil.java
+@@ -22,8 +_,9 @@
+          int bSize = source.sizeX() * source.sizeY() * source.sizeZ() / concurrency;
+ 
+          for (int b = 0; b < concurrency; b++) {
++            final int batchIndex = b;
+             tasks.add(CompletableFuture.runAsync(() -> {
+-               for (int i = b * bSize; i < (b + 1) * bSize; i++) {
++               for (int i = batchIndex * bSize; i < (batchIndex + 1) * bSize; i++) {
+                   int x = i % sizeX + minX;
+                   int y = i / sizeX % sizeY + minY;
+                   int z = i / (sizeX * sizeY) % sizeZ + minZ;

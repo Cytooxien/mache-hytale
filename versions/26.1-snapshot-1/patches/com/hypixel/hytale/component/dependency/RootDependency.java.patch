@@ -1,0 +1,16 @@
+--- a/com/hypixel/hytale/component/dependency/RootDependency.java
++++ b/com/hypixel/hytale/component/dependency/RootDependency.java
+@@ -20,11 +_,11 @@
+    }
+ 
+    public static <ECS_TYPE> Set<Dependency<ECS_TYPE>> firstSet() {
+-      return (Set<Dependency<ECS_TYPE>>)FIRST_SET;
++      return (Set<Dependency<ECS_TYPE>>)(Object)FIRST_SET;
+    }
+ 
+    public static <ECS_TYPE> Set<Dependency<ECS_TYPE>> lastSet() {
+-      return (Set<Dependency<ECS_TYPE>>)LAST_SET;
++      return (Set<Dependency<ECS_TYPE>>)(Object)LAST_SET;
+    }
+ 
+    public RootDependency(int priority) {

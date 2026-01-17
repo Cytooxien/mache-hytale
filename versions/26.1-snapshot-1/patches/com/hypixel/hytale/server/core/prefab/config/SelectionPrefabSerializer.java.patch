@@ -9,3 +9,12 @@
              Objects.requireNonNull(codec, "Unable to create entity because there is no associated codec");
              Entity entity = constructor.apply(null);
              codec.decode(document, entity, new ExtraInfo(version));
+@@ -394,7 +_,7 @@
+                throw new IllegalArgumentException("Unable to find component type for: " + blockStateClass);
+             }
+ 
+-            holder.addComponent(componentType, t);
++            holder.addComponent((ComponentType)componentType, t);
+             return holder;
+          } catch (ACodecMapCodec.UnknownIdException var7) {
+          }

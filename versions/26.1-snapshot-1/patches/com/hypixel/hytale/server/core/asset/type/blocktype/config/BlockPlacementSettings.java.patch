@@ -1,0 +1,11 @@
+--- a/com/hypixel/hytale/server/core/asset/type/blocktype/config/BlockPlacementSettings.java
++++ b/com/hypixel/hytale/server/core/asset/type/blocktype/config/BlockPlacementSettings.java
+@@ -213,6 +_,8 @@
+       // 158: athrow
+       // 159: aload 1
+       // 15a: areturn
++       
++       return null; //TODO
+    }
+ 
+    public String getWallPlacementOverrideBlockId() {
