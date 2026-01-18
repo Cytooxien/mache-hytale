@@ -31,19 +31,33 @@ mache {
     ))
 }
 
-repositories {
-    mavenLocal()
-}
-
-
-tasks.withType<DecompileJar>() {
-    inputJar.set(file("${project.rootDir}/HytaleServer.jar"))
-}
-
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(listOf("-parameters", "-Xlint:-deprecation", "-Xlint:-removal",
         "-Xlint:-options", "-nowarn", "-Xmaxerrs", "500"))
+}
+
+repositories {
+    mavenLocal()
+}
+
+tasks.withType<DecompileJar> {
+    inputJar.set(file("${project.rootDir}/HytaleServer.jar"))
+}
+
+val extractResources by tasks.registering(Copy::class) {
+    val jarFile = file("${project.rootDir}/HytaleServer.jar")
+
+    from(zipTree(jarFile)) {
+        include("manifests.json")
+        include("migration/**")
+    }
+
+    into("src/main/resources")
+
+    doFirst {
+        println("Extracting resources to src/main/resources")
+    }
 }
 
 dependencies {
@@ -56,10 +70,11 @@ dependencies {
     compileOnly("org.jetbrains:annotations:24.0.1")
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
     //Hytale Libs
-    compileOnly("org.checkerframework:checker-compat-qual:2.5.5")
-    compileOnly("io.netty:netty-all:4.2.9.Final")
-    compileOnly("org.bouncycastle:bcpkix-jdk18on:1.83")
-    compileOnly("com.hypixel:ConcurrentFastUtil:1.2-SNAPSHOT")
+    implementation("org.checkerframework:checker-compat-qual:2.5.5")
+    implementation("io.netty:netty-all:4.2.9.Final")
+    implementation("org.bouncycastle:bcpkix-jdk18on:1.83")
+    implementation("com.hypixel:ConcurrentFastUtil:1.2-SNAPSHOT")
+    implementation("it.unimi.dsi:fastutil:8.5.12")
 }
 
 val repackageJar by tasks.registering(Jar::class) {

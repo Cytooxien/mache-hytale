@@ -60,3 +60,5 @@ versions/26.1-snapshot-1/patches/win
 versions/26.1-snapshot-1/patches/manifests.json.patch
 versions/26.1-snapshot-1/patches/migration
 HytaleServer.jar
+
+server
