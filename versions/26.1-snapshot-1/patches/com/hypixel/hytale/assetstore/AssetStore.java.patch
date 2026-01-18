@@ -37,36 +37,32 @@
        }
     }
  
-@@ -1003,15 +_,15 @@
- 
+@@ -1004,14 +_,14 @@
              for (Object contained : containedEntry.getValue()) {
                 Object containedKey = assetStore.getKeyFunction().apply(contained);
--               this.childAssetsMap
+                this.childAssetsMap
 -                  .computeIfAbsent(assetStore.getAssetClass(), k -> new ConcurrentHashMap<>())
 -                  .computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet())
-+               ((Map) this.childAssetsMap)
 +                  .computeIfAbsent(assetStore.getAssetClass(), k -> new ConcurrentHashMap<>());
-+               ((Set) ((Map) this.childAssetsMap.get(assetStore.getAssetClass())).computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet()))
++               this.childAssetsMap.get(assetStore.getAssetClass()).computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet())
                    .add(containedKey);
                 childList.add(contained);
              }
           }
  
 -         AssetLoadResult result = assetStore.loadAssets(packKey, (List<T>)childList, query, forceLoadAll);
-+         AssetLoadResult result = assetStore.loadAssets(packKey, (List) childList, query, forceLoadAll);
++         AssetLoadResult result = assetStore.loadAssets(packKey, childList, query, forceLoadAll);
           childAssetsResults.put(assetClass, result);
        }
  
-@@ -1036,9 +_,9 @@
- 
+@@ -1037,8 +_,8 @@
              for (RawAsset<Object> contained : containedEntry.getValue()) {
                 Object containedKey = contained.getKey();
--               this.childAssetsMap
+                this.childAssetsMap
 -                  .computeIfAbsent(assetStore.getAssetClass(), k -> new ConcurrentHashMap<>())
 -                  .computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet())
-+               ((Map) this.childAssetsMap)
 +                  .computeIfAbsent(assetStore.getAssetClass(), k -> new ConcurrentHashMap<>());
-+               ((Set) ((Map) this.childAssetsMap.get(assetStore.getAssetClass())).computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet()))
++               this.childAssetsMap.get(assetStore.getAssetClass()).computeIfAbsent(key, k -> ConcurrentHashMap.newKeySet())
                    .add(containedKey);
  
                 RawAsset<Object> resolvedContained = switch (contained.getContainedAssetMode()) {
