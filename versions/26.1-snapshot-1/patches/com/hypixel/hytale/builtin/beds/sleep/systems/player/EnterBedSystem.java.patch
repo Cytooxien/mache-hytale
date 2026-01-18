@@ -1,9 +1,10 @@
 --- a/com/hypixel/hytale/builtin/beds/sleep/systems/player/EnterBedSystem.java
 +++ b/com/hypixel/hytale/builtin/beds/sleep/systems/player/EnterBedSystem.java
-@@ -86,44 +_,7 @@
+@@ -85,46 +_,15 @@
+       }
     }
  
-    private Message getMessage(CanSleepInWorld.Result param1) {
+-   private Message getMessage(CanSleepInWorld.Result param1) {
 -      // $VF: Couldn't be decompiled
 -      // Please report this to the Vineflower issue tracker, at https://github.com/Vineflower/vineflower/issues with a copy of the class file (if you have the rights to distribute it!)
 -      // java.lang.IllegalStateException: Invalid switch case set: [[const(0)], [var1_1 instanceof x], [null]] for selector of type Lcom/hypixel/hytale/builtin/beds/sleep/systems/world/CanSleepInWorld$Result;
@@ -42,7 +43,16 @@
 -      // 3f: aload 2
 -      // 40: invokestatic com/hypixel/hytale/server/core/Message.translation (Ljava/lang/String;)Lcom/hypixel/hytale/server/core/Message;
 -      // 43: areturn
-+      return null; //TODO
-    }
+-   }
++    private Message getMessage(CanSleepInWorld.Result param1) {
++        String translationKey = switch (param1) {
++            case CanSleepInWorld.NotDuringSleepHoursRange notDuringSleepHoursRange ->
++                    "server.interactions.sleep.notWithinHours";
++            case CanSleepInWorld.Status.GAME_TIME_PAUSED -> "server.interactions.sleep.gameTimePaused";
++            default -> "server.interactions.sleep.disabled";
++        };
++        return Message.translation(translationKey);
++    }
  
     private static Message formatTime(LocalTime time) {
+       int hour = time.getHour();
